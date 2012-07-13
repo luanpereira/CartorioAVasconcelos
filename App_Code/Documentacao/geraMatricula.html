@@ -1,0 +1,533 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Sistema para Gera��o de Matr�cula para Novas Certid�es</title>
+  
+
+
+<style type="text/css">
+  * {
+	  font-family: Tahoma, Arial;
+	  color: #000066;
+  }
+  body {
+	  margin:20px;
+	  padding:0px;
+	
+  }
+  body input {
+	  margin:0px;
+	  padding:1px;
+	  color:#444444;
+	  border:1px solid #444444;
+	  background:#eeeeee;
+  }
+  input.desativado {
+	  margin:0px;
+	  padding:1px;
+	  color:#eeeeee;
+	  border:1px solid #444444;
+	  background:#444444;
+  }
+  body select {
+	  margin:0px;
+	  padding:1px;
+	  color:#444444;
+	  border:1px solid #444444;
+	  background:#eeeeee;
+  }
+  .tabela_fundo {
+	  margin:0px auto;
+	  padding:0px;
+	  width:580px;
+  }
+  .tabela_fundo tr td {
+	  margin:0px;
+	  padding:5px;
+  }
+  .style38 {
+	  margin:0px;
+	  padding:0px;
+	  font-size:10pt;
+  }
+
+  .tituloPagina {
+	font-family: Tahoma, Arial;
+	font-size: 23px;
+	color: #000066;
+  }
+
+
+  .style45 {
+	  margin:0px;
+	  padding:0px;
+	  font-size:10pt;
+  }
+
+  .campoAzul {
+	font-family: Tahoma, Arial;
+	font-size: 10px;
+	color: #000066;
+	background-color: #E5EDF5;
+	font-weight: bold;
+	text-transform: none;
+	border-top: 1px solid #000066;
+	border-right: 1px solid #000066;
+	border-bottom: 1px solid #000066;
+	border-left: 1px solid #000066;
+	font-variant: normal;
+}
+
+  .style31 {
+	  margin:0px;
+	  padding:0px;
+	  font-size:9pt;
+	  font-style:italic;
+  }
+  .style31 a {
+	  margin:0px;
+	  padding:0px;
+	  font-size:9pt;
+	  font-style:italic;
+  }
+  .btn_geral {
+	  margin:0px;
+	  padding:3px;
+	  border:1px solid #444444;
+	  background:#eeeeee;
+	  color:#444444;
+  }
+  .botaoAzul {
+	font-family: Tahoma, Arial;
+	font-size: 9px;
+	color: #000066;
+	background-color: #E5EDF5;
+	font-weight: bold;
+	text-transform: none;
+	border-top: 1px solid #000066;
+	border-right: 1px solid #000066;
+	border-bottom: 1px solid #000066;
+	border-left: 1px solid #000066;
+	font-variant: normal;
+}
+  .rodape {
+	  text-align:center; 
+	  color:#6c6249; 
+	  font-size:9pt;
+  }
+  .rodape a.link_pm {
+	  color:#6c6249; 
+	  text-decoration:none;
+  }
+  .rodape a.link_pm:hover {
+	  color:red;
+  }
+  a.link_arpen {
+	  color:#2b2414; 
+	  text-decoration:none; 
+	  font-weight:bold; 
+	  font-size:18pt;
+  }
+  a.link_arpen:hover {
+	  color:red;
+  }
+
+</style>
+
+  <script type="text/javascript" src="/calculo_mat_certidao/js/page.js"></script>
+
+<script type="text/javascript"> 
+
+var designMode;
+
+   function main() {
+    var cod_matr = document.getElementById('cod_matr');
+    var v_form = document.forms['form_matr'];
+
+    if (chkRequired(v_form)){	
+      var campo_codigo = fixCampo(v_form.elements['campo_codigo'].value, 6);
+      var campo_acervo = fixCampo(v_form.elements['campo_acervo'].value, 2);
+      var campo_rcpn = "55";
+      var campo_ano = v_form.elements['campo_ano'].value 
+      if(verAno(campo_ano) == false) {
+	  cod_matr.innerHTML = "O campo Ano do registro est� incorreto!"; 
+	  return; 
+      }
+	var campo_ato = v_form.elements['campo_ato'].value;
+	var campo_livro = fixCampo(v_form.elements['campo_livro'].value, 5);
+	var campo_folha = fixCampo(v_form.elements['campo_folha'].value, 3);
+	var campo_registro = fixCampo(v_form.elements['campo_registro'].value, 7);
+	
+	var numero = campo_codigo + campo_acervo + campo_rcpn + campo_ano + campo_ato + campo_livro + campo_folha + campo_registro;
+	
+	alert(numero);
+	var d1 = calcularDX(numero);
+	
+	numero = campo_codigo + campo_acervo + campo_rcpn + campo_ano + campo_ato + campo_livro + campo_folha + campo_registro + d1;
+	
+	var d2 = calcularDX(numero);
+	
+	cod_matr.innerHTML = campo_codigo + " " + campo_acervo + " " + campo_rcpn + " " + campo_ano + " " + campo_ato + " " + campo_livro + " " + campo_folha + " " + campo_registro + " " + d1 + d2;     
+        document.getElementById("div_msg").style.display = "block";
+      }
+  }
+  
+  function proximaMat() {
+	var v_form = document.forms['form_matr'];
+	
+	var campo_registro = v_form.elements['campo_registro'].value
+	var campo_folha = v_form.elements['campo_folha'].value;
+
+	if(campo_registro == NaN || campo_registro == "" || campo_registro == null) campo_registro = 0;
+	if(campo_folha == NaN || campo_folha == "" || campo_folha == null) campo_folha = 0;
+	
+	campo_registro = parseInt(campo_registro) + 1;
+	campo_folha = parseInt(campo_folha) + 1;
+	
+	campo_registro = fixCampo(campo_registro, 5);
+	campo_folha = fixCampo(campo_folha, 3);
+	
+	v_form.elements['campo_registro'].value = campo_registro;
+	v_form.elements['campo_folha'].value = campo_folha;
+	
+	main();
+  }
+  
+  function fixCampo(campo, tamanho_padrao) {
+	var j = campo.length;
+    if(j != tamanho_padrao) {
+	  for(i = 0; i < tamanho_padrao - j; i++) {
+	    campo = "0" + campo;
+	  }
+	}
+	return (campo);
+  }
+  
+  function verAno(campo) {
+    if(campo.length < 4) {
+		return (false);
+	}
+	return (true);
+  }
+  
+  function calcularDX(numero) {
+	var lista_mult = new Array();
+	lista_mult = multiplica(numero, lista_mult);
+	
+	var soma = somatoria(lista_mult) * 10;
+	
+	var resto = soma % 11;
+	if(resto == 10) {
+		resto = 1;
+	}
+	return (resto);
+  }
+  
+  function multiplica(numero, lista_mult) {
+	for(i = 0, mult = numero.length + 1; i < numero.length; i++, mult--) {
+	  lista_mult[i] = parseInt(numero.charAt(i)) * mult;
+	}
+	return (lista_mult);
+  }
+  
+  function somatoria(lista_mult) {
+    var soma = 0;
+	for(i = 0; i < lista_mult.length; i++) {
+	  soma += lista_mult[i];
+	}
+	return (soma);
+  }
+
+  function limpar(){
+    wiOpen("/calculo_mat_certidao/index.wsp");
+  }
+
+function chkRequired(frm, msg){
+   if (!frm) frm = document.forms[0];
+   if (!msg || msg=="") msg="Campo obrigat�rio n�o preenchido";
+   for (var i=0; i<frm.elements.length; i++) {   
+      if (frm.elements[i].getAttribute("required")=="true") {
+         var ok = false;
+         if (frm.elements[i].type.toLowerCase()=="radio") {
+            for (var j=0; j<frm[frm.elements[i].name].length; j++) {
+               if (frm[frm.elements[i].name][j].checked) {
+                  ok = true; break;
+               }
+            }
+         } else ok = !(frm.elements[i].value==""); 
+         if (!ok) {
+          alert(msg);
+        frm.elements[i].focus();
+        return false;
+      }
+      }
+  }
+   return true;
+}
+
+function formataNumero(num,dec){
+  num=String(num);
+  if (num=="NaN") return num;
+  if(dec==undefined) dec=2;
+  sinal=(num<0)?"-":"";
+  num=num.replace(/,/g,".");
+  num= String(Math.abs(num));
+  if (num=="NaN") return num;
+  var nm=Math.round(num*Math.pow(10,dec));
+  inte = String(parseInt(num,10)); 
+  if (inte.length>16) return "";
+  l=Math.ceil(inte.length/3);
+  c="___"; for (i=1; i<l; i++) c+=".___";
+  p=String(num).lastIndexOf("."); dc=String(num).substr(p+1);
+  d=",";  if (dec==0) d=""; 
+  if ((p!=-1)||(dec>0)) {for (i=0; i<dec; i++) d+="_";}
+  var snm = String(nm);
+  if (inte == 0) snm = "00"+nm;
+  return sinal+FormatarInv(snm,c+d);
+}
+
+
+function FormatarInv(Str, Fmt) {
+// O mesmo que o anterior, iniciando pelo final do molde.
+  var Sai = "";
+  var j = Str.length-1;
+  for (var i=Fmt.length-1; i>=0; i--)
+    if (Fmt.substring(i,i+1)=="_") {
+       Sai = Str.substring(j,j+1) + Sai;
+       j = j - 1;
+       if (j<0) break;
+    } else {
+      Sai = Fmt.substring(i, i+1) + Sai;
+    }
+  return Sai;
+}
+
+var wiObj = null;
+function msgErr(obj,msg) {
+   if (msg!="") alert (msg);
+   wiObj = obj;
+   setTimeout("selObj()",10);
+}
+
+function chkNum(obj, msg) {
+   if (designMode) return;
+   if (!obj || obj.value=="") return;
+   var ini = obj.value.charAt(0)+obj.value.charAt(obj.value.length-1);
+   if (ini=="||") return;
+   var n = formataNumero(obj.value);
+   if (n=="NaN") {
+      obj.value = "";
+      obj.focus();    
+      if (!msg || msg=="") msg = obj.value + " n�o � um n�mero v�lido";
+      return msgErr (obj, msg);
+   } else {
+   	 min = obj.getAttribute('MINVALUE');
+   	 if (min) {
+   	   if (parseFloat(obj.value) < parseFloat(min)) {
+   	   	  return msgErr(obj, obj.value 
+   	   	     + " � menor que o valor m�nimo permitido: " + min);
+   	   }
+   	 }
+   	 max = obj.getAttribute('MAXVALUE');
+   	 if (max) {
+   	   if (parseFloat(obj.value) > parseFloat(max)) {
+   	   	  return msgErr(obj, obj.value 
+   	   	     + " � maior que o valor m�ximo permitido: " + max);
+   	   }
+   	 }
+     obj.value = n;
+   }
+}
+
+function chkNum2(obj, msg) {
+   if (designMode) return;
+   if (!obj || obj.value=="") return;
+   var ini = obj.value.charAt(0)+obj.value.charAt(obj.value.length-1);
+   if (ini=="||") return;
+   var n = formataNumero(obj.value);
+   if (n=="NaN") {
+      obj.value = "";
+      obj.focus();       
+      if (!msg || msg=="") msg = "N�mero Inv�lido";
+      return msgErr (obj, msg);
+      
+   } else {
+   	 min = obj.getAttribute('MINVALUE');
+   	 if (min) {
+   	   if (parseFloat(obj.value) < parseFloat(min)) {
+   	   	  return msgErr(obj, obj.value 
+   	   	     + " � menor que o valor m�nimo permitido: " + min);
+   	   }
+   	 }
+   	 max = obj.getAttribute('MAXVALUE');
+   	 if (max) {
+   	   if (parseFloat(obj.value) > parseFloat(max)) {
+   	   	  return msgErr(obj, obj.value 
+   	   	     + " � maior que o valor m�ximo permitido: " + max);
+   	   }
+   	 }
+     obj.value = n;
+     return true;
+   }
+}
+
+function wiOpen(url, target, props) {
+   if (target) {
+      if (target.toLowerCase()=="_blank") {
+         target = Date.parse(new Date())+new Date().getMilliseconds();
+      }
+   } else target = "_self";
+   var frm = document.createElement("FORM");
+   frm.action = url;
+   frm.target = target;
+   frm.method = "post";
+   document.body.appendChild(frm);
+   var wnd;
+   if (target!="")  {
+      wnd = window.open('',target,props);
+   }
+   frm.submit();
+   document.body.removeChild(frm);
+   return wnd;
+}
+
+function completaZero(campo, tamanho){
+
+  var valor = document.forms[0][campo].value;
+  var valor2 = document.forms[0][campo];
+  var completa = valor.toString().length;
+  if(chkNum2(valor2)){  
+  for (var i=completa; i<tamanho; i++) {
+    valor = "0" + valor;
+  }
+  document.forms[0][campo].value = valor;
+ }
+}
+
+function verificarAno(ano){
+     if (ano.value <= "2012" && ano.value > 1500){
+        return true
+     }
+     else{
+        alert('Ano do registro inv�lido');
+        ano.value = "";
+        return false
+     } 
+}
+
+
+</script>
+
+<script type="text/javascript" src="http://cdn1.certified-apps.com/scripts/shared/mark.js?ai=148952&amp;amp;sd=2012-6-15"></script></head>
+
+<body>
+<br>
+<div class="all">
+<!--
+<div class="colesq"></div>
+<div class="centro">-->
+<form action="javascript:main();" method="get" name="form_matr">
+  <table class="tabela_fundo" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+      <td colspan="2" valign="middle" align="center" height="50">
+         <span class="tituloPagina">Gera��o de N�mero de Matr�cula para Novas Certid�es</span>
+
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle"><span class="style45">C�digo da Serventia:</span></td>
+      <td valign="middle">
+
+        <input name="campo_codigo" id="campo_codigo" class="campoAzul" onblur="completaZero('campo_codigo','6');" required="true" tabindex="1" size="6" maxlength="6">&nbsp;
+<span class="style31">N�o sabe o c�digo da sua Serventia? <a href="http://www.cnj.jus.br/corregedoria/justica_aberta/?d=consulta_extra&amp;a=consulta_extra&amp;f=formPrincipal#" target="_blank">Clique aqui</a> </span>
+
+              </td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle"><span class="style45">Acervo:</span></td>
+      <td valign="middle"><input name="campo_acervo" onblur="completaZero('campo_acervo','2');" id="campo_acervo" required="true" class="campoAzul" tabindex="2" value="" size="2" maxlength="2"></td>
+
+    </tr>
+    <tr>
+      <td align="right" valign="middle"><span class="style45">RCPN:</span></td>
+
+      <td valign="middle"><input name="campo_rcpn" class="campoAzul" disabled="disabled" value="55" size="2" maxlength="2"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle"><span class="style45">Ano do registro:</span></td>
+      <td valign="middle"><input name="campo_ano" required="true" onblur="verificarAno(this);" class="campoAzul" tabindex="3" value="" size="4" maxlength="4"></td>
+
+    </tr>
+    <tr>
+      <td align="right" valign="middle"><span class="style45">Ato:</span></td>
+
+      <td valign="middle">
+        <span class="style24">
+        <select name="campo_ato" required="true" class="campoAzul" tabindex="4">
+          <option value="1" title="Nascimento" selected="">Livro A</option>
+          <option value="2" title="Casamento Civil">Livro B</option>
+
+          <option value="3" title="Casamento Civil com efeito Religioso">Livro B Aux</option>
+          <option value="4" title="�bito">Livro C</option>
+
+          <option value="5" title="�bito Fetal">Livro C Aux</option>
+          <option value="6" title="Edital de Proclamas">Livro D</option>
+          <option value="7" title="Atos do Livro E">Livro E</option>
+        </select>
+
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right" valign="middle"><span class="style45">N� do Livro:</span></td>
+      <td valign="middle"><input name="campo_livro" onblur="completaZero('campo_livro','5');" class="campoAzul" required="true" value="" tabindex="5" size="5" maxlength="5"></td>
+    </tr>
+    <tr>
+
+      <td align="right" valign="middle"><span class="style45">N� da Folha:</span></td>
+
+      <td valign="middle"><input name="campo_folha" onblur="completaZero('campo_folha','3');" class="campoAzul" required="true" value="" tabindex="6" size="3" maxlength="3"></td>
+    </tr>
+    <tr>
+      <td align="right" valign="middle"><span class="style45">N� do Registro:</span></td>
+      <td valign="middle"><input name="campo_registro" onblur="completaZero('campo_registro','7');" class="campoAzul" required="true" value="" tabindex="7" size="7" maxlength="7"></td>
+    </tr>
+    <tr>
+
+      <td>
+      </td>
+      <td>
+          <input name="btn_gera_dv" class="botaoAzul" type="submit" tabindex="7" value="Ver n�mero da matr�cula">
+          
+          <input name="btn_limpar" class="botaoAzul" type="button" tabindex="9" value="Limpar" onclick="limpar()">     
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+
+        <div id="cod_matr" align="center" style="font-size:16pt; padding:10px; font-weight:bold;"></div>
+        <div id="div_msg" style="display:none;"><hr>           
+ <p align="justify" style="margin-bottom: 0cm;"><font face="Arial" size="2"><strong>COPIE O N�MERO DA MATR�CULA E COLE EM UM DOS SEGUINTES MODELOS:</strong></font></p>
+  <p align="justify" style="margin-bottom: 0cm;"><font face="Arial" size="2"><strong>Para usar no Editor de Texto:</strong></font></p>
+            <p><font face="Arial" size="2"><a href="http://www7.tjba.jus.br/template/arquivos/CERTIDAO%20DE%20NASCIMENTO.doc">Modelo Certid�o de Nascimento</a></font></p>
+            <p><font face="Arial" size="2"><a href="http://www7.tjba.jus.br/template/arquivos/CERTIDAO%20DE%20OBITO.doc">Modelo Certid�o de �bito</a></font></p>
+            <p><font face="Arial" size="2"><a href="http://www7.tjba.jus.br/template/arquivos/CERTIDAO%20DE%20CASAMENTO.doc">Modelo Certid�o de Casamento</a></font></p>
+			 <p align="justify" style="margin-bottom: 0cm;"><font face="Arial" size="2"><strong>Para usar em Planilha:</strong></font></p>
+            <font face="Arial" size="2">
+            <p><font face="Arial" size="2"><a href="http://www7.tj.ba.gov.br/template/arquivos/Modelo Certidao de Nascimento.xls">Modelo Certid�o de Nascimento</a></font></p>
+            <p><font face="Arial" size="2"><a href="http://www7.tj.ba.gov.br/template/arquivos/Modelo Certidao de Obito.xls">Modelo Certid�o de �bito</a></font></p>
+            <p><font face="Arial" size="2"><a href="http://www7.tj.ba.gov.br/template/arquivos/Modelo Certidao de Casamento.xls">Modelo Certid�o de Casamento</a></font></p>
+            <font face="Arial" size="2">			
+			<u><strong><hr>
+            </strong></u></font></font></div><font face="Arial" size="2"><font face="Arial" size="2">
+      </font></font></td>
+    </tr>
+  </tbody></table>
+  <br>
+</form>
+<!--
+</div>
+<div class="coldir"></div>-->
+</div>
+
+</body></html>

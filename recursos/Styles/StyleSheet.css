@@ -16,7 +16,7 @@ body {
 #imgPrincipal
 {
     margin:0 auto;
-    background: #F6FCFC url(../Images/sacola.jpg) no-repeat;
+    background: #F6FCFC url(../Images/carimbo.jpg) no-repeat;
     width: 350px;
     height: 233px;
 }
@@ -30,7 +30,7 @@ body {
 #corpo {
     margin: 0 auto;
     background-color: white;
-    width: 85%;
+    width: 90%;
     padding: 20px;
     border: #556B2F solid 2px;
     border-radius: 7px;
@@ -199,6 +199,11 @@ input.botaoForm:hover
     width: 120px;
     text-align: left;
 }
+#FormNascimento .lbl
+{
+    width: 130px;
+    text-align: left;
+}
 #formulario .lbl {
     float: left;
     padding-top: 2px;
@@ -212,7 +217,7 @@ input.botaoForm:hover
     text-align: left;
     margin: 0px;
     padding: 20px 0 0 10px;
-    width: 440px;
+    width: 490px;
     float: left;
 }
 

@@ -27,14 +27,15 @@ Namespace Camadas.DAO
             conn = _conn
         End Sub
 
-        Public Function cadastrarClientePessoaFisica(ByVal cliente As Cliente) As Integer Implements IClienteDAO.cadastrarClientePessoaFisica
+        Public Function cadastrarCliente(ByVal cliente As Cliente) As Integer Implements IClienteDAO.cadastrarCliente
             Dim result As Integer
 
-            strSql = " INSERT INTO eb04cliente (EB04NOME,EB04CPF,EB04RG,EB04DATANASCIMENTO,EB04ENDERECO,FK0498CIDADEUF,EB04CEP,EB04EMAIL,EB04CELULAR,EB04FONEFIXO,EB04FAX,FK0406VENDEDOR,EB04TIPOPESSOA,EB04TIPOCLIENTE) "
-            strSql += " VALUES('" & cliente.PessoaFisica.Nome & "','" & cliente.PessoaFisica.Cpf & "','" & cliente.PessoaFisica.Rg & "','" & cliente.DataNascimento & "','" & cliente.Endereco.Logradouro & "',"
-            strSql += IIf(cliente.Endereco.Cidade.Codigo = 0, "NULL", cliente.Endereco.Cidade.Codigo) & ",'" & cliente.Endereco.Cep & "','" & cliente.Contato.Email & "','" & cliente.Contato.FoneCelular & "','"
-            strSql += cliente.Contato.FoneResidencial & "','" & cliente.Contato.Fax & "'," & IIf(cliente.Vendedor.Codigo = 0, "NULL", cliente.Vendedor.Codigo) & ",'F','"
-            strSql += IIf(cliente.TipoCliente = eTipoCliente.Comum, "C", "M") & "')"
+            strSql = " INSERT INTO ct01cliente (CT01NOME,CT01CPF,CT01RG,FK0198NATURAL,CT01ENDERECO,FK0198CIDADEUF,CT01PROFISSAO,CT01EMAIL,CT01FONEFIXO,CT01CELULAR,CT01SEXO,CT01DATANASCIMENTO,CT01ESTADOCIVIL,CT01PAI,CT01MAE,CT01AVOPATERNO1,CT01AVOPATERNO2,CT01AVOMATERNO1,CT01AVOMATERNO2,FK0101GEMEO) "
+            strSql += " VALUES('" & cliente.Nome & "'," & IIf(cliente.Cpf = String.Empty, "NULL", "'" & cliente.Cpf & "'") & ",'" & cliente.Rg & "'," & IIf(cliente.Natural.Codigo = 0, "NULL", cliente.Natural.Codigo) & ",'" & cliente.Endereco.Logradouro & "',"
+            strSql += IIf(cliente.Endereco.Cidade.Codigo = 0, "NULL", cliente.Endereco.Cidade.Codigo) & ",'" & cliente.Profissao & "','" & cliente.Contato.Email & "','" & cliente.Contato.FoneResidencial & "','"
+            strSql += cliente.Contato.FoneCelular & "','" & cliente.Sexo & "','" & cliente.DataNascimento & "','" & cliente.EstadoCivil & "','"
+            strSql += cliente.Filiacao.NomePai & "','" & cliente.Filiacao.NomeMae & "','" & cliente.Filiacao.NomeAvoPaterno1 & "','" & cliente.Filiacao.NomeAvoPaterno2 & "','"
+            strSql += cliente.Filiacao.NomeAvoMaterno1 & "','" & cliente.Filiacao.NomeAvoMaterno2 & "', " & IIf(cliente.Gemeo.Codigo > 0, cliente.Gemeo.Codigo, "NULL") & ")"
 
             Try
                 cmd = conn.CreateCommand
@@ -44,7 +45,7 @@ Namespace Camadas.DAO
                 result = cmd.LastInsertedId
 
                 '===========LOG===========
-                Seguranca.GravarLog(usuario, "I", "EB04", strSql)
+                Seguranca.GravarLog(usuario, "I", "CT01", strSql)
                 '=========================
 
                 Return result
@@ -61,14 +62,16 @@ Namespace Camadas.DAO
             End Try
         End Function
 
-        Public Sub atualizarClientePessoaFisica(ByVal cliente As Cliente) Implements IClienteDAO.atualizarClientePessoaFisica
+        Public Sub atualizarCliente(ByVal cliente As Cliente) Implements IClienteDAO.atualizarCliente
 
-            strSql = "  UPDATE eb04cliente SET EB04NOME='" & cliente.PessoaFisica.Nome & "',EB04CPF='" & cliente.PessoaFisica.Cpf & "',EB04RG='" & cliente.PessoaFisica.Rg & "',"
-            strSql += " EB04DATANASCIMENTO='" & cliente.DataNascimento & "',EB04ENDERECO='" & cliente.Endereco.Logradouro & "',FK0498CIDADEUF=" & IIf(cliente.Endereco.Cidade.Codigo = 0, "NULL", cliente.Endereco.Cidade.Codigo) & ","
-            strSql += " EB04CEP='" & cliente.Endereco.Cep & "',EB04EMAIL='" & cliente.Contato.Email & "',EB04CELULAR='" & cliente.Contato.FoneCelular & "',EB04FONEFIXO='" & cliente.Contato.FoneResidencial & "',"
-            strSql += " EB04FAX='" & cliente.Contato.Fax & "',FK0406VENDEDOR=" & IIf(cliente.Vendedor.Codigo = 0, "NULL", cliente.Vendedor.Codigo) & ","
-            strSql += " EB04TIPOPESSOA='F',EB04TIPOCLIENTE='" & IIf(cliente.TipoCliente = eTipoCliente.Comum, "C", "M") & "' "
-            strSql += " WHERE EB04CODIGO = " & cliente.Codigo
+            strSql = "  UPDATE ct01cliente SET CT01NOME='" & cliente.Nome & "', CT01CPF=" & IIf(cliente.Cpf = String.Empty, "NULL", "'" & cliente.Cpf & "'") & ", CT01RG='" & cliente.Rg & "', "
+            strSql += IIf(cliente.Natural.Codigo > 0, "FK0198NATURAL=" & cliente.Natural.Codigo & ", ", "") & " CT01ENDERECO='" & cliente.Endereco.Logradouro & "', "
+            strSql += IIf(cliente.Endereco.Cidade.Codigo > 0, "FK0198CIDADEUF=" & cliente.Endereco.Cidade.Codigo & ", ", "") & " CT01PROFISSAO='" & cliente.Profissao & "', "
+            strSql += " CT01EMAIL='" & cliente.Contato.Email & "',CT01FONEFIXO='" & cliente.Contato.FoneResidencial & "',CT01CELULAR='" & cliente.Contato.FoneCelular & "', "
+            strSql += " CT01SEXO='" & cliente.Sexo & "',CT01DATANASCIMENTO='" & cliente.DataNascimento & "', CT01ESTADOCIVIL='" & cliente.EstadoCivil & "',CT01PAI='" & cliente.Filiacao.NomePai & "', "
+            strSql += " CT01MAE='" & cliente.Filiacao.NomeMae & "',CT01AVOPATERNO1='" & cliente.Filiacao.NomeAvoPaterno1 & "',CT01AVOPATERNO2='" & cliente.Filiacao.NomeAvoPaterno2 & "', "
+            strSql += " CT01AVOMATERNO1='" & cliente.Filiacao.NomeAvoMaterno1 & "',CT01AVOMATERNO2='" & cliente.Filiacao.NomeAvoMaterno2 & "', FK0101GEMEO=" & IIf(cliente.Gemeo.Codigo > 0, cliente.Gemeo.Codigo, "NULL")
+            strSql += " WHERE CT01CODIGO = " & cliente.Codigo
 
             Try
                 cmd = conn.CreateCommand
@@ -77,7 +80,7 @@ Namespace Camadas.DAO
                 cmd.ExecuteNonQuery()
 
                 '===========LOG===========
-                Seguranca.GravarLog(usuario, "U", "EB04", strSql)
+                Seguranca.GravarLog(usuario, "U", "CT01", strSql)
                 '=========================
 
             Catch ex As OleDbException
@@ -86,135 +89,30 @@ Namespace Camadas.DAO
                 Throw New DAOException(ex.Message)
             End Try
         End Sub
-
-        Public Function cadastrarClientePessoaJuridica(ByVal cliente As Cliente) As Integer Implements IClienteDAO.cadastrarClientePessoaJuridica
-            Dim result As Integer
-
-            strSql = " INSERT INTO eb04cliente (EB04DATANASCIMENTO,EB04CNPJ,EB04RAZAOSOCIAL,EB04FANTASIA,EB04INSCRICAOESTADUAL,EB04ENDERECO,FK0498CIDADEUF,EB04CEP,EB04EMAIL,EB04CELULAR,EB04FONEFIXO,EB04FAX,FK0406VENDEDOR,EB04TIPOPESSOA,EB04TIPOCLIENTE) "
-            strSql += " VALUES('" & cliente.DataNascimento & "','" & cliente.PessoaJuridica.CNPJ & "','" & cliente.PessoaJuridica.RazaoSocial & "','" & cliente.PessoaJuridica.Fantasia & "','" & cliente.PessoaJuridica.InscricaoEstadual & "','" & cliente.Endereco.Logradouro & "',"
-            strSql += IIf(cliente.Endereco.Cidade.Codigo = 0, "NULL", cliente.Endereco.Cidade.Codigo) & ",'" & cliente.Endereco.Cep & "','" & cliente.Contato.Email & "','" & cliente.Contato.FoneCelular & "','"
-            strSql += cliente.Contato.FoneResidencial & "','" & cliente.Contato.Fax & "'," & IIf(cliente.Vendedor.Codigo = 0, "NULL", cliente.Vendedor.Codigo) & ",'J','"
-            strSql += IIf(cliente.TipoCliente = eTipoCliente.Comum, "C", "M") & "')"
-
-            Try
-                cmd = conn.CreateCommand
-                cmd.Transaction = DaoFactory.GetCurrentTransaction
-                cmd.CommandText = strSql
-                cmd.ExecuteNonQuery()
-                result = cmd.LastInsertedId
-
-                '===========LOG===========
-                Seguranca.GravarLog(usuario, "I", "EB04", strSql)
-                '=========================
-
-                Return result
-            Catch ex As OleDbException
-                Throw New DAOException(ex.Message)
-            Catch ex As MySqlException
-                If ex.Number = 1062 Then
-                    Throw New DAOException("CLIENTE COM O CNPJ JÁ CADASTRADO NO SISTEMA!")
-                Else
-                    Throw New DAOException(ex.Message)
-                End If
-            Catch ex As Exception
-                Throw New DAOException(ex.Message)
-            End Try
-        End Function
-
-        Public Sub atualizarClientePessoaJuridica(ByVal cliente As Cliente) Implements IClienteDAO.atualizarClientePessoaJuridica
-
-            strSql = " INSERT INTO eb04cliente (EB04DATANASCIMENTO,EB04CNPJ,EB04RAZAOSOCIAL,EB04FANTASIA,EB04INSCRICAOESTADUAL,EB04ENDERECO,FK0498CIDADEUF,EB04CEP,EB04EMAIL,EB04CELULAR,EB04FONEFIXO,EB04FAX,FK0406VENDEDOR,EB04TIPOPESSOA,EB04TIPOCLIENTE) "
-            strSql += " VALUES('" & cliente.DataNascimento & "','" & cliente.PessoaJuridica.CNPJ & "','" & cliente.PessoaJuridica.RazaoSocial & "','" & cliente.PessoaJuridica.Fantasia & "','" & cliente.PessoaJuridica.InscricaoEstadual & "','" & cliente.Endereco.Logradouro & "',"
-            strSql += IIf(cliente.Endereco.Cidade.Codigo = 0, "NULL", cliente.Endereco.Cidade.Codigo) & ",'" & cliente.Endereco.Cep & "','" & cliente.Contato.Email & "','" & cliente.Contato.FoneCelular & "','"
-            strSql += cliente.Contato.FoneResidencial & "','" & cliente.Contato.Fax & "'," & IIf(cliente.Vendedor.Codigo = 0, "NULL", cliente.Vendedor.Codigo) & ",'J','"
-            strSql += IIf(cliente.TipoCliente = eTipoCliente.Comum, "C", "M") & "')"
-
-            Try
-                cmd = conn.CreateCommand
-                cmd.Transaction = DaoFactory.GetCurrentTransaction
-                cmd.CommandText = strSql
-                cmd.ExecuteNonQuery()
-
-                '===========LOG===========
-                Seguranca.GravarLog(usuario, "U", "EB04", strSql)
-                '=========================
-            Catch ex As OleDbException
-                Throw New DAOException(ex.Message)
-            Catch ex As Exception
-                Throw New DAOException(ex.Message)
-            End Try
-        End Sub
-
-        Public Function listarCliente() As DataTable Implements IClienteDAO.listarCliente
-            Dim ds As New DataSet
-
-            strSql = "  SELECT *, "
-            strSql += "        CASE WHEN EB04NOME IS NULL THEN "
-            strSql += "          EB04RAZAOSOCIAL "
-            strSql += "        ELSE "
-            strSql += "          EB04NOME "
-            strSql += "        END AS NOME, "
-            strSql += "        CASE WHEN EB04CPF IS NULL THEN "
-            strSql += "          EB04CNPJ "
-            strSql += "        ELSE "
-            strSql += "          EB04CPF "
-            strSql += "        END AS CPF_CNPJ, "
-            strSql += "        (SELECT EB06NOME FROM EB06VENDEDOR WHERE EB06CODIGO=FK0406VENDEDOR) AS VENDEDOR, "
-            strSql += "        CONCAT(EB04CELULAR,'/',EB04FONEFIXO,'/',EB04FAX) AS TELEFONE, "
-            strSql += "        (SELECT EB99CODIGO FROM EB99ESTADO, EB98CIDADE WHERE FK9899ESTADO=EB99CODIGO AND EB98CODIGO=FK0498CIDADEUF) AS CODIGO_UF, "
-            strSql += "        (SELECT EB99SIGLA FROM EB99ESTADO, EB98CIDADE WHERE FK9899ESTADO=EB99CODIGO AND EB98CODIGO=FK0498CIDADEUF) AS SIGLA_UF, "
-            strSql += "        (SELECT EB98NOME FROM EB98CIDADE WHERE EB98CODIGO=FK0498CIDADEUF) AS CIDADE, "
-            strSql += "        (SELECT EB96ACESSOWEB FROM EB96USUARIO WHERE FK9604CLIENTE=EB04CODIGO) AS ACESSO, "
-            strSql += "        (SELECT EB96CODIGO FROM EB96USUARIO WHERE FK9604CLIENTE=EB04CODIGO) AS CODIGO_USUARIO "
-            strSql += "   FROM EB04CLIENTE "
-            strSql += "  ORDER BY NOME,VENDEDOR "
-
-            Try
-                adpt = DaoFactory.GetDataAdapter
-                cmd = conn.CreateCommand
-                cmd.CommandText = strSql
-                adpt.SelectCommand = cmd
-                adpt.Fill(ds)
-
-                Return ds.Tables(0)
-            Catch ex As Exception
-                Throw ex
-            End Try
-        End Function
 
         Public Function listarCliente(ByVal c As Cliente) As DataTable Implements IClienteDAO.listarCliente
             Dim ds As New DataSet
 
             strSql = "  SELECT *, "
-            strSql += "        CASE WHEN EB04NOME IS NULL THEN "
-            strSql += "          EB04RAZAOSOCIAL "
-            strSql += "        ELSE "
-            strSql += "          EB04NOME "
-            strSql += "        END AS NOME, "
-            strSql += "        CASE WHEN EB04CPF IS NULL THEN "
-            strSql += "          EB04CNPJ "
-            strSql += "        ELSE "
-            strSql += "          EB04CPF "
-            strSql += "        END AS CPF_CNPJ, "
-            strSql += "        (SELECT EB06NOME FROM EB06VENDEDOR WHERE EB06CODIGO=FK0406VENDEDOR) AS VENDEDOR, "
-            strSql += "        CONCAT(EB04CELULAR,'/',EB04FONEFIXO,'/',EB04FAX) AS TELEFONE, "
-            strSql += "        (SELECT EB99CODIGO FROM EB99ESTADO, EB98CIDADE WHERE FK9899ESTADO=EB99CODIGO AND EB98CODIGO=FK0498CIDADEUF) AS CODIGO_UF, "
-            strSql += "        (SELECT EB99SIGLA FROM EB99ESTADO, EB98CIDADE WHERE FK9899ESTADO=EB99CODIGO AND EB98CODIGO=FK0498CIDADEUF) AS SIGLA_UF, "
-            strSql += "        (SELECT EB98NOME FROM EB98CIDADE WHERE EB98CODIGO=FK0498CIDADEUF) AS CIDADE, "
-            strSql += "        (SELECT EB96ACESSOWEB FROM EB96USUARIO WHERE FK9604CLIENTE=EB04CODIGO) AS ACESSO, "
-            strSql += "        (SELECT EB96CODIGO FROM EB96USUARIO WHERE FK9604CLIENTE=EB04CODIGO) AS CODIGO_USUARIO "
-            strSql += "    FROM EB04CLIENTE "
+            strSql += "        CONCAT(CT01CELULAR,'/',CT01FONEFIXO) AS TELEFONE, "
+            strSql += "        (SELECT CT99CODIGO FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198CIDADEUF) AS CODIGO_UF, "
+            strSql += "        (SELECT CT99SIGLA FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198CIDADEUF) AS SIGLA_UF, "
+            strSql += "        (SELECT CT98NOME FROM CT98CIDADE WHERE CT98CODIGO=FK0198CIDADEUF) AS CIDADE, "
+            strSql += "        (SELECT CT99CODIGO FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198NATURAL) AS CODIGO_UF_NATURAL, "
+            strSql += "        (SELECT CT99SIGLA FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198NATURAL) AS SIGLA_UF_NATURAL, "
+            strSql += "        (SELECT CT98CODIGO FROM CT98CIDADE WHERE CT98CODIGO=FK0198NATURAL) AS CIDADE_NATURAL, "
+            strSql += "        (SELECT CT98NOME FROM CT98CIDADE WHERE CT98CODIGO=FK0198NATURAL) AS NOME_CIDADE_NATURAL, "
+            strSql += "        (SELECT CT01NOME FROM CT01CLIENTE WHERE CT01CODIGO=C.FK0101GEMEO) AS NOME_GEMEO "
+            strSql += "    FROM CT01CLIENTE AS C "
+            strSql += "   WHERE 1=1 "
 
-            If c.Codigo > 0 Then strSql += " WHERE EB04CODIGO = " & c.Codigo
+            If c.Codigo > 0 Then strSql += " AND C.CT01CODIGO = " & c.Codigo
 
-            If Not c.PessoaFisica Is Nothing AndAlso Not c.PessoaFisica.Nome.Trim = String.Empty Then strSql += " WHERE EB04NOME LIKE '%" & c.PessoaFisica.Nome & "%' "
-            If Not c.PessoaJuridica Is Nothing AndAlso Not c.PessoaJuridica.RazaoSocial.Trim = String.Empty Then strSql += " OR EB04RAZAOSOCIAL LIKE '%" & c.PessoaJuridica.RazaoSocial & "%' "
-            If Not c.PessoaJuridica Is Nothing AndAlso Not c.PessoaJuridica.Fantasia.Trim = String.Empty Then strSql += " OR EB04FANTASIA LIKE '%" & c.PessoaJuridica.Fantasia & "%' "
+            If Not c.Nome Is Nothing AndAlso Not c.Nome.Trim = String.Empty Then strSql += " AND C.CT01NOME LIKE '%" & c.Nome & "%' "
+            If Not c.Cpf Is Nothing AndAlso Not c.Cpf.Trim = String.Empty Then strSql += " AND C.CT01CPF LIKE '%" & c.Cpf & "%' "
 
-            If Not c.PessoaFisica Is Nothing AndAlso Not c.PessoaFisica.Cpf.Trim = String.Empty Then strSql += IIf(c.PessoaFisica.Nome.Trim = String.Empty, " WHERE EB04CPF LIKE '%" & c.PessoaFisica.Cpf & "%' ", " OR EB04CPF LIKE '%" & c.PessoaFisica.Cpf & "%' ")
-            If Not c.PessoaJuridica Is Nothing AndAlso Not c.PessoaJuridica.CNPJ.Trim = String.Empty Then strSql += " OR EB04CNPJ LIKE '%" & c.PessoaJuridica.CNPJ & "%' "
 
-            strSql += "  ORDER BY NOME,VENDEDOR "
+            strSql += "  ORDER BY CT01NOME "
 
             Try
                 adpt = DaoFactory.GetDataAdapter
@@ -229,6 +127,27 @@ Namespace Camadas.DAO
             End Try
         End Function
 
+
+        Public Sub atualizarGemeo(ByVal gemeo1 As Dominio.Administrativo.Cliente, ByVal gemeo2 As Dominio.Administrativo.Cliente) Implements IClienteDAO.atualizarGemeo
+            strSql = "  UPDATE ct01cliente SET FK0101GEMEO=" & IIf(gemeo1.Codigo > 0, gemeo1.Codigo, "NULL")
+            strSql += " WHERE CT01CODIGO = " & gemeo2.Codigo
+
+            Try
+                cmd = conn.CreateCommand
+                cmd.Transaction = DaoFactory.GetCurrentTransaction
+                cmd.CommandText = strSql
+                cmd.ExecuteNonQuery()
+
+                '===========LOG===========
+                Seguranca.GravarLog(usuario, "U", "CT01", strSql)
+                '=========================
+
+            Catch ex As OleDbException
+                Throw New DAOException(ex.Message)
+            Catch ex As Exception
+                Throw New DAOException(ex.Message)
+            End Try
+        End Sub
     End Class
 
 End Namespace

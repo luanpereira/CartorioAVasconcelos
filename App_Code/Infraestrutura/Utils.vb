@@ -11,11 +11,27 @@ Namespace Infraestrutura
 
     Public Class Utils
 
+        Public Shared ReadOnly AMBIENTE As String = System.Configuration.ConfigurationManager.AppSettings.Item("AMBIENTE").ToString
+
         Private Shared strSql As String
         Private Shared cmd As IDbCommand
         Private Shared adpt As IDbDataAdapter
         Private Shared conn As IDbConnection
         Private Shared dr As IDataReader
+
+        Public Enum Regime
+            ComunhaoParcial
+            ComunhaoTotal
+        End Enum
+
+        Public Enum TipoLivro
+            Nascimento = 1
+            Casamento = 2
+            CasamentoReligioso = 3
+            Obito = 4
+            Natimorto = 5
+            Proclamas = 6
+        End Enum
 
         Public Enum TipoMsg
             'VALORES DA VARIÁVEL TIPO
@@ -372,7 +388,7 @@ Namespace Infraestrutura
         Public Shared Function ListarEstados() As DataTable
 
             Dim ds As New DataSet
-            strSql = "SELECT * FROM EB99ESTADO ORDER BY EB99SIGLA"
+            strSql = "SELECT * FROM CT99ESTADO ORDER BY CT99SIGLA"
 
             Try
 
@@ -393,8 +409,8 @@ Namespace Infraestrutura
         Public Shared Function ListarCidades(ByVal UF As Int16) As DataTable
 
             Dim ds As New DataSet
-            strSql = "SELECT * FROM EB98CIDADE WHERE FK9899ESTADO = " & UF
-            strSql += " ORDER BY EB98NOME "
+            strSql = "SELECT * FROM CT98CIDADE WHERE FK9899ESTADO = " & UF
+            strSql += " ORDER BY CT98NOME "
 
             Try
 

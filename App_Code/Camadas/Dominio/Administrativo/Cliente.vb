@@ -10,18 +10,26 @@ Namespace Camadas.Dominio.Administrativo
         Public Property Nome() As String
         Public Property Cpf() As String
         Public Property Rg() As String
-        Public Property Sexo() As Short
-        Public Property EstadoCivil() As Short
-        Public Property CodigoUsuario() As Integer
-        Public Property Endereco() As New Endereco
-        Public Property Contato() As New Contato
+        Public Property Sexo() As Char
+        Public Property EstadoCivil() As Char
+        Public Property Profissao() As String
+        Public Property Natural() As Cidade
+        Public Property Endereco() As Endereco
+        Public Property Contato() As Contato
         Public Property Senha() As String
         Public Property DataNascimento() As String
         Public Property isAcessoWeb() As Boolean
         Public Property QuantidadeDispensadores() As Integer
-        Public Property TipoPessoa() As eTipoPessoa
-        Public Property PessoaFisica() As PessoaFisica
-        Public Property TipoCliente() As eTipoCliente
+        Public Property Filiacao() As Filiacao
+        Public Property Gemeo() As Cliente
+
+        Public Sub New()
+            _Filiacao = New Filiacao
+            _Contato = New Contato
+            _Endereco = New Endereco
+            _Natural = New Cidade
+            '_Gemeo = New Cliente
+        End Sub
 
     End Class
 

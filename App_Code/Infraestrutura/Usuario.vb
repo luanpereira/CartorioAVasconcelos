@@ -11,12 +11,9 @@ Public Class Usuario
     Public Property Usuario() As String
     Public Property Senha() As String
     Public Property Nome() As String
-    Public Property Vendedor() As New Vendedor
-    Public Property Cliente() As New Cliente
-    Public Property AcessoWeb() As Boolean
     Public Property NivelAcesso() As String
     Public Property UltimoAcesso() As String
-    Public Property Tipo() As eTipo
-
+    Public Property Ativo() As Boolean
 
 End Class
+

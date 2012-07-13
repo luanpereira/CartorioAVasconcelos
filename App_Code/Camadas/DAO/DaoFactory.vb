@@ -86,13 +86,6 @@ Namespace Camadas.DAO
             Return New ClienteDAO(GetConnection)
         End Function
 
-        Public Shared Function GetVendedorDAO() As IVendedorDAO
-            Return New VendedorDAO(GetConnection)
-        End Function
-
-        Public Shared Function GetEstoqueDAO() As IEstoqueDAO
-            Return New EstoqueDAO(GetConnection)
-        End Function
     End Class
 
 End Namespace

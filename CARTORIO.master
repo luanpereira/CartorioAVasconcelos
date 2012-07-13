@@ -1,20 +1,100 @@
-﻿<%@ Master Language="VB" CodeFile="CARTORIO.master.vb" Inherits="CARTORIO" %>
+﻿<%@ Master Language="VB" CodeFile="~/CARTORIO.master.vb" Inherits="CARTORIO" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head id="Head1" runat="server">
+    <title>Cartório A Vasconcelos - Sistema de Gestão Empresarial</title>
+    
+    <script type="text/javascript" src="../../recursos/Scripts/jquery-1.4.2.js" ></script>
+    <script type="text/javascript" src="../../recursos/Scripts/jfuncoes.js" ></script>
+    
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25127936-4']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="recursos/Styles/StyleSheet.css" />
+    <link rel="stylesheet" type="text/css" href="recursos/Styles/tab/google-analytic/tabs.css" />
+    <%--<link rel="shortcut icon" type="mage/x-icon" href="recursos/Images/favicon.ico">--%>
+
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+    <div id="main">
+        <div id="corpo">
+            <form id="form1" runat="server">
+                <div id="top"><asp:Label ID="lblUsuario" runat="server" Text="">
+                </asp:Label><asp:LinkButton ID="lnkSair" runat="server">[Sair]</asp:LinkButton></div>
+            <div id="cabecalho">
+    	        <a href="#"><div id="logo"></div></a>
+    	        <div id="tituloSite">Cartório A Vasconcelos - Sistema de Gestão Empresarial</div>
+    	        <%--<a href="http://www.famaz.edu.br" target="_blank"><div id="logoFamazBack"></div></a>
+    	        <a href="http://www.unieuro.edu.br" target="_blank"><div id="logoEuroBack"></div></a>
+    	        <a href="http://www.ceuma.br" target="_blank"><div id="logoCeuma"></div></a>--%>
+            </div>
+
+            <div id="div_menu">
+
+                <asp:Menu ID="Menu1" runat="server" BackColor="#E3EAEB" 
+                    DynamicHorizontalOffset="2" Font-Names="Trebuchet MS" Font-Size="1.3em" 
+                    ForeColor="#666666" Orientation="Horizontal" StaticSubMenuIndent="10px">
+                    <DynamicHoverStyle BackColor="#666666" ForeColor="White" />
+                    <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                    <DynamicMenuStyle BackColor="#E3EAEB" />
+                    <DynamicSelectedStyle BackColor="#1C5E55" />
+                    <DynamicItemTemplate>
+                        <%# Eval("Text") %>
+                    </DynamicItemTemplate>
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/pages/principal/Default.aspx" Text="Início" 
+                            Value="Início"></asp:MenuItem>
+                        <asp:MenuItem Text="Administrativo" Value="Administrativo">
+                            <asp:MenuItem NavigateUrl="~/pages/administrativo/ConsultarCliente.aspx" 
+                                Text="Clientes" Value="Clientes"></asp:MenuItem>
+                        </asp:MenuItem>
+<asp:MenuItem Text="Documentação" Value="Financeiro">
+    <asp:MenuItem Text="Certidão de Nascimento" Value="Caixa" 
+        NavigateUrl="~/pages/Documentacao/Nascimento.aspx"></asp:MenuItem>
+    <asp:MenuItem Text="Certidão de Casamento" Value="Certidão de Casamento" 
+        NavigateUrl="~/recursos/Images/casamento.png">
+    </asp:MenuItem>
+    <asp:MenuItem Text="Certidão de Óbito" Value="Certidão de Óbito" 
+        NavigateUrl="~/recursos/Images/obito.png"></asp:MenuItem>
+    <asp:MenuItem Text="Certidão de Cancelamento" Value="Certidão de Cancelamento">
+    </asp:MenuItem>
+    <asp:MenuItem Text="Habilitação de Casamento" Value="Habilitação de Casamento">
+    </asp:MenuItem>
+</asp:MenuItem>
+                    </Items>
+                    <StaticHoverStyle BackColor="#666666" ForeColor="White" />
+                    <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                    <StaticSelectedStyle BackColor="#1C5E55" ForeColor="White" />
+                </asp:Menu>
+
+            </div>
+
+            <div>
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
-        </asp:ContentPlaceHolder>
+                </asp:ContentPlaceHolder>
+            </div>
+            </form>
+        </div>
+        
+            <div class="footer">© Cartório A Vasconcelos <% Response.Write(Date.Now.Year)%>. Todos os direitos Reservados.</div>
+            <div class="footer">Desenvolvido por, <a href="http://www.luanpereira.com" target="_blank">LuanPereira.com</a></div>
+        
     </div>
-    </form>
 </body>
 </html>

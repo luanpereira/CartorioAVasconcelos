@@ -40,7 +40,7 @@ Public Class Seguranca
 
     Public Shared Sub GravarLog(ByVal u As Usuario, ByVal operacao As String, ByVal tabela As String, ByVal sql As String)
 
-        strSql = "  INSERT INTO eb97log VALUES(NULL,"
+        strSql = "  INSERT INTO CT97log VALUES(NULL,"
         strSql += u.Codigo & ", '"
         strSql += operacao & "', '"
         strSql += tabela & "', '"
@@ -111,9 +111,9 @@ Public Class Seguranca
                 usuario.Codigo = dr.Item("AC03CODIGO").ToString
                 usuario.Nome = dr.Item("AC03NOMECOMPLETO").ToString
                 If dr.Item("AC03ULTIMOACESSO").ToString <> "" Then usuario.UltimoAcesso = Format(Date.Parse(dr.Item("AC03ULTIMOACESSO").ToString), "dd/MM/yyyy")
-                usuario.AcessoWeb = dr.Item("AC03ATIVO").ToString
+                usuario.Ativo = dr.Item("AC03ATIVO").ToString
 
-                If usuario.AcessoWeb = "0" Then Throw New UsuarioPermissaoException("VOCÊ FOI DESATIVADO DO SISTEMA. ENTRE EM CONTATO COM O SUPORTE.")
+                If usuario.Ativo = "0" Then Throw New UsuarioPermissaoException("VOCÊ FOI DESATIVADO DO SISTEMA. ENTRE EM CONTATO COM O SUPORTE.")
 
                 dr.Close()
 
@@ -190,9 +190,6 @@ Public Class Seguranca
         strSql += u.Nome & "', '"
         strSql += u.Usuario & "', '"
         strSql += u.Senha & "', "
-        strSql += IIf(u.Tipo = eTipo.Vendedor, u.Vendedor.Codigo, "NULL") & ", "
-        strSql += IIf(u.Tipo = eTipo.Cliente, u.Cliente.Codigo, "NULL") & ", "
-        strSql += IIf(u.AcessoWeb, 1, 0) & ", '"
         strSql += u.NivelAcesso & "', CURRENT_TIMESTAMP())"
 
         Try
@@ -232,7 +229,7 @@ Public Class Seguranca
         strSql = "  UPDATE eb96usuario SET "
         strSql += " EB96NOME = '" & u.Nome & "',"
         strSql += " EB96USUARIO = '" & u.Usuario & "',"
-        strSql += " EB96ACESSOWEB = " & IIf(u.AcessoWeb, 1, 0)
+        strSql += " EB96ACESSOWEB = " & IIf(u.Ativo, 1, 0)
         strSql += " WHERE EB96CODIGO = " & u.Codigo
 
         Try
