@@ -64,7 +64,14 @@ Namespace Infraestrutura
             Return "~/pages/Login.aspx?e=true"
         End Function
 
+        Public Shared Function dataPorExtenso(ByVal data As String) As String
+            Dim array As String()
 
+            array = data.Split("/")
+
+            Return data
+
+        End Function
 
 #Region "GERAL"
 

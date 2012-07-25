@@ -11,16 +11,13 @@ Partial Class pages_relatorio_ExibirRelatorio
             Case 1
                 'EMISSÃO DA CERTIDÃO DE NASCIMENTO
                 Dim rel As New Camadas.Relatorios.Documento
-                'Dim relNascimento As New Camadas.Relatorios.CertidaoNascimento
+                Dim relNascimento As New Camadas.Relatorios.CertidaoNascimento
                 Dim pedido As Pedido = CType(Session("pedido"), Pedido)
 
-                'rel.Nome = pedido.Solicitante.Nome
-                'rel.Averbacao = pedido.Averbacao
-                'rel.Matricula = CType(Session("pedido"), Pedido).Matricula.getMatricula
 
                 rel.Pedido = pedido
-                '                relNascimento.Pedido = pedido
-                'rel.SubRelDocumento = relNascimento
+                relNascimento.Pedido = pedido
+                rel.SubRelDocumento = relNascimento
                 'relNascimento -------------------------------
                 WebViewer.Report = rel
                 '---------------------------------------

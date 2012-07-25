@@ -106,4 +106,19 @@ Partial Class pages_Documentacao_Nascimento
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
         End Try
     End Sub
+
+    Protected Sub txtNumeroLivro_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNumeroLivro.TextChanged
+        Me.completarZeros(Me.txtNumeroLivro)
+    End Sub
+
+    Private Sub completarZeros(ByRef txt As TextBox)
+        Dim zeros As String = ""
+
+        If txt.Text.Length < txt.MaxLength Then
+            For i As Int16 = 1 To (txt.MaxLength - txt.Text.Length)
+                zeros += "0"
+            Next
+            txt.Text = zeros + txt.Text
+        End If
+    End Sub
 End Class
