@@ -1,6 +1,7 @@
 Imports DataDynamics.ActiveReports
 Imports DataDynamics.ActiveReports.Document
 Imports Camadas.Dominio.Documentos
+Imports Infraestrutura
 
 Namespace Camadas.Relatorios
 
@@ -166,7 +167,7 @@ Namespace Camadas.Relatorios
             '
             Me.Detail1.ColumnSpacing = 0.0!
             Me.Detail1.Controls.AddRange(New DataDynamics.ActiveReports.ARControl() {Me.textBox26, Me.textBox24, Me.textBox2, Me.label5, Me.txtNascimento, Me.textBox1, Me.label1, Me.txtDia, Me.textBox5, Me.label2, Me.txtMes, Me.textBox7, Me.label3, Me.txtAno, Me.textBox9, Me.label4, Me.txtHora, Me.textBox11, Me.label6, Me.txtMunicipio, Me.textBox13, Me.label7, Me.txtMunicipioReg, Me.textBox15, Me.label8, Me.txtLocalNascimento, Me.textBox17, Me.label9, Me.txtSexo, Me.label12, Me.label10, Me.txtFiliacao, Me.textBox19, Me.label11, Me.txtAvos, Me.textBox21, Me.label13, Me.txtGemeo, Me.label14, Me.txtNomeGemeo, Me.txtDataRegistro, Me.label15})
-            Me.Detail1.Height = 3.9745!
+            Me.Detail1.Height = 3.57866693!
             Me.Detail1.Name = "Detail1"
             '
             'textBox26
@@ -175,12 +176,12 @@ Namespace Camadas.Relatorios
             Me.textBox26.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox26.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox26.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox26.Height = 0.4185!
+            Me.textBox26.Height = 0.349000007!
             Me.textBox26.Left = 0.0!
             Me.textBox26.Name = "textBox26"
             Me.textBox26.Text = Nothing
-            Me.textBox26.Top = 3.514!
-            Me.textBox26.Width = 4.761!
+            Me.textBox26.Top = 3.19400001!
+            Me.textBox26.Width = 4.76100016!
             '
             'textBox24
             '
@@ -188,12 +189,12 @@ Namespace Camadas.Relatorios
             Me.textBox24.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox24.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox24.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox24.Height = 0.4185!
-            Me.textBox24.Left = 0.6180001!
+            Me.textBox24.Height = 0.349000007!
+            Me.textBox24.Left = 0.61800009!
             Me.textBox24.Name = "textBox24"
             Me.textBox24.Text = Nothing
-            Me.textBox24.Top = 3.0435!
-            Me.textBox24.Width = 5.869!
+            Me.textBox24.Top = 2.75300002!
+            Me.textBox24.Width = 5.68300009!
             '
             'textBox2
             '
@@ -201,33 +202,33 @@ Namespace Camadas.Relatorios
             Me.textBox2.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox2.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox2.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox2.Height = 0.349!
+            Me.textBox2.Height = 0.349000007!
             Me.textBox2.Left = 0.0!
             Me.textBox2.Name = "textBox2"
             Me.textBox2.Text = Nothing
-            Me.textBox2.Top = 0.01!
-            Me.textBox2.Width = 4.761!
+            Me.textBox2.Top = 0.00999999978!
+            Me.textBox2.Width = 4.58400011!
             '
             'label5
             '
-            Me.label5.Height = 0.1666667!
+            Me.label5.Height = 0.166666701!
             Me.label5.HyperLink = Nothing
-            Me.label5.Left = 0.04!
+            Me.label5.Left = 0.0399999991!
             Me.label5.Name = "label5"
             Me.label5.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label5.Text = "Data de nascimemnto"
-            Me.label5.Top = 0.01950003!
-            Me.label5.Width = 1.896!
+            Me.label5.Top = 0.0195000302!
+            Me.label5.Width = 1.89600003!
             '
             'txtNascimento
             '
-            Me.txtNascimento.Height = 0.2!
-            Me.txtNascimento.Left = 0.04!
+            Me.txtNascimento.Height = 0.200000003!
+            Me.txtNascimento.Left = 0.0399999991!
             Me.txtNascimento.Name = "txtNascimento"
             Me.txtNascimento.Style = "font-size: 12pt"
             Me.txtNascimento.Text = "texto"
-            Me.txtNascimento.Top = 0.158!
-            Me.txtNascimento.Width = 4.666!
+            Me.txtNascimento.Top = 0.137999997!
+            Me.txtNascimento.Width = 4.47800016!
             '
             'textBox1
             '
@@ -235,32 +236,32 @@ Namespace Camadas.Relatorios
             Me.textBox1.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox1.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox1.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox1.Height = 0.348!
-            Me.textBox1.Left = 4.835!
+            Me.textBox1.Height = 0.34799999!
+            Me.textBox1.Left = 4.64599991!
             Me.textBox1.Name = "textBox1"
             Me.textBox1.Text = Nothing
-            Me.textBox1.Top = 0.011!
-            Me.textBox1.Width = 0.4690003!
+            Me.textBox1.Top = 0.0109999999!
+            Me.textBox1.Width = 0.46900031!
             '
             'label1
             '
-            Me.label1.Height = 0.1666667!
+            Me.label1.Height = 0.166666701!
             Me.label1.HyperLink = Nothing
-            Me.label1.Left = 4.875!
+            Me.label1.Left = 4.68599987!
             Me.label1.Name = "label1"
             Me.label1.Style = "font-size: 8pt; font-weight: normal; text-align: center"
             Me.label1.Text = "Dia"
-            Me.label1.Top = 0.02050003!
-            Me.label1.Width = 0.3749999!
+            Me.label1.Top = 0.0205000304!
+            Me.label1.Width = 0.374999911!
             '
             'txtDia
             '
-            Me.txtDia.Height = 0.2!
-            Me.txtDia.Left = 4.875!
+            Me.txtDia.Height = 0.200000003!
+            Me.txtDia.Left = 4.68599987!
             Me.txtDia.Name = "txtDia"
             Me.txtDia.Style = "font-size: 12pt; text-align: center"
             Me.txtDia.Text = "00"
-            Me.txtDia.Top = 0.159!
+            Me.txtDia.Top = 0.138999999!
             Me.txtDia.Width = 0.375!
             '
             'textBox5
@@ -269,32 +270,32 @@ Namespace Camadas.Relatorios
             Me.textBox5.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox5.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox5.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox5.Height = 0.4185!
-            Me.textBox5.Left = 5.385!
+            Me.textBox5.Height = 0.34799999!
+            Me.textBox5.Left = 5.19600105!
             Me.textBox5.Name = "textBox5"
             Me.textBox5.Text = Nothing
-            Me.textBox5.Top = 0.011!
-            Me.textBox5.Width = 0.4690003!
+            Me.textBox5.Top = 0.0109999999!
+            Me.textBox5.Width = 0.46900031!
             '
             'label2
             '
-            Me.label2.Height = 0.1666667!
+            Me.label2.Height = 0.166666701!
             Me.label2.HyperLink = Nothing
-            Me.label2.Left = 5.425!
+            Me.label2.Left = 5.23600101!
             Me.label2.Name = "label2"
             Me.label2.Style = "font-size: 8pt; font-weight: normal; text-align: center"
             Me.label2.Text = "Mês"
-            Me.label2.Top = 0.02049991!
-            Me.label2.Width = 0.3749999!
+            Me.label2.Top = 0.0204999093!
+            Me.label2.Width = 0.374999911!
             '
             'txtMes
             '
-            Me.txtMes.Height = 0.2!
-            Me.txtMes.Left = 5.425!
+            Me.txtMes.Height = 0.200000003!
+            Me.txtMes.Left = 5.23600101!
             Me.txtMes.Name = "txtMes"
             Me.txtMes.Style = "font-size: 12pt; text-align: center"
             Me.txtMes.Text = "00"
-            Me.txtMes.Top = 0.159!
+            Me.txtMes.Top = 0.138999999!
             Me.txtMes.Width = 0.375!
             '
             'textBox7
@@ -303,33 +304,33 @@ Namespace Camadas.Relatorios
             Me.textBox7.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox7.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox7.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox7.Height = 0.4185!
-            Me.textBox7.Left = 5.927!
+            Me.textBox7.Height = 0.349499911!
+            Me.textBox7.Left = 5.73799992!
             Me.textBox7.Name = "textBox7"
             Me.textBox7.Text = Nothing
-            Me.textBox7.Top = 0.00950011!
-            Me.textBox7.Width = 0.563!
+            Me.textBox7.Top = 0.00950010959!
+            Me.textBox7.Width = 0.563000023!
             '
             'label3
             '
-            Me.label3.Height = 0.1666667!
+            Me.label3.Height = 0.166666701!
             Me.label3.HyperLink = Nothing
-            Me.label3.Left = 5.967!
+            Me.label3.Left = 5.77799988!
             Me.label3.Name = "label3"
             Me.label3.Style = "font-size: 8pt; font-weight: normal; text-align: center"
             Me.label3.Text = "Ano"
-            Me.label3.Top = 0.01900002!
-            Me.label3.Width = 0.469!
+            Me.label3.Top = 0.0190000199!
+            Me.label3.Width = 0.469000012!
             '
             'txtAno
             '
-            Me.txtAno.Height = 0.2!
-            Me.txtAno.Left = 5.967!
+            Me.txtAno.Height = 0.200000003!
+            Me.txtAno.Left = 5.77800083!
             Me.txtAno.Name = "txtAno"
             Me.txtAno.Style = "font-size: 12pt; text-align: center"
             Me.txtAno.Text = "0000"
-            Me.txtAno.Top = 0.158!
-            Me.txtAno.Width = 0.4689999!
+            Me.txtAno.Top = 0.137999997!
+            Me.txtAno.Width = 0.468999892!
             '
             'textBox9
             '
@@ -337,33 +338,33 @@ Namespace Camadas.Relatorios
             Me.textBox9.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox9.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox9.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox9.Height = 0.4185!
+            Me.textBox9.Height = 0.349000007!
             Me.textBox9.Left = 0.0!
             Me.textBox9.Name = "textBox9"
             Me.textBox9.Text = Nothing
-            Me.textBox9.Top = 0.49!
+            Me.textBox9.Top = 0.449999988!
             Me.textBox9.Width = 1.0!
             '
             'label4
             '
-            Me.label4.Height = 0.1666667!
+            Me.label4.Height = 0.166666701!
             Me.label4.HyperLink = Nothing
-            Me.label4.Left = 0.04000044!
+            Me.label4.Left = 0.0400004387!
             Me.label4.Name = "label4"
             Me.label4.Style = "font-size: 8pt; font-weight: normal; text-align: center"
             Me.label4.Text = "Hora"
-            Me.label4.Top = 0.4994999!
-            Me.label4.Width = 0.9069996!
+            Me.label4.Top = 0.459499896!
+            Me.label4.Width = 0.906999588!
             '
             'txtHora
             '
-            Me.txtHora.Height = 0.2!
-            Me.txtHora.Left = 0.04!
+            Me.txtHora.Height = 0.200000003!
+            Me.txtHora.Left = 0.0399999991!
             Me.txtHora.Name = "txtHora"
             Me.txtHora.Style = "font-size: 12pt; text-align: center"
             Me.txtHora.Text = "texto"
-            Me.txtHora.Top = 0.638!
-            Me.txtHora.Width = 0.9069996!
+            Me.txtHora.Top = 0.588000119!
+            Me.txtHora.Width = 0.906999588!
             '
             'textBox11
             '
@@ -371,33 +372,33 @@ Namespace Camadas.Relatorios
             Me.textBox11.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox11.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox11.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox11.Height = 0.4185!
-            Me.textBox11.Left = 1.087!
+            Me.textBox11.Height = 0.349000007!
+            Me.textBox11.Left = 1.08700001!
             Me.textBox11.Name = "textBox11"
             Me.textBox11.Text = Nothing
-            Me.textBox11.Top = 0.491!
-            Me.textBox11.Width = 5.403!
+            Me.textBox11.Top = 0.451000005!
+            Me.textBox11.Width = 5.21400023!
             '
             'label6
             '
-            Me.label6.Height = 0.1666667!
+            Me.label6.Height = 0.166666701!
             Me.label6.HyperLink = Nothing
-            Me.label6.Left = 1.137!
+            Me.label6.Left = 1.13699996!
             Me.label6.Name = "label6"
             Me.label6.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label6.Text = "Município de Nascimento e Unidade da Federação"
-            Me.label6.Top = 0.501!
+            Me.label6.Top = 0.460999995!
             Me.label6.Width = 2.875!
             '
             'txtMunicipio
             '
-            Me.txtMunicipio.Height = 0.2!
-            Me.txtMunicipio.Left = 1.137!
+            Me.txtMunicipio.Height = 0.200000003!
+            Me.txtMunicipio.Left = 1.13699996!
             Me.txtMunicipio.Name = "txtMunicipio"
             Me.txtMunicipio.Style = "font-size: 12pt; text-align: left"
             Me.txtMunicipio.Text = "texto"
-            Me.txtMunicipio.Top = 0.6390001!
-            Me.txtMunicipio.Width = 5.299!
+            Me.txtMunicipio.Top = 0.588999987!
+            Me.txtMunicipio.Width = 5.11000013!
             '
             'textBox13
             '
@@ -405,33 +406,33 @@ Namespace Camadas.Relatorios
             Me.textBox13.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox13.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox13.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox13.Height = 0.4185!
-            Me.textBox13.Left = 0.00000004097819!
+            Me.textBox13.Height = 0.349000007!
+            Me.textBox13.Left = 0.0!
             Me.textBox13.Name = "textBox13"
             Me.textBox13.Text = Nothing
-            Me.textBox13.Top = 0.9725!
-            Me.textBox13.Width = 1.55!
+            Me.textBox13.Top = 0.89200002!
+            Me.textBox13.Width = 1.54999995!
             '
             'label7
             '
-            Me.label7.Height = 0.1666667!
+            Me.label7.Height = 0.166666701!
             Me.label7.HyperLink = Nothing
-            Me.label7.Left = 0.04!
+            Me.label7.Left = 0.0399999619!
             Me.label7.Name = "label7"
             Me.label7.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label7.Text = "Município de Registro e UF"
-            Me.label7.Top = 0.9820001!
-            Me.label7.Width = 1.459!
+            Me.label7.Top = 0.901500106!
+            Me.label7.Width = 1.45899999!
             '
             'txtMunicipioReg
             '
-            Me.txtMunicipioReg.Height = 0.2!
-            Me.txtMunicipioReg.Left = 0.04!
+            Me.txtMunicipioReg.Height = 0.200000003!
+            Me.txtMunicipioReg.Left = 0.0399999619!
             Me.txtMunicipioReg.Name = "txtMunicipioReg"
             Me.txtMunicipioReg.Style = "font-size: 12pt"
             Me.txtMunicipioReg.Text = "texto"
-            Me.txtMunicipioReg.Top = 1.111!
-            Me.txtMunicipioReg.Width = 1.459!
+            Me.txtMunicipioReg.Top = 1.02049994!
+            Me.txtMunicipioReg.Width = 1.45899999!
             '
             'textBox15
             '
@@ -439,33 +440,33 @@ Namespace Camadas.Relatorios
             Me.textBox15.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox15.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox15.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox15.Height = 0.4185!
-            Me.textBox15.Left = 1.615!
+            Me.textBox15.Height = 0.349000007!
+            Me.textBox15.Left = 1.61500001!
             Me.textBox15.Name = "textBox15"
             Me.textBox15.Text = Nothing
-            Me.textBox15.Top = 0.973!
-            Me.textBox15.Width = 4.05!
+            Me.textBox15.Top = 0.892499983!
+            Me.textBox15.Width = 3.85200095!
             '
             'label8
             '
-            Me.label8.Height = 0.1666667!
+            Me.label8.Height = 0.166666701!
             Me.label8.HyperLink = Nothing
-            Me.label8.Left = 1.643!
+            Me.label8.Left = 1.64300001!
             Me.label8.Name = "label8"
             Me.label8.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label8.Text = "Local de Nascimento"
-            Me.label8.Top = 0.992!
-            Me.label8.Width = 2.396!
+            Me.label8.Top = 0.911499977!
+            Me.label8.Width = 2.39599991!
             '
             'txtLocalNascimento
             '
-            Me.txtLocalNascimento.Height = 0.2!
-            Me.txtLocalNascimento.Left = 1.643!
+            Me.txtLocalNascimento.Height = 0.200000003!
+            Me.txtLocalNascimento.Left = 1.64300001!
             Me.txtLocalNascimento.Name = "txtLocalNascimento"
             Me.txtLocalNascimento.Style = "font-size: 12pt"
             Me.txtLocalNascimento.Text = "texto"
-            Me.txtLocalNascimento.Top = 1.13!
-            Me.txtLocalNascimento.Width = 3.97!
+            Me.txtLocalNascimento.Top = 1.01950002!
+            Me.txtLocalNascimento.Width = 3.76200008!
             '
             'textBox17
             '
@@ -473,33 +474,33 @@ Namespace Camadas.Relatorios
             Me.textBox17.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox17.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox17.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox17.Height = 0.4185!
-            Me.textBox17.Left = 5.719!
+            Me.textBox17.Height = 0.349000007!
+            Me.textBox17.Left = 5.53299999!
             Me.textBox17.Name = "textBox17"
             Me.textBox17.Text = Nothing
-            Me.textBox17.Top = 0.964!
-            Me.textBox17.Width = 0.7680001!
+            Me.textBox17.Top = 0.892499983!
+            Me.textBox17.Width = 0.768000126!
             '
             'label9
             '
-            Me.label9.Height = 0.1666667!
+            Me.label9.Height = 0.166666701!
             Me.label9.HyperLink = Nothing
-            Me.label9.Left = 5.75!
+            Me.label9.Left = 5.56400013!
             Me.label9.Name = "label9"
             Me.label9.Style = "font-size: 8pt; font-weight: normal; text-align: center"
             Me.label9.Text = "Sexo"
-            Me.label9.Top = 0.983!
-            Me.label9.Width = 0.6860003!
+            Me.label9.Top = 0.911499977!
+            Me.label9.Width = 0.686000288!
             '
             'txtSexo
             '
-            Me.txtSexo.Height = 0.2!
-            Me.txtSexo.Left = 5.75!
+            Me.txtSexo.Height = 0.200000003!
+            Me.txtSexo.Left = 5.56400013!
             Me.txtSexo.Name = "txtSexo"
             Me.txtSexo.Style = "font-size: 12pt; text-align: center"
             Me.txtSexo.Text = "texto"
-            Me.txtSexo.Top = 1.112!
-            Me.txtSexo.Width = 0.6859999!
+            Me.txtSexo.Top = 1.02049994!
+            Me.txtSexo.Width = 0.68599987!
             '
             'label12
             '
@@ -507,33 +508,33 @@ Namespace Camadas.Relatorios
             Me.label12.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.label12.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.label12.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.label12.Height = 0.586!
-            Me.label12.Left = 3.72529E-9!
+            Me.label12.Height = 0.523000121!
+            Me.label12.Left = 0.0!
             Me.label12.Name = "label12"
             Me.label12.Text = Nothing
-            Me.label12.Top = 1.469!
-            Me.label12.Width = 6.487!
+            Me.label12.Top = 1.33899999!
+            Me.label12.Width = 6.30100012!
             '
             'label10
             '
-            Me.label10.Height = 0.1666667!
+            Me.label10.Height = 0.166666701!
             Me.label10.HyperLink = Nothing
-            Me.label10.Left = 0.04!
+            Me.label10.Left = 0.0399999991!
             Me.label10.Name = "label10"
             Me.label10.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label10.Text = " Filiação"
-            Me.label10.Top = 1.501!
-            Me.label10.Width = 1.896!
+            Me.label10.Top = 1.37100005!
+            Me.label10.Width = 1.89600003!
             '
             'txtFiliacao
             '
-            Me.txtFiliacao.Height = 0.3649999!
-            Me.txtFiliacao.Left = 0.04!
+            Me.txtFiliacao.Height = 0.302000195!
+            Me.txtFiliacao.Left = 0.0399999991!
             Me.txtFiliacao.Name = "txtFiliacao"
             Me.txtFiliacao.Style = "font-size: 12pt"
             Me.txtFiliacao.Text = "texto"
-            Me.txtFiliacao.Top = 1.638!
-            Me.txtFiliacao.Width = 6.396!
+            Me.txtFiliacao.Top = 1.50800002!
+            Me.txtFiliacao.Width = 6.20699978!
             '
             'textBox19
             '
@@ -541,33 +542,33 @@ Namespace Camadas.Relatorios
             Me.textBox19.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox19.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox19.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox19.Height = 0.8464999!
-            Me.textBox19.Left = 3.72529E-9!
+            Me.textBox19.Height = 0.70050019!
+            Me.textBox19.Left = 0.0!
             Me.textBox19.Name = "textBox19"
             Me.textBox19.Text = Nothing
-            Me.textBox19.Top = 2.1255!
-            Me.textBox19.Width = 6.487!
+            Me.textBox19.Top = 1.95500004!
+            Me.textBox19.Width = 6.30100012!
             '
             'label11
             '
-            Me.label11.Height = 0.1666667!
+            Me.label11.Height = 0.166666701!
             Me.label11.HyperLink = Nothing
-            Me.label11.Left = 0.04!
+            Me.label11.Left = 0.0399999991!
             Me.label11.Name = "label11"
             Me.label11.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label11.Text = "Avós"
-            Me.label11.Top = 2.1575!
-            Me.label11.Width = 1.896!
+            Me.label11.Top = 1.98699999!
+            Me.label11.Width = 1.89600003!
             '
             'txtAvos
             '
-            Me.txtAvos.Height = 0.6249999!
-            Me.txtAvos.Left = 0.04!
+            Me.txtAvos.Height = 0.46900019!
+            Me.txtAvos.Left = 0.0399999991!
             Me.txtAvos.Name = "txtAvos"
             Me.txtAvos.Style = "font-size: 12pt"
             Me.txtAvos.Text = "texto"
-            Me.txtAvos.Top = 2.294!
-            Me.txtAvos.Width = 6.396!
+            Me.txtAvos.Top = 2.12350011!
+            Me.txtAvos.Width = 6.20699978!
             '
             'textBox21
             '
@@ -575,81 +576,82 @@ Namespace Camadas.Relatorios
             Me.textBox21.Border.LeftStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox21.Border.RightStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
             Me.textBox21.Border.TopStyle = DataDynamics.ActiveReports.BorderLineStyle.Solid
-            Me.textBox21.Height = 0.4185!
+            Me.textBox21.Height = 0.349000007!
             Me.textBox21.Left = 0.0!
             Me.textBox21.Name = "textBox21"
             Me.textBox21.Text = Nothing
-            Me.textBox21.Top = 3.0415!
-            Me.textBox21.Width = 0.563!
+            Me.textBox21.Top = 2.75099993!
+            Me.textBox21.Width = 0.563000023!
             '
             'label13
             '
-            Me.label13.Height = 0.1666667!
+            Me.label13.Height = 0.166666701!
             Me.label13.HyperLink = Nothing
-            Me.label13.Left = 0.04000044!
+            Me.label13.Left = 0.0400004387!
             Me.label13.Name = "label13"
             Me.label13.Style = "font-size: 8pt; font-weight: normal; text-align: center"
             Me.label13.Text = "Gêmeo"
-            Me.label13.Top = 3.051!
-            Me.label13.Width = 0.469!
+            Me.label13.Top = 2.76049995!
+            Me.label13.Width = 0.469000012!
             '
             'txtGemeo
             '
-            Me.txtGemeo.Height = 0.2!
-            Me.txtGemeo.Left = 0.04!
+            Me.txtGemeo.Height = 0.200000003!
+            Me.txtGemeo.Left = 0.0399999991!
             Me.txtGemeo.Name = "txtGemeo"
             Me.txtGemeo.Style = "font-size: 12pt; text-align: center"
             Me.txtGemeo.Text = "texto"
-            Me.txtGemeo.Top = 3.19!
-            Me.txtGemeo.Width = 0.4689999!
+            Me.txtGemeo.Top = 2.86949992!
+            Me.txtGemeo.Width = 0.468999892!
             '
             'label14
             '
-            Me.label14.Height = 0.1666667!
+            Me.label14.Height = 0.166666701!
             Me.label14.HyperLink = Nothing
-            Me.label14.Left = 0.668!
+            Me.label14.Left = 0.667999983!
             Me.label14.Name = "label14"
             Me.label14.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label14.Text = "Nome e Matrícula Gêmeo"
-            Me.label14.Top = 3.0535!
+            Me.label14.Top = 2.76300001!
             Me.label14.Width = 2.875!
             '
             'txtNomeGemeo
             '
-            Me.txtNomeGemeo.Height = 0.2!
-            Me.txtNomeGemeo.Left = 0.668!
+            Me.txtNomeGemeo.Height = 0.200000003!
+            Me.txtNomeGemeo.Left = 0.667999983!
             Me.txtNomeGemeo.Name = "txtNomeGemeo"
             Me.txtNomeGemeo.Style = "font-size: 12pt"
             Me.txtNomeGemeo.Text = "texto"
-            Me.txtNomeGemeo.Top = 3.192!
-            Me.txtNomeGemeo.Width = 5.768!
+            Me.txtNomeGemeo.Top = 2.87150002!
+            Me.txtNomeGemeo.Width = 5.58199978!
             '
             'txtDataRegistro
             '
-            Me.txtDataRegistro.Height = 0.2!
-            Me.txtDataRegistro.Left = 0.04!
+            Me.txtDataRegistro.Height = 0.200000003!
+            Me.txtDataRegistro.Left = 0.0399999991!
             Me.txtDataRegistro.Name = "txtDataRegistro"
             Me.txtDataRegistro.Style = "font-size: 12pt"
             Me.txtDataRegistro.Text = "texto"
-            Me.txtDataRegistro.Top = 3.662!
-            Me.txtDataRegistro.Width = 4.666001!
+            Me.txtDataRegistro.Top = 3.32200098!
+            Me.txtDataRegistro.Width = 4.66600084!
             '
             'label15
             '
-            Me.label15.Height = 0.1666667!
+            Me.label15.Height = 0.166666701!
             Me.label15.HyperLink = Nothing
-            Me.label15.Left = 0.04!
+            Me.label15.Left = 0.0399999991!
             Me.label15.Name = "label15"
             Me.label15.Style = "font-size: 8pt; font-weight: normal; text-align: left"
             Me.label15.Text = "Data do registro"
-            Me.label15.Top = 3.5235!
-            Me.label15.Width = 1.896!
+            Me.label15.Top = 3.20350003!
+            Me.label15.Width = 1.89600003!
             '
             'CertidaoNascimento
             '
             Me.MasterReport = False
             Me.PageSettings.PaperHeight = 11.0!
             Me.PageSettings.PaperWidth = 8.5!
+            Me.PrintWidth = 6.3125!
             Me.ScriptLanguage = "VB.NET"
             Me.Sections.Add(Me.Detail1)
             Me.StyleSheet.Add(New DDCssLib.StyleSheetRule("font-family: Arial; font-style: normal; text-decoration: none; font-weight: norma" & _
@@ -707,10 +709,33 @@ Namespace Camadas.Relatorios
 
 
         Private Sub CertidaoNascimento_ReportStart(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReportStart
+            Dim data As String
+            Dim array As String()
+
             txtFiliacao.Text = Pedido.Solicitante.Filiacao.getPais
             txtAvos.Text = Pedido.Solicitante.Filiacao.getAvos
 
-            Me.txtNascimento.Text = WeekdayName(5)
+            '-- DATA NASCIMENTO -----
+            Me.txtNascimento.Text = Utils.dataPorExtenso(Pedido.Solicitante.DataNascimento)
+
+            data = Pedido.Solicitante.DataNascimento
+            array = data.Split("/")
+            Me.txtDia.Text = array(0)
+            Me.txtMes.Text = array(1)
+            Me.txtAno.Text = array(2)
+            '------------------------
+
+            Me.txtHora.Text = CType(Pedido.Documento, Nascimento).Horario.Substring(0, 2) & "H " & CType(Pedido.Documento, Nascimento).Horario.Substring(2, 2) & "Min"
+            Me.txtMunicipio.Text = CType(Pedido.Documento, Nascimento).Cidade
+
+            Me.txtMunicipioReg.Text = ConfigurationManager.AppSettings.Item("CIDADE").ToString
+            Me.txtLocalNascimento.Text = CType(Pedido.Documento, Nascimento).Maternidade
+            Me.txtSexo.Text = Pedido.Solicitante.Sexo
+
+
+            Me.txtGemeo.Text = IIf(Not Pedido.Solicitante.Gemeo.Nome = "NÃO", "Sim", "Não")
+            Me.txtNomeGemeo.Text = Pedido.Solicitante.Gemeo.Nome
+            Me.txtDataRegistro.Text = Utils.dataPorExtenso(Pedido.Documento.DataRegistro)
         End Sub
     End Class
 

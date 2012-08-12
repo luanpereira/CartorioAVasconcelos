@@ -135,6 +135,7 @@ input.texto {
     left: 0px;
     width: 342px;
     text-transform: uppercase;
+    height: 25px;
 }
 
 input.texto:hover, input.texto:focus {

@@ -2,6 +2,7 @@
 Imports System.Data
 Imports Camadas.Negocio
 Imports Camadas.Dominio.Documentos
+Imports Camadas.Dominio.Administrativo
 
 Partial Class pages_Documentacao_Nascimento
     Inherits System.Web.UI.Page
@@ -13,6 +14,16 @@ Partial Class pages_Documentacao_Nascimento
         Dim idPedido As Integer
 
         If Not IsPostBack Then
+            Me.txtServentia.Attributes.Add("onblur", "return CompletarZeros(this,6);")
+            Me.txtAcervo.Attributes.Add("onblur", "return CompletarZeros(this,2);")
+            Me.txtAtribuicao.Attributes.Add("onblur", "return CompletarZeros(this,2);")
+            Me.txtAnoReg.Attributes.Add("onblur", "return CompletarZeros(this,4);")
+            Me.txtTipoLivro.Attributes.Add("onblur", "return CompletarZeros(this,1);")
+            Me.txtNumeroLivro.Attributes.Add("onblur", "return CompletarZeros(this,5);")
+            Me.txtNumeroFolha.Attributes.Add("onblur", "return CompletarZeros(this,3);")
+            Me.txtNumeroTermo.Attributes.Add("onblur", "return CompletarZeros(this,7);")
+
+            Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
 
             Try
                 idCliente = Integer.Parse(Request.QueryString("cliente"))
@@ -71,6 +82,7 @@ Partial Class pages_Documentacao_Nascimento
     Protected Sub btnSalvar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalvar.Click
         Dim pedido As Pedido
         Dim nascimento As Nascimento
+        Dim gemeo As Cliente
 
         Try
             pedido = New Pedido
@@ -83,6 +95,12 @@ Partial Class pages_Documentacao_Nascimento
             pedido.Solicitante.Filiacao.NomeAvoPaterno2 = lblAvoPaterno2.Text
             pedido.Solicitante.Filiacao.NomeAvoMaterno1 = lblAvoMaterno1.Text
             pedido.Solicitante.Filiacao.NomeAvoMaterno2 = lblAvoMaterno2.Text
+            pedido.Solicitante.DataNascimento = Me.lblDataNascimento.Text
+            pedido.Solicitante.Sexo = Me.lblSexo.Text
+
+            gemeo = New Cliente
+            gemeo.Nome = Me.lblGemeo.Text
+            pedido.Solicitante.Gemeo = gemeo
 
             pedido.Matricula.Acervo = txtAcervo.Text
             pedido.Matricula.AnoRegistro = txtAnoReg.Text
@@ -94,10 +112,14 @@ Partial Class pages_Documentacao_Nascimento
             pedido.Matricula.TipoLivro = txtTipoLivro.Text
 
             nascimento = New Nascimento
+            nascimento.Horario = Me.txtHorario.Text
             nascimento.Declarante = drpDeclarante.SelectedValue
-            nascimento.Maternidade = txtLocal.Text
+            nascimento.Maternidade = txtLocal.Text.ToUpper
             nascimento.TipoLivro = txtTipoLivro.Text
+            nascimento.Cidade = lblNascimdoEM.Text
             pedido.Documento = nascimento
+
+            pedido.Documento.DataRegistro = Me.txtDataRegistro.Text
 
             Session("pedido") = pedido
             ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
@@ -105,20 +127,5 @@ Partial Class pages_Documentacao_Nascimento
         Catch ex As Exception
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
         End Try
-    End Sub
-
-    Protected Sub txtNumeroLivro_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNumeroLivro.TextChanged
-        Me.completarZeros(Me.txtNumeroLivro)
-    End Sub
-
-    Private Sub completarZeros(ByRef txt As TextBox)
-        Dim zeros As String = ""
-
-        If txt.Text.Length < txt.MaxLength Then
-            For i As Int16 = 1 To (txt.MaxLength - txt.Text.Length)
-                zeros += "0"
-            Next
-            txt.Text = zeros + txt.Text
-        End If
     End Sub
 End Class

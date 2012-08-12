@@ -33,14 +33,31 @@
                                 <asp:Label ID="lblDataNascimento" runat="server" CssClass="texto" Text="-"></asp:Label>
                             </p>
                             <p>
+                                <asp:Label ID="label18" runat="server" CssClass="lbl" Text="Data do Registro" ForeColor="#FC0000"></asp:Label>
+                                <asp:TextBox ID="txtDataRegistro" runat="server" CssClass="texto" MaxLength="10" Width="120px"></asp:TextBox>
+                                <asp:MaskedEditExtender ID="MaskedEditExtender1" runat="server" CultureAMPMPlaceholder=""
+                                    CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                    CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                    Enabled="True" ErrorTooltipEnabled="True" InputDirection="LeftToRight" Mask="99/99/9999"
+                                    MaskType="None" TargetControlID="txtDataRegistro">
+                                </asp:MaskedEditExtender>   
+                            </p>
+                            <p>
                                 <asp:Label ID="label7" runat="server" CssClass="lbl" Text="Horário Nascimento" 
                                     ForeColor="#FC0000"></asp:Label>
                                 <asp:TextBox ID="txtHorario" runat="server" CssClass="texto" MaxLength="5" Width="60px"></asp:TextBox>
+                                <asp:MaskedEditExtender ID="MaskedEditExtender7" runat="server" CultureAMPMPlaceholder=""
+                                    CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                    CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                    Enabled="True" ErrorTooltipEnabled="True" InputDirection="LeftToRight" Mask="99:99"
+                                    MaskType="None" TargetControlID="txtHorario">
+                                </asp:MaskedEditExtender>   
                             </p>
                             <p>
-                                <asp:Label ID="label12" runat="server" CssClass="lbl" Text="Local Nascimento" 
-                                    ForeColor="#FC0000"></asp:Label>
-                                <asp:TextBox ID="txtLocal" runat="server" CssClass="texto" MaxLength="5" Width="360px"></asp:TextBox>
+                                <asp:Label ID="label12" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Local Nascimento"></asp:Label>
+                                <asp:TextBox ID="txtLocal" runat="server" CssClass="texto" MaxLength="45" Width="360px"></asp:TextBox>
+                            </p>
+                            <p>
                             </p>
                         </asp:Panel>
                     </fieldset>
@@ -101,7 +118,8 @@
                                 style="float:left;">
                                 <p>
                                     <asp:Label ID="label6" runat="server" CssClass="lbl" Text="Serventia (CNS)" ForeColor="#FC0000"></asp:Label>
-                                    <asp:TextBox ID="txtServentia" runat="server" CssClass="texto" MaxLength="7" Text="031385" Width="60px"></asp:TextBox>
+                                    <asp:TextBox ID="txtServentia" runat="server" CssClass="texto" MaxLength="6" 
+                                        Text="031385" Width="60px"></asp:TextBox>
                                 </p>
                                 <p>
                                     <asp:Label ID="label11" runat="server" CssClass="lbl" Text="Acervo" ForeColor="#FC0000"></asp:Label>
@@ -121,7 +139,8 @@
                                 style="float:right;">
                                 <p>
                                     <asp:Label ID="label17" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Tipo de Livro"></asp:Label>
-                                    <asp:TextBox ID="txtTipoLivro" runat="server" CssClass="texto" MaxLength="2" Text="1" Width="30px"></asp:TextBox>
+                                    <asp:TextBox ID="txtTipoLivro" runat="server" CssClass="texto" MaxLength="1" 
+                                        Text="1" Width="30px"></asp:TextBox>
                                 </p>                                
                                 <p>
                                     <asp:Label ID="label19" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Número do Livro"></asp:Label>
@@ -130,7 +149,7 @@
                                 </p>
                                 <p>
                                     <asp:Label ID="label16" runat="server" CssClass="lbl" Text="Número da Folha" ForeColor="#FC0000"></asp:Label>
-                                    <asp:TextBox ID="txtNumeroFolha" runat="server" CssClass="texto" MaxLength="5" 
+                                    <asp:TextBox ID="txtNumeroFolha" runat="server" CssClass="texto" MaxLength="3" 
                                         Width="50px"></asp:TextBox>
                                 </p>
                                 <p>

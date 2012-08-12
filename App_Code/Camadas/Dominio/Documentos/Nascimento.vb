@@ -10,6 +10,8 @@ Namespace Camadas.Dominio.Documentos
         Public Property Declarante() As Char
         Public Property Maternidade() As String
         Public Property Filiacao() As Filiacao
+        Public Property Horario() As String
+        Public Property Cidade() As String
 
         Public Sub New()
             _Filiacao = New Filiacao

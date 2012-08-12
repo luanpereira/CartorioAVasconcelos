@@ -1,5 +1,16 @@
 //Funcoes Gerais
 
+function CompletarZeros(obj,qtd){
+    var zeros = "";
+
+    if(obj.value.length < qtd){
+        for(i=0;i<(qtd - obj.value.length);i++)
+            zeros += "0";
+
+        obj.value = zeros + obj.value;
+    }
+}
+
 function Mascara(event,obj,mask) {
 	var Cod = window.event ? event.keyCode : event.which; 
 	
