@@ -3,6 +3,6 @@ Imports Camadas.Dominio.Administrativo
 Imports System.Data
 
 Public Interface IClienteController
-    Sub cadastrarCliente(ByVal cliente As Cliente)
+    Sub cadastrarCliente(ByRef cliente As Cliente)
     Function listarCliente(ByVal c As Cliente) As DataTable
 End Interface

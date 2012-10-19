@@ -10,7 +10,7 @@ Namespace Camadas.Negocio
     Public Class ClienteController
         Implements IClienteController
 
-        Public Sub cadastrarCliente(ByVal cliente As Cliente) Implements IClienteController.cadastrarCliente
+        Public Sub cadastrarCliente(ByRef cliente As Cliente) Implements IClienteController.cadastrarCliente
             Dim dao As IClienteDAO
             Dim idCliente As Integer = 0
             Dim u As Usuario
@@ -37,6 +37,9 @@ Namespace Camadas.Negocio
                 '--------------------------
                 DaoFactory.TransactionCommit()
 
+            Catch ex As UsuarioInvalidoException
+                DaoFactory.TransactionRollback()
+                Throw ex
             Catch ex As DAOException
                 DaoFactory.TransactionRollback()
                 Throw ex
@@ -64,6 +67,7 @@ Namespace Camadas.Negocio
                 DaoFactory.CloseConnection()
             End Try
         End Function
+
     End Class
 
 End Namespace

@@ -509,13 +509,13 @@ Namespace Camadas.Relatorios
         Private Sub Documento_ReportStart(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReportStart
 
             ' CONFIGURAÇÃO DE PÁGINA ---------------------------
-            Me.PageSettings.DefaultPaperSize = False
-            Me.PageSettings.DefaultPaperSource = False
+            'Me.PageSettings.DefaultPaperSize = False
+            'Me.PageSettings.DefaultPaperSource = False
 
-            Me.PageSettings.Margins.Top = 0.1F
-            Me.PageSettings.Margins.Bottom = 0.1F
-            Me.PageSettings.Margins.Left = 0.2F
-            Me.PageSettings.Margins.Right = 0.2F
+            'Me.PageSettings.Margins.Top = 0.1F
+            'Me.PageSettings.Margins.Bottom = 0.1F
+            'Me.PageSettings.Margins.Left = 0.2F
+            'Me.PageSettings.Margins.Right = 0.2F
             '---------------------------------------------------
 
             Select True

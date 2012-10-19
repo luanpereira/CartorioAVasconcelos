@@ -19,7 +19,7 @@ Partial Class pages_administrativo_ConsultarCliente
             gvCliente.DataBind()
 
             'EMIÇÃO DE DOCUMENTOS --------------------
-            If Not Session("emitirDocumento") Is Nothing Then
+            If Not Session("gerenciarDocumento") Is Nothing Then
                 gvCliente.Columns(1).Visible = False
                 gvCliente.Columns(0).Visible = True
             End If
@@ -81,14 +81,19 @@ Partial Class pages_administrativo_ConsultarCliente
                 If id > 0 Then Response.Redirect("~/pages/administrativo/CadastroCliente.aspx?id=" & id)
 
             Case "Select"
-                Select Case CType(Session("emitirDocumento"), Utils.TipoLivro)
-                    Case Utils.TipoLivro.Nascimento
-                        Session.Remove("emitirDocumento")
-                        Response.Redirect("~/pages/documentacao/Nascimento.aspx?cliente=" & id)
+                If Not Session("gerenciarDocumento") Is Nothing Then
+                    Response.Redirect("~/pages/documentacao/Gerenciar.aspx?cliente=" & id)
+                Else
+                    ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('SESSÃO DE GERENCAR DOCUMENTO VAZIA. POR FAVOR INICIE NOVAMENTE.');", True)
+                End If
+                'Select Case CType(Session("emitirDocumento"), Utils.TipoLivro)
+                '    Case Utils.TipoLivro.Nascimento
+                '        Session.Remove("emitirDocumento")
+                '        Response.Redirect("~/pages/documentacao/Nascimento.aspx?cliente=" & id)
 
-                    Case Else
+                '    Case Else
 
-                End Select
+                'End Select
 
 
             Case Else

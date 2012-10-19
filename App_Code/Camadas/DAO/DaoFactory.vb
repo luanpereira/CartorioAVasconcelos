@@ -86,6 +86,10 @@ Namespace Camadas.DAO
             Return New ClienteDAO(GetConnection)
         End Function
 
+        Public Shared Function GetDocumentoDAO() As IDocumentoDAO
+            Return New DocumentoDAO(GetConnection)
+        End Function
+
     End Class
 
 End Namespace

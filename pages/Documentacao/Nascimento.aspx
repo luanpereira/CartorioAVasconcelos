@@ -13,7 +13,8 @@
                     <fieldset>
                         <legend>Dados Pessoais
                             <asp:ImageButton ID="btnPesquisarCLiente" runat="server" 
-                                ImageUrl="~/recursos/Images/search.png" ToolTip="Pesquisar Cliente" />
+                                ImageUrl="~/recursos/Images/search.png" ToolTip="Pesquisar Cliente" 
+                                Visible="False" />
                         </legend>
                         <asp:Panel ID="pnlFisica" runat="server" Height="225px">
                             <p>
@@ -39,7 +40,7 @@
                                     CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
                                     CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                     Enabled="True" ErrorTooltipEnabled="True" InputDirection="LeftToRight" Mask="99/99/9999"
-                                    MaskType="None" TargetControlID="txtDataRegistro">
+                                    MaskType="Date" TargetControlID="txtDataRegistro">
                                 </asp:MaskedEditExtender>   
                             </p>
                             <p>
@@ -50,7 +51,7 @@
                                     CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
                                     CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                     Enabled="True" ErrorTooltipEnabled="True" InputDirection="LeftToRight" Mask="99:99"
-                                    MaskType="None" TargetControlID="txtHorario">
+                                    MaskType="Time" TargetControlID="txtHorario">
                                 </asp:MaskedEditExtender>   
                             </p>
                             <p>

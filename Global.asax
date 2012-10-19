@@ -5,13 +5,13 @@
 
     Sub Application_Start(ByVal sender As Object, ByVal e As EventArgs)
         ' Code that runs on application startup
-        Dim mail As New MailMessage()
-        mail.To = "contato@luanpereira.com"
-        mail.From = "luanpereira_c@hotmail.com"
-        mail.Subject = "Iniciando Sistema Cartorio."
-        mail.Body = "Iniciando sistema cartório a vasconcelos"
-        SmtpMail.SmtpServer = "localhost" 'your real server goes here
-        SmtpMail.Send(mail)
+        'Dim mail As New MailMessage()
+        'mail.To = "contato@luanpereira.com"
+        'mail.From = "luanpereira_c@hotmail.com"
+        'mail.Subject = "Iniciando Sistema Cartorio."
+        'mail.Body = "Iniciando sistema cartório a vasconcelos"
+        'SmtpMail.SmtpServer = "localhost" 'your real server goes here
+        'SmtpMail.Send(mail)
     End Sub
     
     Sub Application_End(ByVal sender As Object, ByVal e As EventArgs)
@@ -21,14 +21,14 @@
     Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         ' Code that runs when an unhandled error occurs
         
-        Dim mail As New MailMessage()
-        Dim ex As Exception = Server.GetLastError()
-        mail.To = "contato@luanpereira.com"
-        mail.From = "luanpereira_c@hotmail.com"
-        mail.Subject = "Erro Sistema Cartorio."
-        mail.Body = ex.ToString
-        SmtpMail.SmtpServer = "localhost" 'your real server goes here
-        SmtpMail.Send(mail)
+        'Dim mail As New MailMessage()
+        'Dim ex As Exception = Server.GetLastError()
+        'mail.To = "contato@luanpereira.com"
+        'mail.From = "luanpereira_c@hotmail.com"
+        'mail.Subject = "Erro Sistema Cartorio."
+        'mail.Body = ex.ToString
+        'SmtpMail.SmtpServer = "localhost" 'your real server goes here
+        'SmtpMail.Send(mail)
         
     End Sub
 

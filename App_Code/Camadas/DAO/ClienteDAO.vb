@@ -30,7 +30,7 @@ Namespace Camadas.DAO
         Public Function cadastrarCliente(ByVal cliente As Cliente) As Integer Implements IClienteDAO.cadastrarCliente
             Dim result As Integer
 
-            strSql = " INSERT INTO ct01cliente (CT01NOME,CT01CPF,CT01RG,FK0198NATURAL,CT01ENDERECO,FK0198CIDADEUF,CT01PROFISSAO,CT01EMAIL,CT01FONEFIXO,CT01CELULAR,CT01SEXO,CT01DATANASCIMENTO,CT01ESTADOCIVIL,CT01PAI,CT01MAE,CT01AVOPATERNO1,CT01AVOPATERNO2,CT01AVOMATERNO1,CT01AVOMATERNO2,FK0101GEMEO) "
+            strSql = " INSERT INTO CT01CLIENTE (CT01NOME,CT01CPF,CT01RG,FK0198NATURAL,CT01ENDERECO,FK0198CIDADEUF,CT01PROFISSAO,CT01EMAIL,CT01FONEFIXO,CT01CELULAR,CT01SEXO,CT01DATANASCIMENTO,CT01ESTADOCIVIL,CT01PAI,CT01MAE,CT01AVOPATERNO1,CT01AVOPATERNO2,CT01AVOMATERNO1,CT01AVOMATERNO2,FK0101GEMEO) "
             strSql += " VALUES('" & cliente.Nome & "'," & IIf(cliente.Cpf = String.Empty, "NULL", "'" & cliente.Cpf & "'") & ",'" & cliente.Rg & "'," & IIf(cliente.Natural.Codigo = 0, "NULL", cliente.Natural.Codigo) & ",'" & cliente.Endereco.Logradouro & "',"
             strSql += IIf(cliente.Endereco.Cidade.Codigo = 0, "NULL", cliente.Endereco.Cidade.Codigo) & ",'" & cliente.Profissao & "','" & cliente.Contato.Email & "','" & cliente.Contato.FoneResidencial & "','"
             strSql += cliente.Contato.FoneCelular & "','" & cliente.Sexo & "','" & cliente.DataNascimento & "','" & cliente.EstadoCivil & "','"
@@ -49,6 +49,9 @@ Namespace Camadas.DAO
                 '=========================
 
                 Return result
+
+            Catch ex As UsuarioInvalidoException
+                Throw New UsuarioInvalidoException(ex.Message)
             Catch ex As OleDbException
                 Throw New DAOException(ex.Message)
             Catch ex As MySqlException
@@ -64,7 +67,7 @@ Namespace Camadas.DAO
 
         Public Sub atualizarCliente(ByVal cliente As Cliente) Implements IClienteDAO.atualizarCliente
 
-            strSql = "  UPDATE ct01cliente SET CT01NOME='" & cliente.Nome & "', CT01CPF=" & IIf(cliente.Cpf = String.Empty, "NULL", "'" & cliente.Cpf & "'") & ", CT01RG='" & cliente.Rg & "', "
+            strSql = "  UPDATE CT01CLIENTE SET CT01NOME='" & cliente.Nome & "', CT01CPF=" & IIf(cliente.Cpf = String.Empty, "NULL", "'" & cliente.Cpf & "'") & ", CT01RG='" & cliente.Rg & "', "
             strSql += IIf(cliente.Natural.Codigo > 0, "FK0198NATURAL=" & cliente.Natural.Codigo & ", ", "") & " CT01ENDERECO='" & cliente.Endereco.Logradouro & "', "
             strSql += IIf(cliente.Endereco.Cidade.Codigo > 0, "FK0198CIDADEUF=" & cliente.Endereco.Cidade.Codigo & ", ", "") & " CT01PROFISSAO='" & cliente.Profissao & "', "
             strSql += " CT01EMAIL='" & cliente.Contato.Email & "',CT01FONEFIXO='" & cliente.Contato.FoneResidencial & "',CT01CELULAR='" & cliente.Contato.FoneCelular & "', "
@@ -129,7 +132,7 @@ Namespace Camadas.DAO
 
 
         Public Sub atualizarGemeo(ByVal gemeo1 As Dominio.Administrativo.Cliente, ByVal gemeo2 As Dominio.Administrativo.Cliente) Implements IClienteDAO.atualizarGemeo
-            strSql = "  UPDATE ct01cliente SET FK0101GEMEO=" & IIf(gemeo1.Codigo > 0, gemeo1.Codigo, "NULL")
+            strSql = "  UPDATE CT01CLIENTE SET FK0101GEMEO=" & IIf(gemeo1.Codigo > 0, gemeo1.Codigo, "NULL")
             strSql += " WHERE CT01CODIGO = " & gemeo2.Codigo
 
             Try
@@ -142,6 +145,8 @@ Namespace Camadas.DAO
                 Seguranca.GravarLog(usuario, "U", "CT01", strSql)
                 '=========================
 
+            Catch ex As UsuarioInvalidoException
+                Throw New DAOException(ex.Message)
             Catch ex As OleDbException
                 Throw New DAOException(ex.Message)
             Catch ex As Exception

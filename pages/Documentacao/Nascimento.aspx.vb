@@ -8,6 +8,7 @@ Partial Class pages_Documentacao_Nascimento
     Inherits System.Web.UI.Page
 
     Private controller As IClienteController = New ClienteController
+    Private controllerDocumento As IDocumentoController = New DocumentoController
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim idCliente As Integer
@@ -75,8 +76,8 @@ Partial Class pages_Documentacao_Nascimento
     End Sub
 
     Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
-        Session.Remove("emitirDocumento")
-        Response.Redirect("~/pages/principal/")
+        Session.Remove("gerenciarDocumento")
+        Response.Redirect("~/pages/Documentacao/Gerenciar.aspx?cliente=" & ViewState("idCliente"))
     End Sub
 
     Protected Sub btnSalvar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalvar.Click
@@ -122,7 +123,21 @@ Partial Class pages_Documentacao_Nascimento
             pedido.Documento.DataRegistro = Me.txtDataRegistro.Text
 
             Session("pedido") = pedido
-            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
+
+            controllerDocumento.solicitarDocumento(pedido)
+
+            'Response.Redirect("~/pages/relatorio/ExibirRelatorio.aspx?r=1")
+            'If System.Configuration.ConfigurationManager.AppSettings.Item("AMBIENTE").ToString = "T" Then
+            ' ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
+            'Else
+            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
+            'End If
+
+            '<httpHandlers>
+            '  <add verb="*" path="*.rpx" type="DataDynamics.ActiveReports.Web.Handlers.RpxHandler, ActiveReports.Web, Version=6.2.4238.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+            '  <add verb="*" path="*.ActiveReport" type="DataDynamics.ActiveReports.Web.Handlers.CompiledReportHandler, ActiveReports.Web, Version=6.2.4238.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+            '  <add verb="*" path="*.ArCacheItem" type="DataDynamics.ActiveReports.Web.Handlers.WebCacheAccessHandler, ActiveReports.Web, Version=6.2.4238.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
+            '</httpHandlers>
 
         Catch ex As Exception
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)

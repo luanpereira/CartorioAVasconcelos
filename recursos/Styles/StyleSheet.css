@@ -188,6 +188,7 @@ input.botaoForm:hover
 .botaoForm.add {
     background: #104E8B url(../Images/add_16.png) no-repeat left center;
     padding-left: 20px;
+    width: 228px;
 }
 
 #Filtro .lbl {

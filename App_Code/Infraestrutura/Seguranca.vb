@@ -40,7 +40,9 @@ Public Class Seguranca
 
     Public Shared Sub GravarLog(ByVal u As Usuario, ByVal operacao As String, ByVal tabela As String, ByVal sql As String)
 
-        strSql = "  INSERT INTO CT97log VALUES(NULL,"
+        If u Is Nothing Then Throw New UsuarioInvalidoException("SESSÃO EXPIRADA. FAÇA O LOGIN NOVAMENTE.")
+
+        strSql = "  INSERT INTO CT97LOG VALUES(NULL,"
         strSql += u.Codigo & ", '"
         strSql += operacao & "', '"
         strSql += tabela & "', '"
@@ -54,6 +56,8 @@ Public Class Seguranca
             cmd.CommandText = strSql
             cmd.ExecuteNonQuery()
 
+        Catch ex As UsuarioInvalidoException
+            Throw New UsuarioInvalidoException("Gravando Log >> " & ex.Message)
         Catch ex As OleDbException
             Throw New DAOException("Gravando Log >> " & ex.Message)
         Catch ex As Exception

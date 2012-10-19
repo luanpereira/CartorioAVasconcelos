@@ -6,7 +6,9 @@
         <div id="principal" class="boxes">
             <h2>Seja Bem Vindo!</h2>
             <asp:Label ID="lblMatricula" runat="server"></asp:Label>
-            <br /><br /><br /><br />
+            <br /><br />
+            <asp:Button ID="Button1" runat="server" Text="Imprimir" Visible="False" />
+            <br /><br />
             <div id="imgPrincipal"></div>
             <br /><br />
         </div> 

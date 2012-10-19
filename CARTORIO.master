@@ -63,18 +63,7 @@
                             <asp:MenuItem NavigateUrl="~/pages/administrativo/ConsultarCliente.aspx" 
                                 Text="Clientes" Value="Clientes"></asp:MenuItem>
                         </asp:MenuItem>
-<asp:MenuItem Text="Documentação" Value="Financeiro">
-    <asp:MenuItem Text="Certidão de Nascimento" Value="Caixa" 
-        NavigateUrl="~/pages/Documentacao/Nascimento.aspx"></asp:MenuItem>
-    <asp:MenuItem Text="Certidão de Casamento" Value="Certidão de Casamento" 
-        NavigateUrl="~/recursos/Images/casamento.png">
-    </asp:MenuItem>
-    <asp:MenuItem Text="Certidão de Óbito" Value="Certidão de Óbito" 
-        NavigateUrl="~/recursos/Images/obito.png"></asp:MenuItem>
-    <asp:MenuItem Text="Certidão de Cancelamento" Value="Certidão de Cancelamento">
-    </asp:MenuItem>
-    <asp:MenuItem Text="Habilitação de Casamento" Value="Habilitação de Casamento">
-    </asp:MenuItem>
+<asp:MenuItem Text="Documentação" Value="Financeiro" NavigateUrl="~/pages/Documentacao/Gerenciar.aspx">
 </asp:MenuItem>
                     </Items>
                     <StaticHoverStyle BackColor="#666666" ForeColor="White" />

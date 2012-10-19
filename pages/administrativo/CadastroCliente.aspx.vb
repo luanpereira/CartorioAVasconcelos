@@ -22,7 +22,7 @@ Partial Class pages_administrativo_CadastroCliente
             Me.txtTelefoneFixo.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
             Me.txtCelular.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
             Me.txtDataNascimento.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
-            'Me.txtCPF.Attributes.Add("onblur", "return ValidaCPF(this);") 
+            Me.txtCPF.Attributes.Add("onblur", "return ValidaCPF(this);")
             Me.txtPai.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
             Me.txtMae.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
             Me.txtAvoPaterno1.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
@@ -171,7 +171,15 @@ Partial Class pages_administrativo_CadastroCliente
 
             controller.cadastrarCliente(cliente)
 
-            ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('CLIENTE ATUALIZADO COM SUCESSO.'); history.back();", True)
+            If Not Session("gerenciarDocumento") Is Nothing Then
+                Response.Redirect("~/pages/documentacao/Gerenciar.aspx?cliente=" & cliente.Codigo)
+            Else
+                ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('CLIENTE ATUALIZADO COM SUCESSO.'); history.back();", True)
+            End If
+
+        Catch ex As UsuarioInvalidoException
+            ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
+            Response.Redirect("~/pages/Login.aspx")
         Catch ex As BusinessException
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
         Catch ex As Exception
