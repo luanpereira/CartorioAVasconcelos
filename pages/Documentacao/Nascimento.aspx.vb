@@ -11,8 +11,8 @@ Partial Class pages_Documentacao_Nascimento
     Private controllerDocumento As IDocumentoController = New DocumentoController
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim idCliente As Integer
-        Dim idPedido As Integer
+        'Dim idCliente As Integer
+        Dim idPedido, idCliente As Integer
 
         If Not IsPostBack Then
             Me.txtServentia.Attributes.Add("onblur", "return CompletarZeros(this,6);")
@@ -24,10 +24,23 @@ Partial Class pages_Documentacao_Nascimento
             Me.txtNumeroFolha.Attributes.Add("onblur", "return CompletarZeros(this,3);")
             Me.txtNumeroTermo.Attributes.Add("onblur", "return CompletarZeros(this,7);")
 
+            Me.txtAverbacao.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
+
             Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
 
             Try
-                idCliente = Integer.Parse(Request.QueryString("cliente"))
+                If Request.QueryString("cliente") Is Nothing Then
+                    idCliente = 0
+                Else
+                    idCliente = Integer.Parse(Request.QueryString("cliente"))
+                End If
+
+                If Request.QueryString("pedido") Is Nothing Then
+                    idPedido = 0
+                Else
+                    idPedido = Integer.Parse(Request.QueryString("pedido"))
+                End If
+
                 If idCliente > 0 Then
                     ViewState("idCliente") = idCliente
                     Me.listarDadosCliente(idCliente)
@@ -35,11 +48,49 @@ Partial Class pages_Documentacao_Nascimento
                     ViewState("idCliente") = 0
                 End If
 
+                If idPedido > 0 Then
+                    ViewState("idPedido") = idPedido
+                    Me.listarDadosPedido(idPedido)
+                Else
+                    ViewState("idPedido") = 0
+                End If
             Catch ex As Exception
                 ViewState("idCliente") = 0
+                ViewState("idPedido") = 0
                 ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('ERRO NO ID. " & ex.Message.Replace("'", "") & "'); history.back()", True)
             End Try
         End If
+    End Sub
+
+    Private Sub listarDadosPedido(ByVal id As Integer)
+        Dim pedido As Camadas.Dominio.Documentos.Pedido
+
+        Try
+            pedido = New Pedido
+            pedido.Codigo = id
+            pedido = controllerDocumento.listarPedido(pedido)
+
+            Me.txtDataRegistro.Text = pedido.Documento.DataRegistro
+            Me.txtHorario.Text = CType(pedido.Documento, Nascimento).Horario
+            Me.txtLocal.Text = CType(pedido.Documento, Nascimento).Maternidade
+            Me.drpDeclarante.SelectedValue = CType(pedido.Documento, Nascimento).Declarante
+
+            Me.txtServentia.Text = pedido.Matricula.Serventia
+            Me.txtAcervo.Text = pedido.Matricula.Acervo
+            Me.txtAtribuicao.Text = pedido.Matricula.Atribuicao
+            Me.txtAnoReg.Text = pedido.Matricula.AnoRegistro
+            Me.txtTipoLivro.Text = pedido.Matricula.TipoLivro
+            Me.txtNumeroLivro.Text = pedido.Matricula.NumeroLivro
+            Me.txtNumeroFolha.Text = pedido.Matricula.NumeroFolha
+            Me.txtNumeroTermo.Text = pedido.Matricula.NumeroTermo
+
+            Me.txtAverbacao.Text = pedido.Averbacao
+
+            ViewState("NascimentoID") = pedido.Documento.Codigo
+
+        Catch ex As Exception
+            ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
+        End Try
     End Sub
 
     Private Sub listarDadosCliente(ByVal id As Integer)
@@ -81,12 +132,41 @@ Partial Class pages_Documentacao_Nascimento
     End Sub
 
     Protected Sub btnSalvar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalvar.Click
+
+        Try
+
+            Me.salvar()
+
+            Response.Redirect("~/pages/Documentacao/NascimentoReport.aspx")
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
+
+        Catch ex As Exception
+            ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
+        End Try
+    End Sub
+
+    Private Sub salvar()
         Dim pedido As Pedido
         Dim nascimento As Nascimento
         Dim gemeo As Cliente
 
         Try
+            If Me.txtDataRegistro.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO DATA DE REGISTRO OBRIGATÓRIO.")
+            If Me.txtHorario.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
+            If Me.txtLocal.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO LOCAL NASCIMENTO OBRIGATÓRIO.")
+            If Me.drpDeclarante.SelectedValue = 0 Then Throw New CampoObrigatorioException("CAMPO DECLARENTE OBRIGATÓRIO.")
+
+            If Me.txtServentia.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO SERVENTIA OBRIGATÓRIO.")
+            If Me.txtAcervo.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
+            If Me.txtAtribuicao.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
+            If Me.txtAnoReg.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
+            If Me.txtTipoLivro.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
+            If Me.txtNumeroLivro.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO NÚMERO LIVRO OBRIGATÓRIO.")
+            If Me.txtNumeroFolha.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO NÚMERO FOLHA OBRIGATÓRIO.")
+            If Me.txtNumeroTermo.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO NÚMERO TERMO OBRIGATÓRIO.")
+
             pedido = New Pedido
+            pedido.Codigo = ViewState("idPedido")
             pedido.Averbacao = txtAverbacao.Text
             pedido.Solicitante.Codigo = ViewState("idCliente")
             pedido.Solicitante.Nome = lblNome.Text
@@ -113,6 +193,7 @@ Partial Class pages_Documentacao_Nascimento
             pedido.Matricula.TipoLivro = txtTipoLivro.Text
 
             nascimento = New Nascimento
+            nascimento.Codigo = IIf(ViewState("NascimentoID") Is Nothing, 0, ViewState("NascimentoID"))
             nascimento.Horario = Me.txtHorario.Text
             nascimento.Declarante = drpDeclarante.SelectedValue
             nascimento.Maternidade = txtLocal.Text.ToUpper
@@ -126,19 +207,18 @@ Partial Class pages_Documentacao_Nascimento
 
             controllerDocumento.solicitarDocumento(pedido)
 
-            'Response.Redirect("~/pages/relatorio/ExibirRelatorio.aspx?r=1")
-            'If System.Configuration.ConfigurationManager.AppSettings.Item("AMBIENTE").ToString = "T" Then
-            ' ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
-            'Else
-            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
-            'End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
 
-            '<httpHandlers>
-            '  <add verb="*" path="*.rpx" type="DataDynamics.ActiveReports.Web.Handlers.RpxHandler, ActiveReports.Web, Version=6.2.4238.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
-            '  <add verb="*" path="*.ActiveReport" type="DataDynamics.ActiveReports.Web.Handlers.CompiledReportHandler, ActiveReports.Web, Version=6.2.4238.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
-            '  <add verb="*" path="*.ArCacheItem" type="DataDynamics.ActiveReports.Web.Handlers.WebCacheAccessHandler, ActiveReports.Web, Version=6.2.4238.0, Culture=neutral, PublicKeyToken=cc4967777c49a3ff" />
-            '</httpHandlers>
+    Protected Sub btnSalvar2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSalvar2.Click
 
+        Try
+            Me.salvar()
+            Session.Remove("pedido")
+            Session.Remove("gerenciarDocumento")
+            Response.Redirect("~/pages/Documentacao/Gerenciar.aspx?cliente=" & ViewState("idCliente"))
         Catch ex As Exception
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
         End Try

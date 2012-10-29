@@ -15,7 +15,7 @@ Namespace Camadas.Dominio.Administrativo
 
         Public ReadOnly Property getAvos() As String
             Get
-                Return "Paternos: " & _NomeAvoPaterno1.ToUpper & " e " & _NomeAvoPaterno2.ToUpper & ". <br />Maternos: " & _NomeAvoMaterno1.ToUpper & " e " & _NomeAvoMaterno2.ToUpper & "."
+                Return "Paternos: " & _NomeAvoPaterno1.ToUpper & " e " & _NomeAvoPaterno2.ToUpper & ".<BR />&nbsp;&nbsp;Maternos: " & _NomeAvoMaterno1.ToUpper & " e " & _NomeAvoMaterno2.ToUpper & "."
             End Get
         End Property
 

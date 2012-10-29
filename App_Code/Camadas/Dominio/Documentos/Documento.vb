@@ -10,6 +10,7 @@ Namespace Camadas.Dominio.Documentos
         Public Property Valor() As Double
         Public Property TipoLivro() As TipoLivro
         Public Property DataRegistro() As String
+        Public Property Horario() As String
 
     End Class
 

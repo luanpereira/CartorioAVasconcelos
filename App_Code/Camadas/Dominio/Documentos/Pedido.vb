@@ -9,6 +9,7 @@ Namespace Camadas.Dominio.Documentos
         Public Property Solicitante() As Cliente
         Public Property Matricula() As Matricula
         Public Property Averbacao() As String
+        Public Property Status() As Integer
 
         Public Sub New()
             _Matricula = New Matricula

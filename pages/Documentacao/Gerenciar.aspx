@@ -8,6 +8,14 @@
             </asp:ToolkitScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                        <ProgressTemplate>
+                            
+                            <asp:Panel ID="Panel11" runat="server" CssClass="loading" Height="47px">
+                            </asp:Panel>
+                            
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
                     <h2>Documentação</h2>
                     <fieldset>
                         <legend>Dados Pessoais -&nbsp;
@@ -43,8 +51,8 @@
                                 EmptyDataText="O CLIENTE AINDA NÃO SOLICITOU DOCUMENTOS" >
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                 <Columns>
-                                    <asp:ButtonField ButtonType="Image" CommandName="Pesquisar" 
-                                        DataTextField="CT03CODIGO" ImageUrl="~/recursos/Images/search.png">
+                                    <asp:ButtonField ButtonType="Image" CommandName="Editar" 
+                                        DataTextField="CT03CODIGO" ImageUrl="~/recursos/Images/b_edit.png">
                                     <ItemStyle Width="10px" />
                                     </asp:ButtonField>
                                     <asp:ButtonField ButtonType="Image" CommandName="Imprimir" 
@@ -94,7 +102,7 @@
                         <asp:Panel ID="Panel2" runat="server" Height="50px">
                             <p>
                                 <asp:Label ID="label8" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Tipo de Documento"></asp:Label>
-                                <asp:DropDownList ID="DropDownList1" runat="server">
+                                <asp:DropDownList ID="drpDoc" runat="server">
                                 </asp:DropDownList>
                                 <asp:Button ID="btnNovoDoc" runat="server" CssClass="botaoForm add" Text="Solicitar Novo Documento" />
                             </p>

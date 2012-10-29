@@ -1,0 +1,116 @@
+﻿<%@ Master Language="VB" CodeFile="DOCUMENTOS.master.vb" Inherits="DOCUMENTOS" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Impressão de Documentos</title>
+    
+    <script type="text/javascript" src="../../recursos/Scripts/jquery-1.4.2.js" ></script>
+    <script type="text/javascript" src="../../recursos/Scripts/jfuncoes.js" ></script>
+    
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25127936-4']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="recursos/Styles/StyleSheetDoc.css" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form2" runat="server">
+    <div id="documento">
+        <asp:Panel ID="Panel9" runat="server" HorizontalAlign="Center">
+            <asp:Image ID="Image1" runat="server" Height="1.105in" 
+                ImageUrl="~/recursos/Images/brasaoRepublica.jpg" Width="1.115in" />
+            <br />
+            <asp:Label ID="lblTitulo" runat="server" 
+                Text="REGISTRO CIVIL DAS PESSOAS NATURAIS" CssClass="centro"></asp:Label><br />
+            <asp:Label ID="lblTipoDoc" runat="server" 
+                Text=" [Tipo de Documento]" Font-Size="14pt" CssClass="centro"></asp:Label><br />
+            <asp:Label ID="Label2" runat="server" 
+                Text="Nome"></asp:Label><br />
+            <asp:Label ID="lblNomePessoa" runat="server" 
+                Text="[Nome da pessoa]" Font-Size="12pt"></asp:Label><br />
+            <asp:Label ID="Label4" runat="server" 
+                Text="Matrícula"></asp:Label><br />
+            <asp:Label ID="lblMatricula" runat="server" 
+            Text="99999999 9999 9 99999 999 9999999 99" Font-Size="12pt"></asp:Label>
+        </asp:Panel> 
+
+        <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+        <asp:Panel ID="Panel1" runat="server" BorderStyle="Solid" Height="100%" 
+            BorderWidth="1px">
+            <asp:Label ID="Label6" runat="server" Text="Observações / Averbações" 
+                    Font-Size="8pt"></asp:Label><br />
+            <asp:Label ID="lblAverbacao" runat="server" Text="texto" 
+                Font-Size="12pt" CssClass="texto"></asp:Label><br />
+        </asp:Panel>
+
+        <asp:Panel ID="Panel6" runat="server">
+            <asp:Panel ID="Panel7" runat="server" Height="100%" style="float:left" Width="263px">
+                <asp:Panel ID="Panel2" runat="server" BorderStyle="Solid" Height="100%" 
+                    BorderWidth="1px" Width="263px">
+                    <asp:Label ID="Label1" runat="server" Text="Nome do Ofício" 
+                            Font-Size="8pt"></asp:Label><br />
+                    <asp:Label ID="lblNomeOficio" runat="server" Text="texto" 
+                        Font-Size="10pt" CssClass="texto"></asp:Label>
+                </asp:Panel>
+                <asp:Panel ID="Panel3" runat="server" BorderStyle="Solid" style="margin-top:10px;" Height="100%" 
+                    BorderWidth="1px" Width="263px">
+                    <asp:Label ID="Label5" runat="server" Text="Oficial Registrador" 
+                            Font-Size="8pt"></asp:Label><br />
+                    <asp:Label ID="lblOficialRegistrador" runat="server" Text="texto" 
+                        Font-Size="10pt" CssClass="texto"></asp:Label><br />
+                </asp:Panel>
+                <asp:Panel ID="Panel4" runat="server" BorderStyle="Solid" style="margin-top:10px;" Height="100%" 
+                    BorderWidth="1px" Width="263px">
+                    <asp:Label ID="Label8" runat="server" Text="Município / DF" 
+                            Font-Size="8pt"></asp:Label><br />
+                    <asp:Label ID="lblMunicipio" runat="server" Text="texto" 
+                        Font-Size="10pt" CssClass="texto"></asp:Label><br />
+                </asp:Panel>
+                <asp:Panel ID="Panel5" runat="server" style="margin-top:10px;" BorderStyle="Solid" Height="100%" 
+                    BorderWidth="1px" Width="263px">
+                    <asp:Label ID="Label10" runat="server" Text="Endereço" 
+                            Font-Size="8pt"></asp:Label><br />
+                    <asp:Label ID="lblEndereco" runat="server" Text="texto" 
+                        Font-Size="10pt" CssClass="texto"></asp:Label><br />
+                </asp:Panel>
+            </asp:Panel>
+
+            <asp:Panel ID="Panel8" runat="server" style="float:right" Height="100%" 
+                Width="324px" HorizontalAlign="Center">
+                <asp:Label ID="Label12" runat="server" 
+                    Text="O Conteúdo da certidão é verdadeiro. Dou fé." Font-Size="10pt" 
+                    Width="318px"></asp:Label><br />
+                <asp:Label ID="lblLocalData" runat="server" 
+                    Text="[Local e data]" Font-Size="10pt" CssClass="centro"></asp:Label><br />
+                <asp:Label ID="Label14" runat="server" Font-Size="10pt" 
+                    style="border-bottom: 1px solid; padding-top:100px;" CssClass="centro" 
+                    Width="293px"></asp:Label><br />
+                <asp:Label ID="lblNomeOficial" runat="server" 
+                    Text="[Nome do Oficial]" CssClass="centro"></asp:Label><br />
+                <asp:Label ID="Label16" runat="server" 
+                    Text="Oficial Registrador" CssClass="centro"></asp:Label>
+            </asp:Panel> 
+        </asp:Panel>
+
+    </div>
+    </form>
+</body>
+</html>

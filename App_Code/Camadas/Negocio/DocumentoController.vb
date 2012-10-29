@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.VisualBasic
 Imports Camadas.DAO
 Imports Excecoes
+Imports Camadas.Dominio.Documentos
 
 Namespace Camadas.Negocio
 
@@ -57,25 +58,53 @@ Namespace Camadas.Negocio
 
                 dao = DaoFactory.GetDocumentoDAO
 
-                'If cliente.Codigo = 0 Then '-- SE FOR IGUAL A ZERO, É PORQUE É UM NOVO CLIENTE
-                '    idCliente = dao.cadastrarCliente(cliente)
-                '    cliente.Codigo = idCliente
+                pedido.Documento.DataRegistro = Format(DateTime.Parse(pedido.Documento.DataRegistro), "yyyy-MM-dd")
 
-                'Else '-- CASO CONTRÁRIO ATUALIZA
-                '    dao.atualizarCliente(cliente)
-                'End If
+                If pedido.Codigo = 0 Then 'INSERT
+                    Select Case True
+                        Case TypeOf pedido.Documento Is Nascimento
+                            idResult = dao.inserirNascimento(pedido.Documento)
+                            pedido.Documento.Codigo = idResult
 
-                'If cliente.Gemeo.Codigo > 0 Then '-- SE FOR GÊMEOS, ATUALIZA O CAMPO FK0101GEMEO DO OUTRO IRMAO ---
-                '    dao.atualizarGemeo(cliente, cliente.Gemeo)
-                'End If
+                            idResult = dao.inserirDocumentoNascimento(pedido.Documento)
+                            pedido.Documento.Codigo = idResult
 
-                idResult = dao.inserirNascimento(pedido.Documento)
-                pedido.Documento.Codigo = idResult
+                        Case TypeOf pedido.Documento Is Casamento
+                            Throw New NotImplementedException
 
-                idResult = dao.inserirDocumento(pedido.Documento)
-                pedido.Documento.Codigo = idResult
+                        Case TypeOf pedido.Documento Is Obito
+                            idResult = dao.inserirObito(pedido.Documento)
+                            pedido.Documento.Codigo = idResult
 
-                idResult = dao.inserirPedido(pedido)
+                            idResult = dao.inserirDocumentoObito(pedido.Documento)
+                            pedido.Documento.Codigo = idResult
+
+                        Case Else
+                            Throw New CampoObrigatorioException("TIPO DE DOCUMENTO NÃO DEFINIDO.")
+                    End Select
+ 
+
+                    idResult = dao.inserirPedido(pedido)
+                Else 'UPDATE
+                    pedido.Status = 6
+
+                    Select Case True
+                        Case TypeOf pedido.Documento Is Nascimento
+                            dao.atualizarNascimento(pedido.Documento)
+
+                        Case TypeOf pedido.Documento Is Casamento
+                            Throw New NotImplementedException
+
+                        Case TypeOf pedido.Documento Is Obito
+                            dao.atualizarObito(pedido.Documento)
+
+                        Case Else
+                            Throw New CampoObrigatorioException("TIPO DE DOCUMENTO NÃO DEFINIDO.")
+                    End Select
+
+
+                    dao.atualizarPedido(pedido)
+                End If
 
                 '--------------------------
                 DaoFactory.TransactionCommit()
@@ -96,13 +125,26 @@ Namespace Camadas.Negocio
             End Try
         End Function
 
-        Public Function listarPedido(ByVal pedidoID As Integer) As Dominio.Documentos.Pedido Implements IDocumentoController.listarPedido
+        Public Function listarPedido(ByVal pedido As Dominio.Documentos.Pedido) As Dominio.Documentos.Pedido Implements IDocumentoController.listarPedido
             Dim dao As IDocumentoDAO
 
             Try
 
                 dao = DaoFactory.GetDocumentoDAO
-                Return dao.listarPedido(pedidoID)
+
+                Select Case True
+                    Case TypeOf pedido.Documento Is Nascimento
+                        Return dao.listarPedidoNascimento(pedido.Codigo)
+
+                    Case TypeOf pedido.Documento Is Casamento
+                        Return dao.listarPedidoCasamento(pedido.Codigo)
+
+                    Case TypeOf pedido.Documento Is Obito
+                        Return dao.listarPedidoObito(pedido.Codigo)
+
+                    Case Else
+                        Throw New CampoObrigatorioException("TIPO DE DOCUMENTO NÃO DEFINIDO.")
+                End Select
 
             Catch ex As CampoObrigatorioException
                 Throw ex

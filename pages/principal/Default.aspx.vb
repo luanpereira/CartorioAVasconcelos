@@ -1,6 +1,18 @@
 ﻿Imports Camadas.Dominio.Documentos
 Imports Infraestrutura.Utils
 Imports Camadas.Dominio.Administrativo
+Imports System.Net
+Imports System.IO
+Imports System
+Imports System.Data
+Imports System.Configuration
+Imports System.Web
+Imports System.Web.Security
+Imports System.Web.UI
+Imports System.Web.UI.WebControls
+Imports System.Web.UI.WebControls.WebParts
+Imports System.Web.UI.HtmlControls
+Imports EO.Pdf
 
 Partial Class pages_principal_Default
     Inherits System.Web.UI.Page
@@ -29,7 +41,9 @@ Partial Class pages_principal_Default
         Dim nascimento As Nascimento
         Dim gemeo As Cliente
 
+
         Try
+
             pedido = New Pedido
             pedido.Averbacao = "Nenhum"
             pedido.Solicitante.Codigo = 123
@@ -68,7 +82,9 @@ Partial Class pages_principal_Default
 
             Session("pedido") = pedido
 
-            Response.Redirect("~/pages/relatorio/ExibirRelatorio.aspx?r=1")
+            Response.Redirect("~/pages/Documentacao/NascimentoReport.aspx")
+            'Response.Redirect("~/pages/Documentacao/NascimentoReport.aspx", True)
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "window.open('" & Page.ResolveClientUrl("~/pages/Documentacao/NascimentoReport.aspx") & "','_blank','width=400,height=200,toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')", False)
             'If System.Configuration.ConfigurationManager.AppSettings.Item("AMBIENTE").ToString = "T" Then
             'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
             ' Else
@@ -85,4 +101,13 @@ Partial Class pages_principal_Default
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
         End Try
     End Sub
+
+    Private Function GetHtml() As String
+        Dim pageURL As String = System.Web.HttpContext.Current.Request.Url.AbsoluteUri
+
+        Dim mywebReq As WebRequest = WebRequest.Create(pageURL)
+        Dim mywebResp As WebResponse = mywebReq.GetResponse()
+        Dim sr As New StreamReader(mywebResp.GetResponseStream(), System.Text.Encoding.UTF8)
+        Return sr.ReadToEnd()
+    End Function
 End Class

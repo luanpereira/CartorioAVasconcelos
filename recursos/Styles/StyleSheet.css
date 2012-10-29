@@ -44,19 +44,19 @@ body {
 }
 
 .loading {
-    position: fixed;
+    /*position: fixed;
     top: 0px;
     left: 0;
     width: 100%;
     height: 100%;
-    text-align: center;
-    background: white url(../Images/aguarde.gif) no-repeat center;
-    filter: alpha(opacity=75);
+    text-align: center;*/
+    background: white url(../Images/loading.gif) no-repeat center;
+    /*filter: alpha(opacity=75);
     -khtml-opacity: 0.75;
     -moz-opacity: 0.75;
     opacity: 0.75;
     border-top: 1px solid #DDD;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;*/
 }
 
 .boxes {
@@ -133,9 +133,8 @@ input.texto {
     position: relative;
     top: 0px;
     left: 0px;
-    width: 342px;
+    width: 337px;
     text-transform: uppercase;
-    height: 25px;
 }
 
 input.texto:hover, input.texto:focus {

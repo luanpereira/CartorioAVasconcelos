@@ -11,7 +11,7 @@
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>
                             
-                            <asp:Panel ID="Panel1" runat="server" CssClass="loading">
+                            <asp:Panel ID="Panel1" runat="server" CssClass="loading" Height="47px">
                             </asp:Panel>
                             
                         </ProgressTemplate>
@@ -45,9 +45,9 @@
                             <Columns>
                                 <asp:CommandField CancelImageUrl="~/recursos/Images/cancel.png" 
                                     SelectImageUrl="~/recursos/Images/add_16.png" ShowSelectButton="True" 
-                                    Visible="False" />
+                                    Visible="False" ButtonType="Image" />
                                 <asp:ButtonField ButtonType="Image" CommandName="Pesquisar" 
-                                    DataTextField="CT01CODIGO" ImageUrl="~/recursos/Images/search.png">
+                                    DataTextField="CT01CODIGO" ImageUrl="~/recursos/Images/b_edit.png">
                                 <ItemStyle Width="10px" />
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="CT01NOME" HeaderText="Nome" >

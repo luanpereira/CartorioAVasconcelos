@@ -9,6 +9,14 @@
             </asp:ToolkitScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                        <ProgressTemplate>
+                            
+                            <asp:Panel ID="Panel1" runat="server" CssClass="loading" Height="47px">
+                            </asp:Panel>
+                            
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
                 <h2>Cadastrar novo Cliente</h2>
                 &nbsp;<fieldset>
                     <legend>Dados Pessoais</legend>

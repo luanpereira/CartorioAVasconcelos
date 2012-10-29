@@ -9,6 +9,14 @@
             </asp:ToolkitScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
+                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                        <ProgressTemplate>
+                            
+                            <asp:Panel ID="Panel11" runat="server" CssClass="loading" Height="47px">
+                            </asp:Panel>
+                            
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
                     <h2>Emissão de Certidão de Nascimento</h2>
                     <fieldset>
                         <legend>Dados Pessoais
@@ -172,7 +180,9 @@
                     </fieldset> 
                     &nbsp; 
                     <p style="float: right">
-                
+
+                        <asp:Button ID="btnSalvar2" runat="server" CssClass="botaoForm save" 
+                            Text="Salvar" />                
                         <asp:Button ID="btnSalvar" runat="server" CssClass="botaoForm save" 
                             Text="Salvar e imprimir documento" />
                         <asp:Button ID="btnCancelar" runat="server" CssClass="botaoForm" 

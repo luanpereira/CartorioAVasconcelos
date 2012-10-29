@@ -109,8 +109,13 @@ Namespace Infraestrutura
         Public Shared Function dataPorExtenso(ByVal data As String) As String
             Dim array As String()
 
-            array = data.Split("/")
-            Return Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "")
+            If data.Contains("/") Then
+                array = data.Split("/")
+                Return Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "") & "."
+            ElseIf data.Contains("-") Then
+                array = data.Split("-")
+                Return Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "") & "."
+            End If
         End Function
 
         ''' <summary>
