@@ -105,7 +105,8 @@
                                 </p>
                                 <p>
                                     <asp:Label ID="label12" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Local Falecimento"></asp:Label>
-                                    <asp:TextBox ID="txtLocal" runat="server" CssClass="texto" MaxLength="45"></asp:TextBox>
+                                    <asp:TextBox ID="txtLocal" runat="server" CssClass="texto" MaxLength="45" 
+                                        Width="333px"></asp:TextBox>
                                 </p>                                                                                                                                                     
                             </asp:Panel>   
 
@@ -113,33 +114,82 @@
                                 style="float:right;">
                                 <p>
                                     <asp:Label ID="label8" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Declarante"></asp:Label>
-                                    <asp:TextBox ID="txtDeclarante" runat="server" CssClass="texto" MaxLength="45"></asp:TextBox>
+                                    <asp:TextBox ID="txtDeclarante" runat="server" CssClass="texto" MaxLength="45" 
+                                        Width="333px"></asp:TextBox>
                                 </p>
                                 <p>
                                     <asp:Label ID="label9" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Causa Falecimento"></asp:Label>
                                     <asp:TextBox ID="txtCausaFalecimento" runat="server" CssClass="texto" 
-                                        MaxLength="45"></asp:TextBox>
+                                        MaxLength="45" Width="333px"></asp:TextBox>
                                 </p>
                                 <p>
                                     <asp:Label ID="label10" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Sepultamento"></asp:Label>
                                     <asp:TextBox ID="txtSepultamento" runat="server" CssClass="texto" 
-                                        MaxLength="45"></asp:TextBox>
+                                        MaxLength="45" Width="333px"></asp:TextBox>
                                 </p>
                                 <p>
                                     <asp:Label ID="label13" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Médico"></asp:Label>
-                                    <asp:TextBox ID="txtMedico" runat="server" CssClass="texto" MaxLength="45" Width="360px"></asp:TextBox>
+                                    <asp:TextBox ID="txtMedico" runat="server" CssClass="texto" MaxLength="45" 
+                                        Width="333px"></asp:TextBox>
                                 </p>                                                                  
                             </asp:Panel> 
-
-                            <asp:Panel ID="Panel7" runat="server" Height="100px" Width="100%" 
+                        </asp:Panel> 
+                        <br />
+                        <asp:Panel ID="Panel8" runat="server" Height="160px" Width="1000px">
+                            <asp:Panel ID="Panel9" runat="server" Height="104%" Width="494px" 
                                 style="float:left;">
                                 <p>
-                                    <asp:Label ID="label19" runat="server" CssClass="lbl" Text="Averbação"></asp:Label>
+                                    <asp:Label ID="label11" runat="server" CssClass="lbl" Text="Serventia (CNS)" ForeColor="#FC0000"></asp:Label>
+                                    <asp:TextBox ID="txtServentia" runat="server" CssClass="texto" MaxLength="6" 
+                                        Text="031385" Width="60px"></asp:TextBox>
+                                </p>
+                                <p>
+                                    <asp:Label ID="label14" runat="server" CssClass="lbl" Text="Acervo" ForeColor="#FC0000"></asp:Label>
+                                    <asp:TextBox ID="txtAcervo" runat="server" CssClass="texto" MaxLength="2" Text="01" Width="30px"></asp:TextBox>
+                                </p>                                
+                                <p>
+                                    <asp:Label ID="label15" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Atribuição"></asp:Label>
+                                    <asp:TextBox ID="txtAtribuicao" runat="server" CssClass="texto" MaxLength="2" Text="55" Width="30px"></asp:TextBox>
+                                </p>                 
+                                <p>
+                                    <asp:Label ID="label16" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Ano do Registro"></asp:Label>
+                                    <asp:TextBox ID="txtAnoReg" runat="server" CssClass="texto" MaxLength="4" Width="60px"></asp:TextBox>
+                                </p>                                                                                                                                                            
+                            </asp:Panel>   
+
+                            <asp:Panel ID="Panel10" runat="server" Height="104%" Width="494px" 
+                                style="float:right;">
+                                <p>
+                                    <asp:Label ID="label177" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Tipo de Livro"></asp:Label>
+                                    <asp:TextBox ID="txtTipoLivro" runat="server" CssClass="texto" MaxLength="1" 
+                                        Text="4" Width="30px"></asp:TextBox>
+                                </p>                                
+                                <p>
+                                    <asp:Label ID="label17" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Número do Livro"></asp:Label>
+                                    <asp:TextBox ID="txtNumeroLivro" runat="server" CssClass="texto" MaxLength="5" 
+                                        Width="80px"></asp:TextBox>
+                                </p>
+                                <p>
+                                    <asp:Label ID="label20" runat="server" CssClass="lbl" Text="Número da Folha" ForeColor="#FC0000"></asp:Label>
+                                    <asp:TextBox ID="txtNumeroFolha" runat="server" CssClass="texto" MaxLength="3" 
+                                        Width="50px"></asp:TextBox>
+                                </p>
+                                <p>
+                                    <asp:Label ID="label21" runat="server" CssClass="lbl" Text="Número do Termo" ForeColor="#FC0000"></asp:Label>
+                                    <asp:TextBox ID="txtNumeroTermo" runat="server" CssClass="texto" MaxLength="7" 
+                                        Width="100px"></asp:TextBox>
+                                </p>                                                                         
+                            </asp:Panel> 
+
+                            <asp:Panel ID="Panel12" runat="server" Height="100px" Width="100%" 
+                                style="float:left;">
+                                <p>
+                                    <asp:Label ID="label22" runat="server" CssClass="lbl" Text="Averbação"></asp:Label>
                                     <asp:TextBox ID="txtAverbacao" runat="server" CssClass="texto" 
                                         TextMode="MultiLine" Height="80px" Width="608px"></asp:TextBox>
                                 </p>                                                                                                      
                             </asp:Panel> 
-                        </asp:Panel> 
+                        </asp:Panel>
                     </fieldset> 
                     &nbsp; 
                     <p style="float: right">

@@ -16,7 +16,7 @@ Partial Class pages_Documentacao_Gerenciar
             Try
                 drpDoc.DataSource = controllerDocumento.listarTipoDocumento
                 drpDoc.DataTextField = "CT02NOME"
-                drpDoc.DataValueField = "CT02DOCUMENTO"
+                drpDoc.DataValueField = "CT02TIPOLIVRO"
                 drpDoc.DataBind()
 
                 If Not Request.QueryString("cliente") Is Nothing Then
@@ -124,25 +124,26 @@ Partial Class pages_Documentacao_Gerenciar
     End Sub
 
     Private Sub imprimirDocumento(ByVal idPedido As Integer)
-        Dim pedido As Camadas.Dominio.Documentos.Pedido
+        Dim pedido As New Camadas.Dominio.Documentos.Pedido
 
-        'Try
-        pedido = controllerDocumento.listarPedido(idPedido)
-        Session("pedido") = pedido
+        Try
+            pedido.Codigo = idPedido
+            pedido = controllerDocumento.listarPedido(pedido)
+            Session("pedido") = pedido
 
-        Response.Redirect("~/pages/Documentacao/NascimentoReport.aspx")
+            Response.Redirect("~/pages/Documentacao/NascimentoReport.aspx")
 
-        'Response.Write("<script>")
-        'Response.Write("window.open('" & Page.ResolveClientUrl("~/pages/Documentacao/NascimentoReport.aspx") & "','_blank')")
-        'Response.Write("</script>")
-        'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "window.open('" & Page.ResolveClientUrl("~/pages/Documentacao/NascimentoReport.aspx") & "','_blank',toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes, resizable = yes ')", True)
-        'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
-        'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela(' /pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
-        'Catch ex As ThreadAbortException
-        '    ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
-        'Catch ex As Exception
-        '    ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
-        'End Try
+            'Response.Write("<script>")
+            'Response.Write("window.open('" & Page.ResolveClientUrl("~/pages/Documentacao/NascimentoReport.aspx") & "','_blank')")
+            'Response.Write("</script>")
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "window.open('" & Page.ResolveClientUrl("~/pages/Documentacao/NascimentoReport.aspx") & "','_blank',toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes, resizable = yes ')", True)
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('" & Me.Page.Request.ApplicationPath & "/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela(' /pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
+            'Catch ex As ThreadAbortException
+            '    ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
+        Catch ex As Exception
+            ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
+        End Try
 
 
     End Sub

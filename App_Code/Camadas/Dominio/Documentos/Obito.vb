@@ -14,6 +14,7 @@ Namespace Camadas.Dominio.Documentos
         Public Property Declarante() As String
         Public Property Medico() As String
         Public Property Sepultamento() As String
+        Public Property Cor() As Integer
 
         Public Sub New()
             _Cidade = New Cidade

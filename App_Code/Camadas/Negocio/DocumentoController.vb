@@ -82,7 +82,7 @@ Namespace Camadas.Negocio
                         Case Else
                             Throw New CampoObrigatorioException("TIPO DE DOCUMENTO NÃO DEFINIDO.")
                     End Select
- 
+
 
                     idResult = dao.inserirPedido(pedido)
                 Else 'UPDATE
@@ -145,6 +145,24 @@ Namespace Camadas.Negocio
                     Case Else
                         Throw New CampoObrigatorioException("TIPO DE DOCUMENTO NÃO DEFINIDO.")
                 End Select
+
+            Catch ex As CampoObrigatorioException
+                Throw ex
+            Catch ex As Exception
+                Throw ex
+            Finally
+                dao = Nothing
+                DaoFactory.CloseConnection()
+            End Try
+        End Function
+
+        Public Function listarCor() As System.Data.DataTable Implements IDocumentoController.listarCor
+            Dim dao As IDocumentoDAO
+
+            Try
+
+                dao = DaoFactory.GetDocumentoDAO
+                Return dao.listarCor
 
             Catch ex As CampoObrigatorioException
                 Throw ex

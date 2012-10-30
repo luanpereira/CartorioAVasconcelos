@@ -54,9 +54,9 @@ Namespace Camadas.DAO
         Public Function listarTipoDocumento() As System.Data.DataTable Implements IDocumentoDAO.listarTipoDocumento
             Dim ds As New DataSet
 
-            strSql = "  SELECT 0 CT02DOCUMENTO, 'SELECIONE' CT02NOME "
+            strSql = "  SELECT 0 CT02DOCUMENTO, 0 CT02TIPOLIVRO, 'SELECIONE' CT02NOME "
             strSql += "  UNION "
-            strSql += "  SELECT CT02DOCUMENTO, CT02NOME "
+            strSql += "  SELECT CT02DOCUMENTO, CT02TIPOLIVRO, CT02NOME "
             strSql += "   FROM CT02TIPODOCUMENTO "
             strSql += "  WHERE CT02ATIVO=1 "
 
@@ -302,11 +302,12 @@ Namespace Camadas.DAO
             'strSql += "  (SELECT CT99SIGLA FROM CT98CIDADE,CT99ESTADO WHERE CT99CODIGO=FK9899ESTADO AND FK0198CIDADEUF=CT98CODIGO ) NOMEESTADO, "
             strSql += "  (SELECT CT98NOME FROM CT98CIDADE WHERE FK0198NATURAL=CT98CODIGO ) NOMECIDADENATURAL, "
             strSql += "  (SELECT CT99SIGLA FROM CT98CIDADE,CT99ESTADO WHERE CT99CODIGO=FK9899ESTADO AND FK0198NATURAL=CT98CODIGO ) NOMEESTADONATURAL "
-            strSql += "   FROM CT01CLIENTE, CT02TIPODOCUMENTO, CT03PEDIDO, CT04DOCUMENTO, CT09OBITO "
+            strSql += "   FROM CT01CLIENTE, CT02TIPODOCUMENTO, CT03PEDIDO, CT04DOCUMENTO, CT09OBITO, CT12COR "
             strSql += "  WHERE FK0304DOCUMENTO=CT04CODIGO "
             strSql += "    AND FK0301SOLICITANTE=CT01CODIGO "
             strSql += "    AND FK0402TIPODOCUMENTO=CT02DOCUMENTO "
-            strSql += "    AND CT09CODIGO=FK0408OBITO "
+            strSql += "    AND CT09CODIGO=FK0409OBITO "
+            strSql += "    AND CT12CODIGO=FK0912OBITO "
             strSql += "    AND CT03CODIGO = " & pedidoID
             strSql += "        ORDER BY CT03DATA, CT02NOME "
 
@@ -351,6 +352,7 @@ Namespace Camadas.DAO
                     obito.Sepultamento = dr.Item("CT09SEPULTAMENTO").ToString
                     obito.CausaMorte = dr.Item("CT09CAUSAMORTE").ToString
                     obito.DataObito = dr.Item("CT09DATAOBITO").ToString
+                    obito.Cor = dr.Item("CT12CODIGO").ToString
                     pedido.Documento = obito
 
                     If dr.Item("CT03DATAREGISTRO").ToString = String.Empty Then
@@ -417,8 +419,8 @@ Namespace Camadas.DAO
         Public Function inserirDocumentoObito(ByVal obito As Dominio.Documentos.Obito) As Integer Implements IDocumentoDAO.inserirDocumentoObito
             Dim result As Integer
 
-            strSql = " INSERT INTO CT04DOCUMENTO (CT04CODIGO,FK0402TIPODOCUMENTO,FK0408OBITO) "
-            strSql += " VALUES(NULL," & obito.TipoLivro & "," & obito.Codigo & ") "
+            strSql = " INSERT INTO CT04DOCUMENTO (CT04CODIGO,FK0402TIPODOCUMENTO,FK0409OBITO) "
+            strSql += " VALUES(NULL,3," & obito.Codigo & ") "
 
             Try
                 cmd = conn.CreateCommand
@@ -451,8 +453,8 @@ Namespace Camadas.DAO
         Public Function inserirObito(ByVal obito As Dominio.Documentos.Obito) As Integer Implements IDocumentoDAO.inserirObito
             Dim result As Integer
 
-            strSql = " INSERT INTO CT09OBITO (CT09CODIGO,CT09DATAOBITO,CT09LOCAL,CT09CAUSAMORTE,CT09DECLARANTE,CT09MEDICO,CT09SEPULTAMENTO) "
-            strSql += " VALUES(NULL,'" & obito.DataObito & "','" & obito.Local & "','" & obito.CausaMorte & "','" & obito.Declarante & "','" & obito.Medico & "','" & obito.Sepultamento & "') "
+            strSql = " INSERT INTO CT09OBITO (CT09CODIGO,CT09DATAOBITO,CT09LOCAL,CT09CAUSAMORTE,CT09DECLARANTE,CT09MEDICO,CT09SEPULTAMENTO,FK0912COR) "
+            strSql += " VALUES(NULL,'" & obito.DataObito & "','" & obito.Local & "','" & obito.CausaMorte & "','" & obito.Declarante & "','" & obito.Medico & "','" & obito.Sepultamento & "'," & obito.Cor & ") "
 
             Try
                 cmd = conn.CreateCommand
@@ -515,5 +517,26 @@ Namespace Camadas.DAO
                 Throw New DAOException(ex.Message)
             End Try
         End Sub
+
+        Public Function listarCor() As System.Data.DataTable Implements IDocumentoDAO.listarCor
+            Dim ds As New DataSet
+
+            strSql = "  SELECT 0 CT12CODIGO, 'SELECIONE' CT12NOME "
+            strSql += "  UNION "
+            strSql += "  SELECT CT12CODIGO, CT12NOME "
+            strSql += "   FROM CT12COR "
+
+            Try
+                adpt = DaoFactory.GetDataAdapter
+                cmd = conn.CreateCommand
+                cmd.CommandText = strSql
+                adpt.SelectCommand = cmd
+                adpt.Fill(ds)
+
+                Return ds.Tables(0)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
     End Class
 End Namespace

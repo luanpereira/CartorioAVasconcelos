@@ -6,6 +6,7 @@ Imports System.Data
 Public Interface IDocumentoDAO
     Function listarDocumentosByClienteID(ByVal cliente As Cliente) As DataTable
     Function listarTipoDocumento() As DataTable
+    Function listarCor() As DataTable
 
     Function inserirNascimento(ByVal nascimento As Nascimento) As Integer
     Function inserirCasamento(ByVal casamento As Casamento) As Integer
