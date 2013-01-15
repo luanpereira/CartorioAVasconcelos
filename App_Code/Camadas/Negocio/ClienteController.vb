@@ -68,6 +68,21 @@ Namespace Camadas.Negocio
             End Try
         End Function
 
+        Public Function listarClassCliente(ByVal c As Dominio.Administrativo.Cliente) As Dominio.Administrativo.Cliente Implements IClienteController.listarClassCliente
+            Dim dao As IClienteDAO
+
+            Try
+
+                dao = DaoFactory.GetClienteDAO
+                Return dao.listarClassCliente(c)
+
+            Catch ex As Exception
+                Throw ex
+            Finally
+                dao = Nothing
+                DaoFactory.CloseConnection()
+            End Try
+        End Function
     End Class
 
 End Namespace

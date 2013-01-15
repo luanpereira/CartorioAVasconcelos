@@ -3,6 +3,7 @@ Imports Camadas.Dominio.Administrativo
 
 Namespace Camadas.Dominio.Documentos
 
+    <Serializable()> _
     Public Class Nascimento
         Inherits Documento
 

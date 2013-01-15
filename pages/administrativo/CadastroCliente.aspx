@@ -12,7 +12,7 @@
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>
                             
-                            <asp:Panel ID="Panel1" runat="server" CssClass="loading" Height="47px">
+                            <asp:Panel ID="Panel231" runat="server" CssClass="loading" Height="47px">
                             </asp:Panel>
                             
                         </ProgressTemplate>
@@ -24,7 +24,7 @@
                         <p>
                             <asp:Label ID="label" runat="server" Text="Nome" CssClass="lbl" 
                                 ForeColor="#FC0000"></asp:Label>
-                            <asp:TextBox ID="txtNome" runat="server" CssClass="texto" MaxLength="45"></asp:TextBox>
+                            <asp:TextBox ID="txtNome" runat="server" CssClass="texto" MaxLength="45" Width="350px"></asp:TextBox>
                         </p>
                         <p>
                             <asp:Label ID="label2" runat="server" CssClass="lbl" Text="CPF"></asp:Label>
@@ -116,6 +116,7 @@
                                     <asp:ListItem Value="S">Solteiro(a)</asp:ListItem>
                                     <asp:ListItem Value="U">União Estável</asp:ListItem>
                                     <asp:ListItem Value="V">Viúvo(a)</asp:ListItem>
+                                    <asp:ListItem Value="D">Divorciado(a)</asp:ListItem>
                                 </asp:DropDownList>
                             </p>
                             <p>
@@ -129,7 +130,7 @@
                             </p>       
                             <p>
                                 <asp:Label ID="label17" runat="server" CssClass="lbl" Text="Profissão"></asp:Label>
-                                <asp:TextBox ID="txtProfissão" runat="server" CssClass="texto" MaxLength="100"></asp:TextBox>
+                                <asp:TextBox ID="txtProfissão" runat="server" CssClass="texto" MaxLength="100" Width="200px"></asp:TextBox>
                             </p>                                                                                                                                                              
                         </asp:Panel>   
 
@@ -154,18 +155,17 @@
                         <asp:Panel ID="Panel3" runat="server" Height="100%" Width="494px" 
                             style="float:left;">
                             <p>
-                                <asp:Label ID="label1" runat="server" CssClass="lbl" Text="Nome do Pai" 
-                                    ForeColor="#FC0000"></asp:Label>
-                                <asp:TextBox ID="txtPai" runat="server" CssClass="texto" MaxLength="100"></asp:TextBox>
+                                <asp:Label ID="label1" runat="server" CssClass="lbl" Text="Nome do Pai"></asp:Label>
+                                <asp:TextBox ID="txtPai" runat="server" CssClass="texto" MaxLength="100" Width="300px"></asp:TextBox>
                             </p>
                             <p>
                                 <asp:Label ID="label21" runat="server" CssClass="lbl" Text="Avó Paterno"></asp:Label>
-                                <asp:TextBox ID="txtAvoPaterno1" runat="server" CssClass="texto" 
+                                <asp:TextBox ID="txtAvoPaterno1" runat="server" CssClass="texto" Width="300px"
                                     MaxLength="100"></asp:TextBox>
                             </p>                                
                             <p>
                                 <asp:Label ID="label22" runat="server" CssClass="lbl" Text="Avô Paterno"></asp:Label>
-                                <asp:TextBox ID="txtAvoPaterno2" runat="server" CssClass="texto" 
+                                <asp:TextBox ID="txtAvoPaterno2" runat="server" Width="300px" CssClass="texto" 
                                     MaxLength="100"></asp:TextBox>
                             </p>                                                                                                                                      
                         </asp:Panel>   
@@ -173,18 +173,17 @@
                         <asp:Panel ID="Panel4" runat="server" Height="100%" Width="494px" 
                             style="float:right;">
                             <p>
-                                <asp:Label ID="label7" runat="server" CssClass="lbl" Text="Nome da Mãe" 
-                                    ForeColor="#FC0000"></asp:Label>
-                                <asp:TextBox ID="txtMae" runat="server" CssClass="texto" MaxLength="100"></asp:TextBox>
+                                <asp:Label ID="label7" runat="server" CssClass="lbl" Text="Nome da Mãe"></asp:Label>
+                                <asp:TextBox ID="txtMae" runat="server" CssClass="texto" Width="300px" MaxLength="100"></asp:TextBox>
                             </p>       
                             <p>
                                 <asp:Label ID="label8" runat="server" CssClass="lbl" Text="Avó Materno"></asp:Label>
-                                <asp:TextBox ID="txtAvoMaterno1" runat="server" CssClass="texto" 
+                                <asp:TextBox ID="txtAvoMaterno1" runat="server" CssClass="texto" Width="300px" 
                                     MaxLength="100"></asp:TextBox>
                             </p>                                
                             <p>
                                 <asp:Label ID="label9" runat="server" CssClass="lbl" Text="Avô Materno"></asp:Label>
-                                <asp:TextBox ID="txtAvoMaterno2" runat="server" CssClass="texto" 
+                                <asp:TextBox ID="txtAvoMaterno2" runat="server" CssClass="texto" Width="300px"
                                     MaxLength="100"></asp:TextBox>
                             </p>         
                         </asp:Panel> 

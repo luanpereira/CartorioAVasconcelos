@@ -3,6 +3,7 @@ Imports Infraestrutura.Utils
 
 Namespace Camadas.Dominio.Documentos
 
+    <Serializable()> _
     Public Class Matricula
         Private _matricula As String = ""
 

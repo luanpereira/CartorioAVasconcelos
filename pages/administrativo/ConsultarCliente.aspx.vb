@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports Camadas.Negocio
 Imports Camadas.Dominio.Administrativo
+Imports Camadas.Dominio.Documentos
 Imports Infraestrutura
 
 Partial Class pages_administrativo_ConsultarCliente
@@ -22,6 +23,17 @@ Partial Class pages_administrativo_ConsultarCliente
             If Not Session("gerenciarDocumento") Is Nothing Then
                 gvCliente.Columns(1).Visible = False
                 gvCliente.Columns(0).Visible = True
+                Session("casamento") = Nothing
+            End If
+            '-----------------------------------------
+
+            'DOCUMENTO DE CASAMENTO ------------------
+            If Not Session("casamento") Is Nothing Or Not Session("casamentoReligioso") Is Nothing Or _
+                Not Session("habilitacao") Is Nothing Or Not Session("proclamas") Is Nothing Then
+                gvCliente.Columns(1).Visible = False
+                gvCliente.Columns(0).Visible = True
+                btnAddCliente.Visible = False
+                Session("gerenciarDocumento") = Nothing
             End If
             '-----------------------------------------
 
@@ -74,17 +86,27 @@ Partial Class pages_administrativo_ConsultarCliente
     Protected Sub gvCliente_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvCliente.RowCommand
         Dim id As Integer = 0
 
-        id = gvCliente.DataKeys.Item(e.CommandArgument).Value
-
         Select Case e.CommandName
             Case "Pesquisar"
+                id = gvCliente.DataKeys.Item(e.CommandArgument).Value
+
                 If id > 0 Then Response.Redirect("~/pages/administrativo/CadastroCliente.aspx?id=" & id)
 
             Case "Select"
+                id = gvCliente.DataKeys.Item(e.CommandArgument).Value
+
                 If Not Session("gerenciarDocumento") Is Nothing Then
                     Response.Redirect("~/pages/documentacao/Gerenciar.aspx?cliente=" & id)
+                ElseIf Not Session("casamento") Is Nothing Then
+                    Response.Redirect("~/pages/documentacao/Casamento.aspx?conjuge1=" & CType(Session("casamento"), Casal).Conjuge1.Codigo & "&conjuge2=" & id)
+                ElseIf Not Session("casamentoReligioso") Is Nothing Then
+                    Response.Redirect("~/pages/documentacao/CasamentoReligioso.aspx?conjuge1=" & CType(Session("casamentoReligioso"), Casal).Conjuge1.Codigo & "&conjuge2=" & id)
+                ElseIf Not Session("habilitacao") Is Nothing Then
+                    Response.Redirect("~/pages/documentacao/CasamentoHabilitacao.aspx?conjuge1=" & CType(Session("habilitacao"), Casal).Conjuge1.Codigo & "&conjuge2=" & id)
+                ElseIf Not Session("proclamas") Is Nothing Then
+                    Response.Redirect("~/pages/documentacao/Proclamas.aspx?conjuge1=" & CType(Session("proclamas"), Casal).Conjuge1.Codigo & "&conjuge2=" & id)
                 Else
-                    ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('SESSÃO DE GERENCAR DOCUMENTO VAZIA. POR FAVOR INICIE NOVAMENTE.');", True)
+                    ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('SESSÃO VAZIA. POR FAVOR INICIE NOVAMENTE.');", True)
                 End If
                 'Select Case CType(Session("emitirDocumento"), Utils.TipoLivro)
                 '    Case Utils.TipoLivro.Nascimento
@@ -104,5 +126,10 @@ Partial Class pages_administrativo_ConsultarCliente
 
     Protected Sub gvCliente_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvCliente.SelectedIndexChanged
 
+    End Sub
+
+    Protected Sub gvCliente_PageIndexChanging(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewPageEventArgs) Handles gvCliente.PageIndexChanging
+        gvCliente.PageIndex = e.NewPageIndex
+        btnPesquisar_Click(Nothing, Nothing)
     End Sub
 End Class

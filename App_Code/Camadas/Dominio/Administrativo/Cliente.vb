@@ -4,6 +4,7 @@ Imports Infraestrutura.Utils
 
 Namespace Camadas.Dominio.Administrativo
 
+    <Serializable()> _
     Public Class Cliente
 
         Public Property Codigo() As Integer

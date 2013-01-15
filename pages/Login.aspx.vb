@@ -17,7 +17,7 @@ Partial Class pages_Login
 
         Select Case Utils.AMBIENTE
             Case "P"
-                If Me.txtUsuario.Text.ToLower = "cartorio" And Me.txtSenha.Text = "123456" Then
+                If Me.txtUsuario.Text.ToLower = "cartorio" And Me.txtSenha.Text.ToLower = "cartorio@187" Then
                     u = New Usuario
 
                     u.Nome = "Joselina - Cartório"

@@ -1,5 +1,6 @@
 Namespace Camadas.Dominio.Administrativo
 
+    <Serializable()> _
     Public Class Contato
 
         Public Property FoneResidencial() As String

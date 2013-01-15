@@ -24,20 +24,28 @@ Partial Class pages_Documentacao_NascimentoReport
                 CType(Master.FindControl("lblNomeOficial"), Label).Text = AppSettings.Item("NOME_OFICIAL").ToString
                 CType(Master.FindControl("lblEndereco"), Label).Text = AppSettings.Item("ENDERECO").ToString
                 CType(Master.FindControl("lblMunicipio"), Label).Text = AppSettings.Item("CIDADE").ToString
-                CType(Master.FindControl("lblLocalData"), Label).Text = Format(Date.Parse(pedido.Documento.DataRegistro), "dddd, dd MMMM, yyyy") & ", " & CType(Master.FindControl("lblMunicipio"), Label).Text & "."
+                CType(Master.FindControl("lblLocalData"), Label).Text = Format(Date.Parse(pedido.DataEmissao), "dddd, dd MMMM, yyyy") & ", " & CType(Master.FindControl("lblMunicipio"), Label).Text & "."
                 CType(Master.FindControl("lblOficialRegistrador"), Label).Text = CType(Master.FindControl("lblNomeOficial"), Label).Text
 
                 lblFiliacao.Text = pedido.Solicitante.Filiacao.getPais
                 lblAvos.Text = pedido.Solicitante.Filiacao.getAvos
-
                 '-- DATA DE NASCIMENTO ------------------
                 lblDataNascimento.Text = Utils.dataPorExtenso(pedido.Solicitante.DataNascimento)
 
                 data = pedido.Solicitante.DataNascimento
-                array = data.Split("/")
-                lblDia.Text = array(0)
-                lblMes.Text = array(1)
-                lblAno.Text = array(2)
+                If data.Length.ToString = 10 Then
+                    If data.Contains("/") Then
+                        array = data.Split("/")
+                        lblDia.Text = array(0)
+                        lblMes.Text = array(1)
+                        lblAno.Text = array(2)
+                    Else
+                        array = data.Split("-")
+                        lblDia.Text = array(2)
+                        lblMes.Text = array(1)
+                        lblAno.Text = array(0)
+                    End If
+                End If
                 '----------------------------------------
 
                 lblHora.Text = CType(pedido.Documento, Nascimento).Horario.Substring(0, 2) & "H " & CType(pedido.Documento, Nascimento).Horario.Substring(3, 2) & "Min"
@@ -45,11 +53,11 @@ Partial Class pages_Documentacao_NascimentoReport
 
                 lblMunicipioRegistro.Text = ConfigurationManager.AppSettings.Item("CIDADE").ToString
                 lblLocal.Text = CType(pedido.Documento, Nascimento).Maternidade
-                lblSexo.Text = pedido.Solicitante.Sexo
+                lblSexo.Text = IIf(pedido.Solicitante.Sexo = "F", "Feminino", "Masculino")
 
                 lblGemeo.Text = IIf(Not pedido.Solicitante.Gemeo.Nome.ToUpper = "NÃO", "Sim", "Não")
                 lblNomeGemeo.Text = IIf(Not pedido.Solicitante.Gemeo.Nome.ToUpper = "NÃO", pedido.Solicitante.Gemeo.Nome, "-")
-                lblDataRegistro.Text = Utils.dataPorExtenso(pedido.Documento.DataRegistro)
+                lblDataRegistro.Text = Utils.dataPorExtenso(pedido.Documento.DataRegistro) & "."
 
                 Session.Remove("pedido")
             Else

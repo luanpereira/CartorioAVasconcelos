@@ -20,8 +20,10 @@ Namespace Infraestrutura
         Private Shared dr As IDataReader
 
         Public Enum Regime
-            ComunhaoParcial
-            ComunhaoTotal
+            COMUNHAO_PARCIAL_DE_BENS = 1
+            COMUNHAO_UNIVERSAL_DE_BENS = 2
+            COMUNHAO_DE_SEPARACAO_DE_BENS = 3
+            COMUNHAO_DE_PARTICIPACAO_FINAL_NOS_AQUESTOS = 4
         End Enum
 
         Public Enum TipoLivro
@@ -31,6 +33,8 @@ Namespace Infraestrutura
             Obito = 4
             Natimorto = 5
             Proclamas = 6
+            CancelamentoNascimento = 99
+            Habilitacao = 98
         End Enum
 
         Public Enum TipoMsg
@@ -109,12 +113,26 @@ Namespace Infraestrutura
         Public Shared Function dataPorExtenso(ByVal data As String) As String
             Dim array As String()
 
-            If data.Contains("/") Then
-                array = data.Split("/")
-                Return Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "") & "."
-            ElseIf data.Contains("-") Then
-                array = data.Split("-")
-                Return Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "") & "."
+            If Not data Is Nothing AndAlso data.Length >= 10 Then
+                If data.Contains("/") Then
+                    If data.Length > 10 Then
+                        array = data.Substring(0, 10).Split("/")
+                    Else
+                        array = data.Split("/")
+                    End If
+
+                    Return Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "").Trim
+                ElseIf data.Contains("-") Then
+                    If data.Length > 10 Then
+                        array = data.Substring(0, 10).Split("-")
+                    Else
+                        array = data.Split("-")
+                    End If
+
+                    Return Utils.numeroPorExtenso(array(2)).Replace("Real", "").Replace("Reais", "") & " de " & Utils.getMes(array(1)) & " de " & Utils.numeroPorExtenso(array(0)).Replace("Real", "").Replace("Reais", "").Trim
+                End If
+            Else
+                Return data
             End If
         End Function
 
@@ -236,7 +254,7 @@ Namespace Infraestrutura
                             Case Is <= 100
                                 Return "Mil e " + getInteger(number Mod 1000)
                             Case Else
-                                Return "Mil, " + getInteger(number Mod 1000)
+                                Return "Mil " + getInteger(number Mod 1000)
                         End Select
                     Case 2000 To 999999
                         Select Case (number Mod 1000)
@@ -245,7 +263,7 @@ Namespace Infraestrutura
                             Case Is <= 100
                                 Return getInteger(number \ 1000) & "Mil e " & getInteger(number Mod 1000)
                             Case Else
-                                Return getInteger(number \ 1000) & "Mil, " & getInteger(number Mod 1000)
+                                Return getInteger(number \ 1000) & "Mil " & getInteger(number Mod 1000)
                         End Select
                     Case 1000000 To 1999999
                         Select Case (number Mod 1000000)

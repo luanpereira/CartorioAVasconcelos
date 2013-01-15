@@ -134,8 +134,8 @@ Partial Class pages_administrativo_CadastroCliente
             End If
 
             If txtNome.Text = String.Empty Then Throw New BusinessException("O CAMPO NOME É OBRIGATÓRIO.")
-            If txtPai.Text = String.Empty Then Throw New BusinessException("O CAMPO Pai É OBRIGATÓRIO.")
-            If txtMae.Text = String.Empty Then Throw New BusinessException("O CAMPO Mãe É OBRIGATÓRIO.")
+            'If txtPai.Text = String.Empty Then Throw New BusinessException("O CAMPO Pai É OBRIGATÓRIO.")
+            'If txtMae.Text = String.Empty Then Throw New BusinessException("O CAMPO Mãe É OBRIGATÓRIO.")
             If drpSexo.SelectedValue = "0" Then Throw New BusinessException("O CAMPO Sexo É OBRIGATÓRIO.")
             If drpGemeo.SelectedValue = ViewState("idCliente") And ViewState("idCliente") > 0 Then Throw New BusinessException("OPERAÇÃO CANCELADA. O IRMÃO GÊMEO É O PRÓPRIO CLIENTE. VERIFIQUE")
 

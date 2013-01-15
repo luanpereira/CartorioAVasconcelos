@@ -40,7 +40,8 @@
 
                         <asp:GridView ID="gvCliente" runat="server" AutoGenerateColumns="False" 
                             CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" 
-                            Width="936px" DataKeyNames="CT01CODIGO" >
+                            Width="936px" DataKeyNames="CT01CODIGO" AllowPaging="True" 
+                            AllowSorting="True" PageSize="15" ShowHeaderWhenEmpty="True" >
                             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             <Columns>
                                 <asp:CommandField CancelImageUrl="~/recursos/Images/cancel.png" 

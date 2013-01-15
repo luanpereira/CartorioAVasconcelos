@@ -74,6 +74,18 @@
                             <asp:Panel ID="Panel1" runat="server" Height="104%" Width="494px" 
                                 style="float:left;">
                                 <p>
+                                    <asp:Label ID="label19" runat="server" CssClass="lbl" Text="Data Emissão Via" 
+                                        ForeColor="#FC0000"></asp:Label>
+                                    <asp:TextBox ID="txtEmissao" runat="server" CssClass="texto" MaxLength="10" 
+                                        Width="120px"></asp:TextBox>
+                                    <asp:MaskedEditExtender ID="MaskedEditExtender3" runat="server" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        Enabled="True" ErrorTooltipEnabled="True" InputDirection="LeftToRight" Mask="99/99/9999"
+                                        MaskType="Date" TargetControlID="txtEmissao">
+                                    </asp:MaskedEditExtender>   
+                                </p>
+                                <p>
                                     <asp:Label ID="label4" runat="server" CssClass="lbl" Text="Data do Registro" ForeColor="#FC0000"></asp:Label>
                                     <asp:TextBox ID="txtDataRegistro" runat="server" CssClass="texto" MaxLength="10" Width="120px"></asp:TextBox>
                                     <asp:MaskedEditExtender ID="MaskedEditExtender1" runat="server" CultureAMPMPlaceholder=""
@@ -162,7 +174,7 @@
                                 <p>
                                     <asp:Label ID="label177" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Tipo de Livro"></asp:Label>
                                     <asp:TextBox ID="txtTipoLivro" runat="server" CssClass="texto" MaxLength="1" 
-                                        Text="4" Width="30px"></asp:TextBox>
+                                        Text="4" Width="30px" Enabled="False"></asp:TextBox>
                                 </p>                                
                                 <p>
                                     <asp:Label ID="label17" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Número do Livro"></asp:Label>
@@ -197,7 +209,7 @@
                         <asp:Button ID="btnSalvar2" runat="server" CssClass="botaoForm save" 
                             Text="Salvar" />                
                         <asp:Button ID="btnSalvar" runat="server" CssClass="botaoForm save" 
-                            Text="Salvar e imprimir documento" />
+                            Text="Salvar e imprimir documento" Visible="False" />
                         <asp:Button ID="btnCancelar" runat="server" CssClass="botaoForm" 
                             Text="Cancelar" />
                             

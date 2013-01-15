@@ -20,15 +20,30 @@ Partial Class pages_Documentacao_Obito
             Me.txtSepultamento.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
 
             Me.txtServentia.Attributes.Add("onblur", "return CompletarZeros(this,6);")
-            Me.txtAcervo.Attributes.Add("onblur", "return CompletarZeros(this,2);")
-            Me.txtAtribuicao.Attributes.Add("onblur", "return CompletarZeros(this,2);")
-            Me.txtAnoReg.Attributes.Add("onblur", "return CompletarZeros(this,4);")
-            Me.txtTipoLivro.Attributes.Add("onblur", "return CompletarZeros(this,1);")
-            Me.txtNumeroLivro.Attributes.Add("onblur", "return CompletarZeros(this,5);")
-            Me.txtNumeroFolha.Attributes.Add("onblur", "return CompletarZeros(this,3);")
-            Me.txtNumeroTermo.Attributes.Add("onblur", "return CompletarZeros(this,7);")
+            Me.txtServentia.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
 
-            Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
+            Me.txtAcervo.Attributes.Add("onblur", "return CompletarZeros(this,2);")
+            Me.txtAcervo.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
+            Me.txtAtribuicao.Attributes.Add("onblur", "return CompletarZeros(this,2);")
+            Me.txtAtribuicao.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
+            Me.txtAnoReg.Attributes.Add("onblur", "return CompletarZeros(this,4);")
+            Me.txtAnoReg.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
+            Me.txtTipoLivro.Attributes.Add("onblur", "return CompletarZeros(this,1);")
+
+            Me.txtNumeroLivro.Attributes.Add("onblur", "return CompletarZeros(this,5);")
+            Me.txtNumeroLivro.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
+            Me.txtNumeroFolha.Attributes.Add("onblur", "return CompletarZeros(this,3);")
+            Me.txtNumeroFolha.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
+            Me.txtNumeroTermo.Attributes.Add("onblur", "return CompletarZeros(this,7);")
+            Me.txtNumeroTermo.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
+            'Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
+            Me.txtEmissao.Text = Format(DateTime.Now(), "dd/MM/yyyy")
 
             Try
                 drpCor.DataSource = controllerDocumento.listarCor
@@ -75,9 +90,11 @@ Partial Class pages_Documentacao_Obito
         Try
             pedido = New Camadas.Dominio.Documentos.Pedido
             pedido.Codigo = id
+            pedido.Documento = New Obito
             pedido = controllerDocumento.listarPedido(pedido)
 
             Me.txtDataRegistro.Text = pedido.Documento.DataRegistro
+            Me.txtEmissao.Text = pedido.DataEmissao
             Me.txtHorario.Text = CType(pedido.Documento, Obito).Horario
             Me.txtLocal.Text = CType(pedido.Documento, Obito).Local
             Me.txtDeclarante.Text = CType(pedido.Documento, Obito).Declarante
@@ -86,7 +103,7 @@ Partial Class pages_Documentacao_Obito
             Me.txtCausaFalecimento.Text = CType(pedido.Documento, Obito).CausaMorte
             Me.txtSepultamento.Text = CType(pedido.Documento, Obito).Sepultamento
             Me.txtMedico.Text = CType(pedido.Documento, Obito).Medico
-            Me.drpCor.SelectedValue = CType(pedido.Documento, Obito).Cor
+            Me.drpCor.SelectedValue = CType(pedido.Documento, Obito).Cor.Codigo
 
             Me.txtServentia.Text = pedido.Matricula.Serventia
             Me.txtAcervo.Text = pedido.Matricula.Acervo
@@ -144,7 +161,7 @@ Partial Class pages_Documentacao_Obito
         Try
 
             Me.salvar()
-
+            CType(Session("pedido"), Pedido).Solicitante = controller.listarClassCliente(CType(Session("pedido"), Pedido).Solicitante)
             Response.Redirect("~/pages/Documentacao/ObitoReport.aspx")
             'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
 
@@ -201,6 +218,7 @@ Partial Class pages_Documentacao_Obito
             pedido.Matricula.NumeroTermo = txtNumeroTermo.Text
             pedido.Matricula.Serventia = txtServentia.Text
             pedido.Matricula.TipoLivro = txtTipoLivro.Text
+            pedido.DataEmissao = Format(Date.Parse(txtEmissao.Text), "yyyy-MM-dd")
 
             obito = New Obito
             obito.Codigo = IIf(ViewState("ObitoID") Is Nothing, 0, ViewState("ObitoID"))
@@ -213,7 +231,8 @@ Partial Class pages_Documentacao_Obito
             obito.Medico = txtMedico.Text.ToUpper
             obito.TipoLivro = txtTipoLivro.Text
             obito.Local = txtLocal.Text.ToUpper
-            obito.Cor = drpCor.SelectedValue
+            obito.Cor.Codigo = drpCor.SelectedValue
+            obito.Cor.Nome = drpCor.SelectedItem.Text
             pedido.Documento = obito
 
             pedido.Documento.DataRegistro = Me.txtDataRegistro.Text

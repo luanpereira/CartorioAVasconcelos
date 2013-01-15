@@ -23,27 +23,40 @@
 
     </script>
 
+    <style type="text/css" media="print">
+        HEAD{
+            display: none
+          }
+
+    </style>
+
+  <!--<style type="text/css">
+    @media print {
+      .noprint { display: none; }
+    }
+  </style>-->
+
+
     <link rel="stylesheet" type="text/css" href="recursos/Styles/StyleSheetDoc.css" />
 
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="window.print();">
     <form id="form2" runat="server">
     <div id="documento">
         <asp:Panel ID="Panel9" runat="server" HorizontalAlign="Center">
-            <asp:Image ID="Image1" runat="server" Height="1.105in" 
-                ImageUrl="~/recursos/Images/brasaoRepublica.jpg" Width="1.115in" />
+            <asp:Image ID="imgBrasao" runat="server" Height="1.105in" Width="1.115in" />
             <br />
             <asp:Label ID="lblTitulo" runat="server" 
                 Text="REGISTRO CIVIL DAS PESSOAS NATURAIS" CssClass="centro"></asp:Label><br />
             <asp:Label ID="lblTipoDoc" runat="server" 
                 Text=" [Tipo de Documento]" Font-Size="14pt" CssClass="centro"></asp:Label><br />
-            <asp:Label ID="Label2" runat="server" 
+            <asp:Label ID="lblNomePessoaLabel" runat="server" 
                 Text="Nome"></asp:Label><br />
             <asp:Label ID="lblNomePessoa" runat="server" 
                 Text="[Nome da pessoa]" Font-Size="12pt"></asp:Label><br />
-            <asp:Label ID="Label4" runat="server" 
+            <asp:Label ID="lblMatriculaLabel" runat="server" 
                 Text="Matrícula"></asp:Label><br />
             <asp:Label ID="lblMatricula" runat="server" 
             Text="99999999 9999 9 99999 999 9999999 99" Font-Size="12pt"></asp:Label>
@@ -53,7 +66,7 @@
         
         </asp:ContentPlaceHolder>
 
-        <asp:Panel ID="Panel1" runat="server" BorderStyle="Solid" Height="100%" 
+        <asp:Panel ID="pnlAverbacao" runat="server" BorderStyle="Solid" Height="100%" 
             BorderWidth="1px">
             <asp:Label ID="Label6" runat="server" Text="Observações / Averbações" 
                     Font-Size="8pt"></asp:Label><br />
@@ -100,13 +113,13 @@
                     Width="318px"></asp:Label><br />
                 <asp:Label ID="lblLocalData" runat="server" 
                     Text="[Local e data]" Font-Size="10pt" CssClass="centro"></asp:Label><br />
-                <asp:Label ID="Label14" runat="server" Font-Size="10pt" 
-                    style="border-bottom: 1px solid; padding-top:100px;" CssClass="centro" 
-                    Width="293px"></asp:Label><br />
+                <br />
+                <asp:Image ID="imgAss" runat="server" Visible="False" />
+                <br />
                 <asp:Label ID="lblNomeOficial" runat="server" 
-                    Text="[Nome do Oficial]" CssClass="centro"></asp:Label><br />
+                    Text="[Nome do Oficial]" CssClass="centro" Visible="False"></asp:Label><br />
                 <asp:Label ID="Label16" runat="server" 
-                    Text="Oficial Registrador" CssClass="centro"></asp:Label>
+                    Text="Registrador(a)" CssClass="centro" Visible="False"></asp:Label>
             </asp:Panel> 
         </asp:Panel>
 

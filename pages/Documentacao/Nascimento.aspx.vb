@@ -16,17 +16,32 @@ Partial Class pages_Documentacao_Nascimento
 
         If Not IsPostBack Then
             Me.txtServentia.Attributes.Add("onblur", "return CompletarZeros(this,6);")
+            Me.txtServentia.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
             Me.txtAcervo.Attributes.Add("onblur", "return CompletarZeros(this,2);")
+            Me.txtAcervo.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
             Me.txtAtribuicao.Attributes.Add("onblur", "return CompletarZeros(this,2);")
+            Me.txtAtribuicao.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
             Me.txtAnoReg.Attributes.Add("onblur", "return CompletarZeros(this,4);")
+            Me.txtAnoReg.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
             Me.txtTipoLivro.Attributes.Add("onblur", "return CompletarZeros(this,1);")
+
             Me.txtNumeroLivro.Attributes.Add("onblur", "return CompletarZeros(this,5);")
+            Me.txtNumeroLivro.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
             Me.txtNumeroFolha.Attributes.Add("onblur", "return CompletarZeros(this,3);")
+            Me.txtNumeroFolha.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
+
             Me.txtNumeroTermo.Attributes.Add("onblur", "return CompletarZeros(this,7);")
+            Me.txtNumeroTermo.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
 
             Me.txtAverbacao.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
 
-            Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
+            'Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
+            Me.txtEmissao.Text = Format(DateTime.Now(), "dd/MM/yyyy")
 
             Try
                 If Request.QueryString("cliente") Is Nothing Then
@@ -68,9 +83,11 @@ Partial Class pages_Documentacao_Nascimento
         Try
             pedido = New Pedido
             pedido.Codigo = id
+            pedido.Documento = New Nascimento
             pedido = controllerDocumento.listarPedido(pedido)
 
             Me.txtDataRegistro.Text = pedido.Documento.DataRegistro
+            Me.txtEmissao.Text = pedido.DataEmissao
             Me.txtHorario.Text = CType(pedido.Documento, Nascimento).Horario
             Me.txtLocal.Text = CType(pedido.Documento, Nascimento).Maternidade
             Me.drpDeclarante.SelectedValue = CType(pedido.Documento, Nascimento).Declarante
@@ -152,9 +169,10 @@ Partial Class pages_Documentacao_Nascimento
 
         Try
             If Me.txtDataRegistro.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO DATA DE REGISTRO OBRIGATÓRIO.")
+            If Me.txtEmissao.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO DATA DE EMISSÃO OBRIGATÓRIA.")
             If Me.txtHorario.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
             If Me.txtLocal.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO LOCAL NASCIMENTO OBRIGATÓRIO.")
-            If Me.drpDeclarante.SelectedValue = 0 Then Throw New CampoObrigatorioException("CAMPO DECLARENTE OBRIGATÓRIO.")
+            If Me.drpDeclarante.SelectedValue = "0" Then Throw New CampoObrigatorioException("CAMPO DECLARENTE OBRIGATÓRIO.")
 
             If Me.txtServentia.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO SERVENTIA OBRIGATÓRIO.")
             If Me.txtAcervo.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
@@ -202,6 +220,7 @@ Partial Class pages_Documentacao_Nascimento
             pedido.Documento = nascimento
 
             pedido.Documento.DataRegistro = Me.txtDataRegistro.Text
+            pedido.DataEmissao = Me.txtEmissao.Text
 
             Session("pedido") = pedido
 

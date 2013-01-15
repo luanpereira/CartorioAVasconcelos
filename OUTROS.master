@@ -1,0 +1,70 @@
+﻿<%@ Master Language="VB" CodeFile="OUTROS.master.vb" Inherits="OUTROS" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Impressão de Documentos</title>
+    
+    <script type="text/javascript" src="../../recursos/Scripts/jquery-1.4.2.js" ></script>
+    <script type="text/javascript" src="../../recursos/Scripts/jfuncoes.js" ></script>
+    
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25127936-4']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="recursos/Styles/StyleSheetDoc.css" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="window.print();">
+    <form id="form2" runat="server">
+    <div id="documento">
+        <asp:Panel ID="Panel9" runat="server" HorizontalAlign="Center">
+            <asp:Label ID="lblCabecalho" runat="server" CssClass="centro" Font-Size="14pt"></asp:Label><br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <asp:Label ID="lblTitulo" runat="server" 
+                Text=" [Título]" Font-Size="14pt" CssClass="centro"></asp:Label>
+            <br />
+            <br />
+            <br />
+        </asp:Panel> 
+
+        <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+        <asp:Panel ID="Panel6" runat="server">
+
+            <asp:Panel ID="Panel8" runat="server" style="float:right" Height="100%" 
+                Width="400px" HorizontalAlign="Center">
+                <asp:Label ID="lblLocalData" runat="server" 
+                    Text="[Local e data]" Font-Size="10pt" CssClass="centro"></asp:Label>
+                <br />
+                <br />
+                <br />
+                <asp:Image ID="imgAss" runat="server" />
+                <br />
+                <asp:Label ID="lblNomeOficial" runat="server" 
+                    Text="[Nome do Oficial]" CssClass="centro"></asp:Label>
+            </asp:Panel> 
+        </asp:Panel>
+
+    </div>
+    </form>
+</body>
+</html>

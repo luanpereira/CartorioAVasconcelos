@@ -153,6 +153,71 @@ Namespace Camadas.DAO
                 Throw New DAOException(ex.Message)
             End Try
         End Sub
+
+        Public Function listarClassCliente(ByVal cliente As Dominio.Administrativo.Cliente) As Dominio.Administrativo.Cliente Implements IClienteDAO.listarClassCliente
+            Dim returnCliente As Cliente = Nothing
+
+            strSql = "  SELECT *, "
+            strSql += "        CONCAT(CT01CELULAR,'/',CT01FONEFIXO) AS TELEFONE, "
+            strSql += "        (SELECT CT99CODIGO FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198CIDADEUF) AS CODIGO_UF, "
+            strSql += "        (SELECT CT99SIGLA FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198CIDADEUF) AS SIGLA_UF, "
+            strSql += "        (SELECT CT98CODIGO FROM CT98CIDADE WHERE CT98CODIGO=FK0198CIDADEUF) AS CODIGO_CIDADE, "
+            strSql += "        (SELECT CT98NOME FROM CT98CIDADE WHERE CT98CODIGO=FK0198CIDADEUF) AS CIDADE, "
+            strSql += "        (SELECT CT99CODIGO FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198NATURAL) AS CODIGO_UF_NATURAL, "
+            strSql += "        (SELECT CT99SIGLA FROM CT99ESTADO, CT98CIDADE WHERE FK9899ESTADO=CT99CODIGO AND CT98CODIGO=FK0198NATURAL) AS SIGLA_UF_NATURAL, "
+            strSql += "        (SELECT CT98CODIGO FROM CT98CIDADE WHERE CT98CODIGO=FK0198NATURAL) AS CIDADE_NATURAL, "
+            strSql += "        (SELECT CT98NOME FROM CT98CIDADE WHERE CT98CODIGO=FK0198NATURAL) AS NOME_CIDADE_NATURAL, "
+            strSql += "        (SELECT CT01NOME FROM CT01CLIENTE WHERE CT01CODIGO=C.FK0101GEMEO) AS NOME_GEMEO "
+            strSql += "    FROM CT01CLIENTE AS C "
+            strSql += "   WHERE 1=1 "
+
+            If cliente.Codigo > 0 Then strSql += " AND C.CT01CODIGO = " & cliente.Codigo
+
+            If Not cliente.Nome Is Nothing AndAlso Not cliente.Nome.Trim = String.Empty Then strSql += " AND C.CT01NOME LIKE '%" & cliente.Nome & "%' "
+            If Not cliente.Cpf Is Nothing AndAlso Not cliente.Cpf.Trim = String.Empty Then strSql += " AND C.CT01CPF LIKE '%" & cliente.Cpf & "%' "
+
+
+            strSql += "  ORDER BY CT01NOME "
+
+            Try
+                cmd = conn.CreateCommand
+                cmd.CommandText = strSql
+                dr = cmd.ExecuteReader
+
+                While dr.Read
+                    returnCliente = New Cliente
+
+                    returnCliente.Codigo = dr.Item("CT01CODIGO")
+                    returnCliente.DataNascimento = dr.Item("CT01DATANASCIMENTO").ToString
+                    returnCliente.Endereco.Logradouro = dr.Item("CT01ENDERECO").ToString
+                    returnCliente.Endereco.Cidade.Codigo = IIf(dr.Item("CODIGO_CIDADE").ToString = String.Empty, 0, dr.Item("CODIGO_CIDADE").ToString)
+                    returnCliente.Endereco.Cidade.Nome = dr.Item("CIDADE").ToString
+                    returnCliente.Endereco.Cidade.Estado.Codigo = IIf(dr.Item("CODIGO_UF").ToString = String.Empty, 0, dr.Item("CODIGO_UF").ToString)
+                    returnCliente.Endereco.Cidade.Estado.Nome = dr.Item("SIGLA_UF").ToString
+
+                    returnCliente.Natural.Codigo = IIf(dr.Item("CIDADE_NATURAL").ToString = String.Empty, 0, dr.Item("CIDADE_NATURAL").ToString)
+                    returnCliente.Natural.Nome = dr.Item("NOME_CIDADE_NATURAL").ToString
+                    returnCliente.Natural.Estado.Codigo = IIf(dr.Item("CODIGO_UF_NATURAL").ToString = String.Empty, 0, dr.Item("CODIGO_UF_NATURAL").ToString)
+                    returnCliente.Natural.Estado.Nome = dr.Item("SIGLA_UF_NATURAL").ToString
+
+                    returnCliente.EstadoCivil = dr.Item("CT01ESTADOCIVIL").ToString
+                    returnCliente.Filiacao.NomePai = dr.Item("CT01PAI").ToString
+                    returnCliente.Filiacao.NomeMae = dr.Item("CT01MAE").ToString
+
+                    returnCliente.Nome = dr.Item("CT01NOME").ToString
+                    returnCliente.Profissao = dr.Item("CT01PROFISSAO").ToString
+                    returnCliente.Sexo = dr.Item("CT01SEXO").ToString
+                    
+                End While
+
+                dr.Close()
+
+                Return returnCliente
+
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
     End Class
 
 End Namespace

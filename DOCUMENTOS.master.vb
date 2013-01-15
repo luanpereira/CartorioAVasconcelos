@@ -8,6 +8,8 @@ Partial Class DOCUMENTOS
         Dim pedido As Pedido
 
         If Not IsPostBack Then
+            imgBrasao.ImageUrl = "~/recursos/Images/brasaoRepublica.jpg"
+            imgAss.ImageUrl = "~/recursos/Images/assinaturaEnoch.png"
 
             If Not Session("pedido") Is Nothing Then
                 pedido = Session("pedido")

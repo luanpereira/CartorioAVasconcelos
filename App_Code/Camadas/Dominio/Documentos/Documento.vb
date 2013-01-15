@@ -3,6 +3,7 @@ Imports Infraestrutura.Utils
 
 Namespace Camadas.Dominio.Documentos
 
+    <Serializable()> _
     Public Class Documento
         Public Property Codigo() As Integer
         Public Property Nome() As String

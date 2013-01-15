@@ -8,14 +8,6 @@
             </asp:ToolkitScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
-                        <ProgressTemplate>
-                            
-                            <asp:Panel ID="Panel11" runat="server" CssClass="loading" Height="47px">
-                            </asp:Panel>
-                            
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
                     <h2>Documentação</h2>
                     <fieldset>
                         <legend>Dados Pessoais -&nbsp;
@@ -44,11 +36,19 @@
 
                     <fieldset>
                         <legend>Dados de Documentos Emitidos</legend>
-                        <asp:Panel ID="Panel1" runat="server" Height="230px">
+                        <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                            <ProgressTemplate>
+                                <asp:Panel ID="Panel11" runat="server" CssClass="loading" Height="47px">
+                                </asp:Panel>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+                        <asp:Panel ID="Panel1" runat="server" Height="400px">
                             <asp:GridView ID="gvDocumento" runat="server" AutoGenerateColumns="False" 
                                 CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" 
-                                Width="936px" DataKeyNames="CT03CODIGO" 
-                                EmptyDataText="O CLIENTE AINDA NÃO SOLICITOU DOCUMENTOS" >
+                                Width="936px" DataKeyNames="CT03CODIGO,CT02TIPOLIVRO,CT01CODIGO" 
+                                EmptyDataText="O CLIENTE AINDA NÃO SOLICITOU DOCUMENTOS" 
+                                AllowPaging="True" AllowSorting="True" EnableTheming="True" PageSize="8" 
+                                ShowHeaderWhenEmpty="True" >
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                 <Columns>
                                     <asp:ButtonField ButtonType="Image" CommandName="Editar" 
@@ -62,17 +62,17 @@
                                     <asp:BoundField DataField="CT01NOME" HeaderText="Nome" >
                                     <HeaderStyle HorizontalAlign="Left" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="CT01CPF" HeaderText="CPF" >
+                                    <asp:BoundField DataField="CT01CPF" HeaderText="CPF" Visible="False" >
                                     <HeaderStyle HorizontalAlign="Left" Width="100px" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="CT02NOME" HeaderText="Tipo Documento" 
                                         NullDisplayText="-">
-                                    <HeaderStyle HorizontalAlign="Left" Width="200px" />
+                                    <HeaderStyle HorizontalAlign="Left" Width="300px" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="CT03VIA" HeaderText="Via">
                                     <HeaderStyle Width="60px" />
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="CT03DATA" HeaderText="Data">
+                                    <asp:BoundField DataField="CT03DATACRIACAO" HeaderText="Data">
                                     <HeaderStyle HorizontalAlign="Left" Width="150px" />
                                     </asp:BoundField>
                                     <asp:ButtonField ButtonType="Image" CommandName="Excluir" 
