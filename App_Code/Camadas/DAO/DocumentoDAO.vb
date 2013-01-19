@@ -847,7 +847,7 @@ Namespace Camadas.DAO
             strSql += "    AND FK0301SOLICITANTE=CT01CODIGO "
             strSql += "    AND FK0402TIPODOCUMENTO=CT02DOCUMENTO "
             strSql += "    AND FK0305STATUS=CT05CODIGO "
-            strSql += "        ORDER BY CT03DATACRIACAO DESC, CT02NOME LIMIT 10 "
+            strSql += "        ORDER BY CT03DATACRIACAO DESC, CT02NOME LIMIT 16 "
 
             Try
                 adpt = DaoFactory.GetDataAdapter

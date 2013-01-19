@@ -20,8 +20,13 @@ Partial Class pages_Documentacao_ProclamasReport
                 str = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" & AppSettings.Item("DIZERES_PROCLAMAS").ToString
 
                 str = str.Replace("{OFICIO}", AppSettings.Item("NOME_OFICIO2").ToString)
-                str = str.Replace("{CONJUGE1}", Me.getDados(CType(pedido.Documento, Proclamas).Casal.Conjuge1))
-                str = str.Replace("{CONJUGE2}", Me.getDados(CType(pedido.Documento, Proclamas).Casal.Conjuge2))
+                If CType(pedido.Documento, Proclamas).Casal.Conjuge1.Sexo = "M" Then
+                    str = str.Replace("{CONJUGE1}", Me.getDados(CType(pedido.Documento, Proclamas).Casal.Conjuge1))
+                    str = str.Replace("{CONJUGE2}", Me.getDados(CType(pedido.Documento, Proclamas).Casal.Conjuge2))
+                Else
+                    str = str.Replace("{CONJUGE1}", Me.getDados(CType(pedido.Documento, Proclamas).Casal.Conjuge2))
+                    str = str.Replace("{CONJUGE2}", Me.getDados(CType(pedido.Documento, Proclamas).Casal.Conjuge1))
+                End If
 
                 lblDocumento.Text = str
 
@@ -34,31 +39,31 @@ Partial Class pages_Documentacao_ProclamasReport
 
         str = "<b>" & cliente.Nome & "</b>, "
 
-        If cliente.Sexo = "F" Then
-            str += "nascida"
-            estadoCivil = ""
-        Else
-            str += "nascido"
-            estadoCivil = ""
-        End If
+        'If cliente.Sexo = "F" Then
+        ' str += "nascida"
+        ' estadoCivil = ""
+        ' Else
+        ' str += "nascido"
+        ''estadoCivil = ""
+        'End If
 
-        str += " aos "
-        str += Utils.dataPorExtenso(cliente.DataNascimento) & ", "
+        'str += " aos "
+        'str += Utils.dataPorExtenso(cliente.DataNascimento) & ", "
 
         str += "natural de " & cliente.Natural.ToString & ", "
         str += "de nacionalidade brasileira, "
 
         Select Case cliente.EstadoCivil
             Case "C"
-                str += IIf(cliente.Sexo = "F", "casada", "casado")
+                str += "," & IIf(cliente.Sexo = "F", "casada", "casado")
             Case "S"
-                str += IIf(cliente.Sexo = "F", "solteira", "solteiro")
+                str += "," & IIf(cliente.Sexo = "F", "solteira", "solteiro")
             Case "V"
-                str += IIf(cliente.Sexo = "F", "viúva", "viúvo")
+                str += "," & IIf(cliente.Sexo = "F", "viúva", "viúvo")
             Case "U"
-                str += "união estável"
+                str += "," & "união estável"
             Case "D"
-                str += IIf(cliente.Sexo = "F", "divorciada", "divorciado")
+                str += "," & IIf(cliente.Sexo = "F", "divorciada", "divorciado")
             Case Else
                 str += "sem estado civil cadastrado"
         End Select

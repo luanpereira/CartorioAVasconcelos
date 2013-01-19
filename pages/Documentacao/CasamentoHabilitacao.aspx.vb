@@ -98,7 +98,12 @@ Partial Class pages_Documentacao_CasamentoHabilitacao
             lblSexo1.Text = IIf(dtb.Rows(0).Item("CT01SEXO").ToString = "F", "Feminino", "Masculino")
             lblNascimdoEM1.Text = dtb.Rows(0).Item("NOME_CIDADE_NATURAL").ToString & " - " & dtb.Rows(0).Item("SIGLA_UF_NATURAL").ToString
             lblDataNascimento1.Text = Format(DateTime.Parse(dtb.Rows(0).Item("CT01DATANASCIMENTO").ToString), "dd/MM/yyyy")
-            txtNovoNome1.Text = lblNome1.Text
+
+            If dtb.Rows(0).Item("CT01SEXO").ToString = "M" Then
+                txtNovoNome1.Text = lblNome1.Text
+            Else
+                txtNovoNome2.Text = lblNome1.Text
+            End If
 
             If casal.Conjuge2.Codigo > 0 Then
                 dtb = Nothing
@@ -107,7 +112,12 @@ Partial Class pages_Documentacao_CasamentoHabilitacao
                 lblSexo2.Text = IIf(dtb.Rows(0).Item("CT01SEXO").ToString = "F", "Feminino", "Masculino")
                 lblNascimdoEM2.Text = dtb.Rows(0).Item("NOME_CIDADE_NATURAL").ToString & " - " & dtb.Rows(0).Item("SIGLA_UF_NATURAL").ToString
                 lblDataNascimento2.Text = Format(DateTime.Parse(dtb.Rows(0).Item("CT01DATANASCIMENTO").ToString), "dd/MM/yyyy")
-                txtNovoNome2.Text = lblNome2.Text
+
+                If dtb.Rows(0).Item("CT01SEXO").ToString = "M" Then
+                    txtNovoNome1.Text = lblNome2.Text
+                Else
+                    txtNovoNome2.Text = lblNome2.Text
+                End If
             End If
 
             ViewState("casal") = casal

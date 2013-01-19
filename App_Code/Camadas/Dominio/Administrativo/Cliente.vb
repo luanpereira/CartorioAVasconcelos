@@ -32,6 +32,37 @@ Namespace Camadas.Dominio.Administrativo
             '_Gemeo = New Cliente
         End Sub
 
+        Public ReadOnly Property getIdade(Optional ByVal data As String = "") As String
+            Get
+                Dim dias As Single
+                Dim anos As Integer
+                Dim meses As Integer
+                Dim resto As Integer
+
+                dias = DateDiff("d", Convert.ToDateTime(_DataNascimento), IIf(data = String.Empty, Now, data))
+                anos = Int(dias / 365)
+                resto = dias Mod 365
+                meses = Int(resto / 30)
+                dias = resto Mod 30
+
+                If anos > 1 Then
+                    Return anos & " anos"
+                ElseIf anos = 1 Then
+                    Return anos & " ano"
+                ElseIf meses > 1 Then
+                    Return meses & " meses"
+                ElseIf meses = 1 Then
+                    Return meses & " mês"
+                ElseIf dias > 1 Then
+                    Return dias & " dias"
+                ElseIf dias = 1 Then
+                    Return dias & " dia"
+                Else
+                    Return ""
+                End If
+
+            End Get
+        End Property
     End Class
 
 End Namespace

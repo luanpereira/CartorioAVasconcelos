@@ -34,10 +34,18 @@ Partial Class pages_Documentacao_CasamentoHabilitacaoReport
                 str = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" & AppSettings.Item("DIZERES_HABILITACAO").ToString
 
                 str = str.Replace("{OFICIO}", AppSettings.Item("NOME_OFICIO2").ToString)
-                str = str.Replace("{DE1}", IIf(CType(pedido.Documento, Habilitacao).Casal.Conjuge1.Sexo = "F", "da", "do"))
-                str = str.Replace("{CONJUGE1}", Me.getDados(CType(pedido.Documento, Habilitacao).Casal.Conjuge1))
-                str = str.Replace("{DE2}", IIf(CType(pedido.Documento, Habilitacao).Casal.Conjuge2.Sexo = "F", "da", "do"))
-                str = str.Replace("{CONJUGE2}", Me.getDados(CType(pedido.Documento, Habilitacao).Casal.Conjuge2))
+
+                If CType(pedido.Documento, Habilitacao).Casal.Conjuge1.Sexo = "M" Then
+                    str = str.Replace("{DE1}", "do")
+                    str = str.Replace("{CONJUGE1}", Me.getDados(CType(pedido.Documento, Habilitacao).Casal.Conjuge1))
+                    str = str.Replace("{DE2}", "da")
+                    str = str.Replace("{CONJUGE2}", Me.getDados(CType(pedido.Documento, Habilitacao).Casal.Conjuge2))
+                Else
+                    str = str.Replace("{DE2}", "da")
+                    str = str.Replace("{CONJUGE2}", Me.getDados(CType(pedido.Documento, Habilitacao).Casal.Conjuge2))
+                    str = str.Replace("{DE1}", "do")
+                    str = str.Replace("{CONJUGE1}", Me.getDados(CType(pedido.Documento, Habilitacao).Casal.Conjuge1))
+                End If
 
                 Select Case CType(pedido.Documento, Habilitacao).Regime
                     Case Utils.Regime.COMUNHAO_DE_PARTICIPACAO_FINAL_NOS_AQUESTOS

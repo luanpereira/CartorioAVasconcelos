@@ -17,7 +17,12 @@ Partial Class pages_Documentacao_CasamentoReport
 
                 CType(Master.FindControl("lblTipoDoc"), Label).Text = "CERTIDÃO DE CASAMENTO"
 
-                CType(Master.FindControl("lblNomePessoa"), Label).Text = CType(pedido.Documento, Casamento).NovoNomeConjuge1 & "<BR />" & CType(pedido.Documento, Casamento).NovoNomeConjuge2
+                If CType(pedido.Documento, Casamento).Casal.Conjuge1.Sexo = "M" Then
+                    CType(Master.FindControl("lblNomePessoa"), Label).Text = CType(pedido.Documento, Casamento).Casal.Conjuge1.Nome & "<BR />" & CType(pedido.Documento, Casamento).Casal.Conjuge2.Nome
+                Else
+                    CType(Master.FindControl("lblNomePessoa"), Label).Text = CType(pedido.Documento, Casamento).Casal.Conjuge2.Nome & "<BR />" & CType(pedido.Documento, Casamento).Casal.Conjuge1.Nome
+                End If
+
                 CType(Master.FindControl("lblMatricula"), Label).Text = pedido.Matricula.getMatricula
                 CType(Master.FindControl("lblAverbacao"), Label).Text = IIf(pedido.Averbacao.Trim = String.Empty, "Nenhuma.         ", pedido.Averbacao)
 
@@ -29,8 +34,14 @@ Partial Class pages_Documentacao_CasamentoReport
                 CType(Master.FindControl("lblOficialRegistrador"), Label).Text = CType(Master.FindControl("lblNomeOficial"), Label).Text
 
 
-                Me.lblConjuges.Text = Me.getDados(CType(pedido.Documento, Casamento).Casal.Conjuge1) & "<br />&nbsp;&nbsp;"
-                Me.lblConjuges.Text += Me.getDados(CType(pedido.Documento, Casamento).Casal.Conjuge2)
+                If CType(pedido.Documento, Casamento).Casal.Conjuge1.Sexo = "M" Then
+                    Me.lblConjuges.Text = Me.getDados(CType(pedido.Documento, Casamento).Casal.Conjuge1) & "<br />&nbsp;&nbsp;"
+                    Me.lblConjuges.Text += Me.getDados(CType(pedido.Documento, Casamento).Casal.Conjuge2)
+                Else
+                    Me.lblConjuges.Text = Me.getDados(CType(pedido.Documento, Casamento).Casal.Conjuge2) & "<br />&nbsp;&nbsp;"
+                    Me.lblConjuges.Text += Me.getDados(CType(pedido.Documento, Casamento).Casal.Conjuge1)
+                End If
+
 
                 '-- DATA DE NASCIMENTO ------------------
                 lblDataCasa.Text = Utils.dataPorExtenso(pedido.Documento.DataRegistro)
@@ -66,12 +77,22 @@ Partial Class pages_Documentacao_CasamentoReport
                 End Select
 
                 lblNovosNomes.Text = ""
-                If CType(pedido.Documento, Casamento).NovoNomeConjuge1 <> CType(pedido.Documento, Casamento).Casal.Conjuge1.Nome Then
-                    lblNovosNomes.Text += CType(pedido.Documento, Casamento).NovoNomeConjuge1 & "<br />"
-                End If
+                If CType(pedido.Documento, Casamento).Casal.Conjuge1.Sexo = "M" Then
+                    If CType(pedido.Documento, Casamento).NovoNomeConjuge1 <> CType(pedido.Documento, Casamento).Casal.Conjuge1.Nome Then
+                        lblNovosNomes.Text += CType(pedido.Documento, Casamento).NovoNomeConjuge1 & "<br />"
+                    End If
 
-                If CType(pedido.Documento, Casamento).NovoNomeConjuge2 <> CType(pedido.Documento, Casamento).Casal.Conjuge2.Nome Then
-                    lblNovosNomes.Text += CType(pedido.Documento, Casamento).NovoNomeConjuge2
+                    If CType(pedido.Documento, Casamento).NovoNomeConjuge2 <> CType(pedido.Documento, Casamento).Casal.Conjuge2.Nome Then
+                        lblNovosNomes.Text += CType(pedido.Documento, Casamento).NovoNomeConjuge2
+                    End If
+                Else
+                    If CType(pedido.Documento, Casamento).NovoNomeConjuge2 <> CType(pedido.Documento, Casamento).Casal.Conjuge2.Nome Then
+                        lblNovosNomes.Text += CType(pedido.Documento, Casamento).NovoNomeConjuge2 & "<br />"
+                    End If
+
+                    If CType(pedido.Documento, Casamento).NovoNomeConjuge1 <> CType(pedido.Documento, Casamento).Casal.Conjuge1.Nome Then
+                        lblNovosNomes.Text += CType(pedido.Documento, Casamento).NovoNomeConjuge1
+                    End If
                 End If
 
                 If lblNovosNomes.Text.Trim = String.Empty Then
@@ -104,21 +125,21 @@ Partial Class pages_Documentacao_CasamentoReport
         str += "natural de " & cliente.Natural.ToString & ", "
         str += "de nacionalidade brasileira, "
 
-        Select Case cliente.EstadoCivil
-            Case "C"
-                str += IIf(cliente.Sexo = "F", "casada", "casado")
-            Case "S"
-                str += IIf(cliente.Sexo = "F", "solteira", "solteiro")
-            Case "V"
-                str += IIf(cliente.Sexo = "F", "viúva", "viúvo")
-            Case "U"
-                str += "união estável"
-            Case "D"
-                str += IIf(cliente.Sexo = "F", "divorciada", "divorciado")
-            Case Else
-                str += "sem estado civil cadastrado"
-        End Select
-        str += ", "
+        'Select Case cliente.EstadoCivil
+        '    Case "C"
+        '        str += IIf(cliente.Sexo = "F", "casada", "casado")
+        '    Case "S"
+        '        str += IIf(cliente.Sexo = "F", "solteira", "solteiro")
+        '    Case "V"
+        '        str += IIf(cliente.Sexo = "F", "viúva", "viúvo")
+        '    Case "U"
+        '        str += "união estável"
+        '    Case "D"
+        '        str += IIf(cliente.Sexo = "F", "divorciada", "divorciado")
+        '    Case Else
+        '        str += "sem estado civil cadastrado"
+        'End Select
+        'str += ", "
 
         If Not cliente.Profissao Is Nothing Then
             str += IIf(cliente.Profissao.Trim = String.Empty, "sem profissão", cliente.Profissao) & ", "

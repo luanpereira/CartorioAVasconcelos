@@ -88,14 +88,11 @@
                         <asp:Panel ID="Panel2" runat="server" Height="155px" Width="1000px">
                             <asp:Panel ID="Panel3" runat="server" Height="100%" Width="494px" 
                                 style="float:left;">
-                                <p>
-                                    <asp:Label ID="label8" runat="server" ForeColor="#FC0000" CssClass="lbl" Text="Declarante"></asp:Label>&nbsp;
-                                    <asp:DropDownList ID="drpDeclarante" runat="server">
-                                        <asp:ListItem Value="0">Selecione...</asp:ListItem>
-                                        <asp:ListItem Value="P">O Pai</asp:ListItem>
-                                        <asp:ListItem Value="M">A Mãe</asp:ListItem>
-                                    </asp:DropDownList>
-                                </p>
+                            <p>
+                                <asp:Label ID="label8" runat="server" CssClass="lbl" ForeColor="#FC0000" Text="Declarante"></asp:Label>
+                                <asp:TextBox ID="txtDeclarante" runat="server" CssClass="texto" MaxLength="45" 
+                                    Width="320px">O PAI</asp:TextBox>
+                            </p>
                                 <p>
                                     <asp:Label ID="label120" runat="server" CssClass="lbl" Text="Nome do Pai"></asp:Label>&nbsp;
                                     <asp:Label ID="lblPai" runat="server" CssClass="texto" Text="-"></asp:Label>

@@ -19,7 +19,7 @@
 
         <asp:Panel ID="Panel2" runat="server" style="float:left;" BorderStyle="Solid" Height="100%" 
             BorderWidth="1px" Width="432px">
-            <asp:Label ID="Label6" runat="server" Text="Data de registro de casamento." 
+            <asp:Label ID="Label6" runat="server" Text="Data do casamento." 
                     Font-Size="8pt"></asp:Label><br />
             <asp:Label ID="lblDataCasa" runat="server" CssClass="texto" Font-Size="10pt" 
                 Text="texto"></asp:Label>

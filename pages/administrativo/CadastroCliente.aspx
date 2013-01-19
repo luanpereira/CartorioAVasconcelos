@@ -52,11 +52,11 @@
                                 <asp:TextBox ID="txtEndereco" runat="server" CssClass="texto" MaxLength="100"></asp:TextBox>
                             </p>
                             <p>
-                                <asp:Label ID="label5" runat="server" CssClass="lbl" Text="UF"></asp:Label>
+                                <asp:Label ID="label5" runat="server" CssClass="lbl" Text="UF - Residente"></asp:Label>
                                 <asp:DropDownList ID="drpUF" runat="server" AutoPostBack="True" ></asp:DropDownList>
                             </p>                    
                             <p>
-                                <asp:Label ID="label6" runat="server" CssClass="lbl" Text="Cidade"></asp:Label>
+                                <asp:Label ID="label6" runat="server" CssClass="lbl" Text="Cidade - Residente"></asp:Label>
                                 <asp:DropDownList ID="drpCidade" runat="server" AutoPostBack="True" ></asp:DropDownList>
                             </p>    
                             <p>
@@ -137,11 +137,11 @@
                         <asp:Panel ID="Panel7" runat="server" Height="100%" Width="494px" 
                             style="float:right;">                             
                             <p>
-                                <asp:Label ID="label18" runat="server" CssClass="lbl" Text="UF Natural"></asp:Label>
+                                <asp:Label ID="label18" runat="server" CssClass="lbl" Text="UF - Natural"></asp:Label>
                                 <asp:DropDownList ID="drpUfNatural" runat="server" AutoPostBack="True" ></asp:DropDownList>
                             </p>                    
                             <p>
-                                <asp:Label ID="label20" runat="server" CssClass="lbl" Text="Cidade Natural"></asp:Label>
+                                <asp:Label ID="label20" runat="server" CssClass="lbl" Text="Cidade - Natural"></asp:Label>
                                 <asp:DropDownList ID="drpCidadeNatural" runat="server" AutoPostBack="True" ></asp:DropDownList>
                             </p>     
                             <p>
@@ -157,17 +157,17 @@
                             <p>
                                 <asp:Label ID="label1" runat="server" CssClass="lbl" Text="Nome do Pai"></asp:Label>
                                 <asp:TextBox ID="txtPai" runat="server" CssClass="texto" MaxLength="100" Width="300px"></asp:TextBox>
-                            </p>
+                            </p>                        
                             <p>
-                                <asp:Label ID="label21" runat="server" CssClass="lbl" Text="Avó Paterno"></asp:Label>
-                                <asp:TextBox ID="txtAvoPaterno1" runat="server" CssClass="texto" Width="300px"
-                                    MaxLength="100"></asp:TextBox>
-                            </p>                                
-                            <p>
-                                <asp:Label ID="label22" runat="server" CssClass="lbl" Text="Avô Paterno"></asp:Label>
+                                <asp:Label ID="label22" runat="server" CssClass="lbl" Text="Avô Paterno (ELE)"></asp:Label>
                                 <asp:TextBox ID="txtAvoPaterno2" runat="server" Width="300px" CssClass="texto" 
                                     MaxLength="100"></asp:TextBox>
-                            </p>                                                                                                                                      
+                            </p>
+                            <p>
+                                <asp:Label ID="label21" runat="server" CssClass="lbl" Text="Avó Paterno (ELA)"></asp:Label>
+                                <asp:TextBox ID="txtAvoPaterno1" runat="server" CssClass="texto" Width="300px"
+                                    MaxLength="100"></asp:TextBox>
+                            </p>                                                                                                                                                                          
                         </asp:Panel>   
 
                         <asp:Panel ID="Panel4" runat="server" Height="100%" Width="494px" 
@@ -177,15 +177,15 @@
                                 <asp:TextBox ID="txtMae" runat="server" CssClass="texto" Width="300px" MaxLength="100"></asp:TextBox>
                             </p>       
                             <p>
-                                <asp:Label ID="label8" runat="server" CssClass="lbl" Text="Avó Materno"></asp:Label>
-                                <asp:TextBox ID="txtAvoMaterno1" runat="server" CssClass="texto" Width="300px" 
-                                    MaxLength="100"></asp:TextBox>
-                            </p>                                
-                            <p>
-                                <asp:Label ID="label9" runat="server" CssClass="lbl" Text="Avô Materno"></asp:Label>
+                                <asp:Label ID="label9" runat="server" CssClass="lbl" Text="Avô Materno (ELE)"></asp:Label>
                                 <asp:TextBox ID="txtAvoMaterno2" runat="server" CssClass="texto" Width="300px"
                                     MaxLength="100"></asp:TextBox>
                             </p>         
+                            <p>
+                                <asp:Label ID="label8" runat="server" CssClass="lbl" Text="Avó Materno (ELA)"></asp:Label>
+                                <asp:TextBox ID="txtAvoMaterno1" runat="server" CssClass="texto" Width="300px" 
+                                    MaxLength="100"></asp:TextBox>
+                            </p>                                
                         </asp:Panel> 
                     </asp:Panel>        
                                                                                  

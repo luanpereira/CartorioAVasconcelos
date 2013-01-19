@@ -39,6 +39,7 @@ Partial Class pages_Documentacao_Nascimento
             Me.txtNumeroTermo.Attributes.Add("onkeypress", "return ValidarEntrada(event, '1')")
 
             Me.txtAverbacao.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
+            Me.txtDeclarante.Attributes.Add("onkeypress", "return ValidarEntrada(event, '3')")
 
             'Me.txtDataRegistro.Text = Format(DateTime.Now(), "dd/MM/yyyy")
             Me.txtEmissao.Text = Format(DateTime.Now(), "dd/MM/yyyy")
@@ -90,7 +91,7 @@ Partial Class pages_Documentacao_Nascimento
             Me.txtEmissao.Text = pedido.DataEmissao
             Me.txtHorario.Text = CType(pedido.Documento, Nascimento).Horario
             Me.txtLocal.Text = CType(pedido.Documento, Nascimento).Maternidade
-            Me.drpDeclarante.SelectedValue = CType(pedido.Documento, Nascimento).Declarante
+            Me.txtDeclarante.Text = CType(pedido.Documento, Nascimento).Declarante
 
             Me.txtServentia.Text = pedido.Matricula.Serventia
             Me.txtAcervo.Text = pedido.Matricula.Acervo
@@ -172,7 +173,7 @@ Partial Class pages_Documentacao_Nascimento
             If Me.txtEmissao.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO DATA DE EMISSÃO OBRIGATÓRIA.")
             If Me.txtHorario.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
             If Me.txtLocal.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO LOCAL NASCIMENTO OBRIGATÓRIO.")
-            If Me.drpDeclarante.SelectedValue = "0" Then Throw New CampoObrigatorioException("CAMPO DECLARENTE OBRIGATÓRIO.")
+            If Me.txtDeclarante.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO DECLARENTE OBRIGATÓRIO.")
 
             If Me.txtServentia.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO SERVENTIA OBRIGATÓRIO.")
             If Me.txtAcervo.Text.Trim = String.Empty Then Throw New CampoObrigatorioException("CAMPO HORARIO OBRIGATÓRIO.")
@@ -213,7 +214,7 @@ Partial Class pages_Documentacao_Nascimento
             nascimento = New Nascimento
             nascimento.Codigo = IIf(ViewState("NascimentoID") Is Nothing, 0, ViewState("NascimentoID"))
             nascimento.Horario = Me.txtHorario.Text
-            nascimento.Declarante = drpDeclarante.SelectedValue
+            nascimento.Declarante = txtDeclarante.Text.ToUpper
             nascimento.Maternidade = txtLocal.Text.ToUpper
             nascimento.TipoLivro = txtTipoLivro.Text
             nascimento.Cidade = lblNascimdoEM.Text

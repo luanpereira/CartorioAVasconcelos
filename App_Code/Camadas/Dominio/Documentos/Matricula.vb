@@ -37,7 +37,7 @@ Namespace Camadas.Dominio.Documentos
         Public Function getMatricula() As String
 
             _matricula = _Serventia & _Acervo & _Atribuicao & " " & _AnoRegistro & " " & _TipoLivro & " " & _NumeroLivro & " " & _NumeroFolha & " " & _NumeroTermo
-            _matricula += " " & Me.getDV
+            _matricula &= " " & Me.getDV
 
             If _matricula.Replace(" ", "").Length = 32 Then
                 Return _matricula
@@ -46,7 +46,7 @@ Namespace Camadas.Dominio.Documentos
             End If
         End Function
 
-        Private Function getDV() As Int16
+        Private Function getDV() As String
             Dim d1 = 0, d2 As Int16 = 0
             Dim mat As String = _matricula.Replace(" ", "")
 
@@ -58,7 +58,7 @@ Namespace Camadas.Dominio.Documentos
             Return d1 & d2
         End Function
 
-        Private Function calcularDX(ByVal numero As String) As Int16
+        Private Function calcularDX(ByVal numero As String) As String
             Dim lista_mult As New List(Of String)
             Dim soma As Long = 0
             Dim resto As Int16

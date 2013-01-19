@@ -52,29 +52,7 @@ Partial Class pages_Documentacao_ObitoReport
                         estadoCivilIdade = "NÃO DEFINIDO"
                 End Select
 
-                dt = pedido.Solicitante.DataNascimento
-                ts = DateTime.Today.Subtract(dt)
-                idade = New DateTime(ts.Ticks).ToString("yy")
-
-                If idade > 1 Then
-                    estadoCivilIdade += ", " & idade & " anos."
-                ElseIf idade = 1 Then
-                    estadoCivilIdade += ", " & idade & " ano."
-                Else
-                    idade = New DateTime(ts.Ticks).ToString("MM")
-                    If idade > 1 Then
-                        estadoCivilIdade += ", " & idade & " meses."
-                    ElseIf idade = 1 Then
-                        estadoCivilIdade += ", " & idade & " mês."
-                    Else
-                        idade = New DateTime(ts.Ticks).ToString("dd")
-                        If idade > 1 Then
-                            estadoCivilIdade += ", " & idade & " dias."
-                        Else
-                            estadoCivilIdade += ", " & idade & " dia."
-                        End If
-                    End If
-                End If
+                estadoCivilIdade += ", " & pedido.Solicitante.getIdade(obito.DataObito) & "."
 
                 Me.lblEstadoCivilIdade.Text = estadoCivilIdade
                 Me.lblNatural.Text = pedido.Solicitante.Natural.ToString
@@ -106,4 +84,7 @@ Partial Class pages_Documentacao_ObitoReport
             End If
         End If
     End Sub
+
+
+
 End Class

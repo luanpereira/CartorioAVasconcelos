@@ -19,7 +19,7 @@ Namespace Camadas.Dominio.Administrativo
                 Dim str As String = ""
 
                 If Not _NomeAvoPaterno1 = String.Empty And Not _NomeAvoPaterno2 = String.Empty Then
-                    str += "Paternos: " & _NomeAvoPaterno1.ToUpper & " e " & _NomeAvoPaterno2.ToUpper
+                    str += "Paternos: " & _NomeAvoPaterno2.ToUpper & " e " & _NomeAvoPaterno1.ToUpper
                 ElseIf _NomeAvoPaterno1 = String.Empty And _NomeAvoPaterno2 = String.Empty Then
                     str += ""
                 ElseIf _NomeAvoPaterno1 = String.Empty Then
@@ -33,7 +33,7 @@ Namespace Camadas.Dominio.Administrativo
                 End If
 
                 If Not _NomeAvoMaterno1 = String.Empty And Not _NomeAvoMaterno2 = String.Empty Then
-                    str += "Maternos: " & _NomeAvoMaterno1.ToUpper & " e " & _NomeAvoMaterno2.ToUpper
+                    str += "Maternos: " & _NomeAvoMaterno2.ToUpper & " e " & _NomeAvoMaterno1.ToUpper
                 ElseIf _NomeAvoMaterno1 = String.Empty And _NomeAvoMaterno2 = String.Empty Then
                     str += ""
                 ElseIf _NomeAvoMaterno1 = String.Empty Then

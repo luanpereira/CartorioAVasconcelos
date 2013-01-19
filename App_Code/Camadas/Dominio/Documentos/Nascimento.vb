@@ -8,7 +8,7 @@ Namespace Camadas.Dominio.Documentos
         Inherits Documento
 
         Public Property CodigoNascimento() As Integer
-        Public Property Declarante() As Char
+        Public Property Declarante() As String
         Public Property Maternidade() As String
         Public Property Filiacao() As Filiacao
         Public Property Horario() As String

@@ -64,10 +64,8 @@ Partial Class pages_Documentacao_CasamentoReligioso
 
                 If Request.QueryString("pedido") Is Nothing Then
                     idPedido = 0
-                    Me.btnHabilitacao.Visible = False
                 Else
                     idPedido = Integer.Parse(Request.QueryString("pedido"))
-                    Me.btnHabilitacao.Visible = True
                 End If
 
                 If casal.Conjuge1.Codigo > 0 Then
@@ -98,7 +96,7 @@ Partial Class pages_Documentacao_CasamentoReligioso
         Try
             pedido = New Pedido
             pedido.Codigo = ID
-            pedido.Documento = New Casamento
+            pedido.Documento = New CasamentoReligioso
             pedido = controllerDocumento.listarPedido(pedido)
 
             Me.listarDadosCliente(CType(pedido.Documento, CasamentoReligioso).Casal)
@@ -136,7 +134,12 @@ Partial Class pages_Documentacao_CasamentoReligioso
             lblSexo1.Text = IIf(dtb.Rows(0).Item("CT01SEXO").ToString = "F", "Feminino", "Masculino")
             lblNascimdoEM1.Text = dtb.Rows(0).Item("NOME_CIDADE_NATURAL").ToString & " - " & dtb.Rows(0).Item("SIGLA_UF_NATURAL").ToString
             lblDataNascimento1.Text = Format(DateTime.Parse(dtb.Rows(0).Item("CT01DATANASCIMENTO").ToString), "dd/MM/yyyy")
-            txtNovoNome1.Text = lblNome1.Text
+
+            If dtb.Rows(0).Item("CT01SEXO").ToString = "M" Then
+                txtNovoNome1.Text = lblNome1.Text
+            Else
+                txtNovoNome2.Text = lblNome1.Text
+            End If
 
             If casal.Conjuge2.Codigo > 0 Then
                 dtb = Nothing
@@ -145,6 +148,17 @@ Partial Class pages_Documentacao_CasamentoReligioso
                 lblSexo2.Text = IIf(dtb.Rows(0).Item("CT01SEXO").ToString = "F", "Feminino", "Masculino")
                 lblNascimdoEM2.Text = dtb.Rows(0).Item("NOME_CIDADE_NATURAL").ToString & " - " & dtb.Rows(0).Item("SIGLA_UF_NATURAL").ToString
                 lblDataNascimento2.Text = Format(DateTime.Parse(dtb.Rows(0).Item("CT01DATANASCIMENTO").ToString), "dd/MM/yyyy")
+
+                If dtb.Rows(0).Item("CT01SEXO").ToString = "M" Then
+                    txtNovoNome1.Text = lblNome2.Text
+                Else
+                    txtNovoNome2.Text = lblNome2.Text
+                End If
+            End If
+
+            If ((lblSexo1.Text = "Masculino" And lblSexo2.Text = "Masculino") Or _
+                (lblSexo1.Text = "Feminino" And lblSexo2.Text = "Feminino")) Then
+                txtNovoNome1.Text = lblNome1.Text
                 txtNovoNome2.Text = lblNome2.Text
             End If
 
@@ -246,15 +260,6 @@ Partial Class pages_Documentacao_CasamentoReligioso
             Response.Redirect("~/pages/Documentacao/CasamentoReligiosoReport.aspx")
             'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "", "CriarJanela('/pages/relatorio/ExibirRelatorio.aspx?r=1', '800', '800')", True)
 
-        Catch ex As Exception
-            ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
-        End Try
-    End Sub
-
-    Protected Sub btnHabilitacao_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnHabilitacao.Click
-        Try
-            Me.salvar()
-            Response.Redirect("~/pages/Documentacao/CasamentoHabilitacaoReport.aspx")
         Catch ex As Exception
             ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType, "Mensagem", "Mensagem('" & ex.Message.Replace("'", "") & "');", True)
         End Try

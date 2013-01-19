@@ -77,7 +77,8 @@
                                 </asp:MaskedEditExtender>   
                             </p>
                             <p>
-                                <asp:Label ID="label18" runat="server" CssClass="lbl" Text="Data do Registro" ForeColor="#FC0000"></asp:Label>
+                                <asp:Label ID="label18" runat="server" CssClass="lbl" Text="Data do Casamento" 
+                                    ForeColor="#FC0000"></asp:Label>
                                 <asp:TextBox ID="txtDataRegistro" runat="server" CssClass="texto" MaxLength="10" Width="120px"></asp:TextBox>
                                 <asp:MaskedEditExtender ID="MaskedEditExtender1" runat="server" CultureAMPMPlaceholder=""
                                     CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
@@ -160,7 +161,7 @@
                                 <p>
                                     <asp:Label ID="label24" runat="server" CssClass="lbl" Text="Averbação"></asp:Label>
                                     <asp:TextBox ID="txtAverbacao" runat="server" CssClass="texto" 
-                                        TextMode="MultiLine" Height="80px" Width="608px"></asp:TextBox>
+                                        TextMode="MultiLine" Height="80px" Width="608px">Casamento religioso com efeito civil.</asp:TextBox>
                                 </p>                                                                                                      
                             </asp:Panel> 
                         </asp:Panel> 
@@ -172,8 +173,6 @@
                             Text="Salvar" />                
                         <asp:Button ID="btnSalvar" runat="server" CssClass="botaoForm save" 
                             Text="Salvar e imprimir documento" Visible="False" />
-                            <asp:Button ID="btnHabilitacao" runat="server" CssClass="botaoForm" 
-                            Text="Imprimir Habilitação" />
                         <asp:Button ID="btnCancelar" runat="server" CssClass="botaoForm" 
                             Text="Cancelar" />
                             

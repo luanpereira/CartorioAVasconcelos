@@ -37,9 +37,9 @@ Partial Class pages_administrativo_CadastroCliente
             drpUF.DataSource = ListarEstados()
             drpUF.DataBind()
             drpUF.Items.Add(New ListItem("Selecione...", 0))
-            drpUF.SelectedValue = 0
-
-            drpCidade.Items.Add(New ListItem("Selecione o Estado...", 0))
+            drpUF.SelectedValue = 10
+            drpUF_SelectedIndexChanged(Nothing, Nothing)
+            drpCidade.SelectedValue = 1314
 
             drpUfNatural.DataValueField = "CT99CODIGO"
             drpUfNatural.DataTextField = "CT99NOME"
